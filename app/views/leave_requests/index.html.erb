@@ -1,0 +1,42 @@
+<%= render 'calendar' %>
+
+<div id="content" style="background-color: #263746;">
+  <div class="container">
+    <h1 style="color: #fff;">Leave Requests Calendar</h1>
+    <p style="color: #dfe7ee;">An overview of Bootstrap, how to download and use, basic templates and examples, and more.</p>
+  </div>
+</div>
+
+<div id="content">
+  <div class="container col-md-6">
+    <div class="paragraph">
+      <div class="row">
+        <div class="col-sm-3"><h4>Employee</h6></div>
+        <div class="col-sm-2"><h4>Startdate</h6></div>
+        <div class="col-sm-2"><h4>Enddate</h6></div>
+        <div class="col-sm-5"></div>
+      </div> <br />
+      <% @leave_requests.each do |leave_request| %>
+        <div class="row">
+          <div class="col-sm-3"><p style="font-size:10px;"><%= leave_request.employee %></p></div>
+          <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.start_date %></p></div>
+          <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.end_date %></p></div>
+          <div class="btn-group col-sm-5" >
+            <%= link_to "<button type=\"button\" class=\"btn button_default\">Show</button>".html_safe, leave_request %>
+            <%= link_to "<button type=\"button\" class=\"btn button_default\">Edit</button>".html_safe, edit_leave_request_path(leave_request) %>
+            <%= link_to "<button type=\"button\" class=\"btn button_default\">Destroy</button>".html_safe, leave_request, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </div> <br />
+      <% end %>  
+      <br />
+      <%= button_to 'New Leave request', new_leave_request_path, :method => "get", :class => "btn button_default" %>
+      <br />
+    </div>
+    <%= render 'import' %>
+  </div>
+  <div class="container col-md-6">
+    <div id="calendar"></div>
+  </div>
+  <br />
+  <br />
+</div>

@@ -1,0 +1,24 @@
+<script>
+
+  $(document).ready(function() {
+
+    $('#calendar').fullCalendar({
+      weekends: false, // hides saturdays and sundays
+      editable: true,
+      events: [
+        <% @leave_requests.each do |leave_request| %>
+          {
+            title: '<%= leave_request.employee %>',
+            start: '<%= leave_request.start_date%>',
+            end: '<%= leave_request.end_date %>',
+            url: '/leave_requests/<%= leave_request.id%>'
+           },
+        <% end %>
+        {
+        }
+      ]
+    });
+    
+  });
+
+</script>
