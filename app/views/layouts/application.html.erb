@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Enerleave</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+  <%= render 'layouts/header' %>
+
+  <div id="wrapper">
+
+    <div id="container">
+      <div  style="background-color: #263746;">
+        <p id="notice"><%= flash[:notice] %></p>
+        <p id="alert"><%= flash[:alert] %></p>
+      </div>
+      <section id="content">
+        <%= yield %>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

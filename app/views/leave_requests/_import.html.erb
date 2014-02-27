@@ -1,0 +1,4 @@
+<%= form_tag import_leave_requests_path, multipart: true do %>
+	<%= file_field_tag :file, :class => "btn button_default" %>
+	<%= submit_tag "Import CSV", :class => "btn button_default" %>
+<% end %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee: MyString
+  StartDate: 2014-02-25
+  EndDate: 2014-02-25
+
+two:
+  employee: MyString
+  StartDate: 2014-02-25
+  EndDate: 2014-02-25
