@@ -1,5 +1,5 @@
 class LeaveRequestsController < ApplicationController
-  before_action :set_leave_request, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login, except: [:index, :show]
 
   # GET /leave_requests
   # GET /leave_requests.json

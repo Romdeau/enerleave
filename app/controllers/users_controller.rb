@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  skip_before_filter :require_login, only: [:index, :new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_filter :zero_users_or_authenticated, only: [:new, :create]
+  before_filter :require_login, except: [:new, :create]
 
   # GET /users
   # GET /users.json
@@ -77,4 +78,11 @@ class UsersController < ApplicationController
     def not_authenticated
       redirect_to login_path, alert: "Please login first"      
     end
+
+    def zero_users_or_authenticated
+    unless User.count == 0 || current_user
+      redirect_to login_path
+      return false
+    end
+  end
 end
