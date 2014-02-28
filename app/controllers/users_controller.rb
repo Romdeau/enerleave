@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :zero_users_or_authenticated, only: [:new, :create]
   before_filter :require_login, except: [:new, :create]
 
+  
   # GET /users
   # GET /users.json
   def index

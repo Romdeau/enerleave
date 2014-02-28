@@ -1,9 +1,9 @@
 production:
-  adapter: postgres
+  adapter: postgresql
   encoding: unicode
   reconnect: false
   database: enerleave_production
   pool: 5
   username:
   password:
-  timeout: 5000
+  host: localhost
