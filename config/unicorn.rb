@@ -9,7 +9,7 @@ timeout 30
 
 pid "/tmp/unicorn.enerleave.pid"
 
-stderr_path "/opt/www/enerleave.enerauqe.com/log/unicorn.stderr.log"
+stderr_path "/opt/www/enerleave.eneraque.com/log/unicorn.stderr.log"
 stdout_path "/opt/www/enerleave.eneraque.com/log/unicorn.stdout.log"
 
 preload_app true
