@@ -1,6 +1,4 @@
 Enerleave::Application.routes.draw do
-  resources :toil_requests
-
   root 'leave_requests#index'
 
   resources :users
@@ -8,6 +6,7 @@ Enerleave::Application.routes.draw do
   resources :leave_requests do
     collection { post :import }
   end
+  resources :toil_requests
 
   get 'export' => 'leave_requests#export', :as => :export
   get 'login' => 'user_sessions#new', :as => :login
