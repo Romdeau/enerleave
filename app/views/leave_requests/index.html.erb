@@ -15,6 +15,7 @@
         <div class="col-sm-2"><h4>Enddate</h6></div>
         <div class="col-sm-5"></div>
       </div> <br />
+      
       <% @leave_requests.each do |leave_request| %>
         <div class="row">
           <div class="col-sm-3"><p style="font-size:10px;"><%= leave_request.employee %></p></div>
@@ -28,16 +29,19 @@
             </div>
           <% end %>
         </div> <br />
-      <% end %>  
+      <% end %>
+      <%= will_paginate @leave_requests %>
       <br />
       <% if logged_in? %>
         <%= button_to 'New Leave request', new_leave_request_path, :method => "get", :class => "btn button_default" %>
       <% end %>
       <br />
     </div>
-    <% if logged_in? %>
-      <%= render 'import' %>
-    <% end %>
+    <div class="paragra">
+      <% if logged_in? %>
+        <%= render 'import' %>
+      <% end %>
+    </div>
   </div>
   <div class="container col-md-6">
     <div id="calendar"></div>

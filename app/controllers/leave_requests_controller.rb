@@ -4,7 +4,8 @@ class LeaveRequestsController < ApplicationController
   # GET /leave_requests
   # GET /leave_requests.json
   def index
-    @leave_requests = LeaveRequest.all
+  #  @leave_requests = LeaveRequest.paginate(:page => params[:page], :per_page => 8)
+  @leave_requests = LeaveRequest.reorder("end_date DESC").page(params[:page]).per_page(8)
   end
 
   # GET /leave_requests/1
