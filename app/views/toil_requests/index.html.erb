@@ -1,0 +1,33 @@
+<h1>Listing toil_requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Claim date</th>
+      <th>Claim hours</th>
+      <th>Approver</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @toil_requests.each do |toil_request| %>
+      <tr>
+        <td><%= toil_request.user_id %></td>
+        <td><%= toil_request.claim_date %></td>
+        <td><%= toil_request.claim_hours %></td>
+        <td><%= toil_request.approver_id %></td>
+        <td><%= link_to 'Show', toil_request %></td>
+        <td><%= link_to 'Edit', edit_toil_request_path(toil_request) %></td>
+        <td><%= link_to 'Destroy', toil_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Toil request', new_toil_request_path %>

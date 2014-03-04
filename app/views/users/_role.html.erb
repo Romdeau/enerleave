@@ -12,18 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-   <%= f.label :password %><br />
-   <%= f.password_field :password %>
-  </div>
-  <div class="field">
-     <%= f.label :password_confirmation %><br />
-     <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
+    <h3> Change role of <%= @user.email %></h3>
     <%= f.label :role %><br />
     <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
   </div>
