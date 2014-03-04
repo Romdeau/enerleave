@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @toil_request.user_id %>
+</p>
+
+<p>
+  <strong>Claim date:</strong>
+  <%= @toil_request.claim_date %>
+</p>
+
+<p>
+  <strong>Claim hours:</strong>
+  <%= @toil_request.claim_hours %>
+</p>
+
+<p>
+  <strong>Approver:</strong>
+  <%= @toil_request.approver_id %>
+</p>
+
+<%= link_to 'Edit', edit_toil_request_path(@toil_request) %> |
+<%= link_to 'Back', toil_requests_path %>

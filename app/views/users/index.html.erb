@@ -1,27 +1,32 @@
-<h1>Listing users</h1>
+<div id="content">
+  <div class="container">
+    <h1 style="color: #263746;">User Directory</h1>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div id="content">
+  <div class="paragraph">
+    <div class="row">
+      <div class="col-sm-3"><h4>Employee</h6></div>
+      <div class="col-sm-5" ></div>
+    </div> <br />
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% @users.each do |user| %>
+    <div class="row">
+      <div class="col-sm-3"><p><%= user.email %></p></div>
+      <div class="btn-group col-sm-5" >
+        <% if can? :manage, user or current_user.id == user.id %>
+          <%= link_to "<button type=\"button\" class=\"btn button_default\">Show</button>".html_safe, user %>
+          <%= link_to "<button type=\"button\" class=\"btn button_default\">Edit</button>".html_safe, edit_user_path(user) %>
+        <% end %>
+        <% if can? :manage, user %>
+          <%= link_to "<button type=\"button\" class=\"btn button_default\">Destroy</button>".html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to "<button type=\"button\" class=\"btn button_default\">New User</button>".html_safe, new_user_path %>

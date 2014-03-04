@@ -21,7 +21,7 @@
           <div class="col-sm-3"><p style="font-size:10px;"><%= leave_request.employee %></p></div>
           <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.start_date %></p></div>
           <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.end_date %></p></div>
-          <% if logged_in? %>
+          <% if logged_in? and can? :manage, leave_request %>
             <div class="btn-group col-sm-5" >
               <%= link_to "<button type=\"button\" class=\"btn button_default\">Show</button>".html_safe, leave_request %>
               <%= link_to "<button type=\"button\" class=\"btn button_default\">Edit</button>".html_safe, edit_leave_request_path(leave_request) %>
@@ -38,7 +38,7 @@
       <br />
     </div>
     <div class="paragra">
-      <% if logged_in? %>
+      <% if logged_in? and can? :manage, :all %>
         <%= render 'import' %>
       <% end %>
     </div>

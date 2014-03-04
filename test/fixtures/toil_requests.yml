@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  claim_date: MyString
+  claim_hours: MyString
+  approver_id: MyString
+
+two:
+  user_id: MyString
+  claim_date: MyString
+  claim_hours: MyString
+  approver_id: MyString

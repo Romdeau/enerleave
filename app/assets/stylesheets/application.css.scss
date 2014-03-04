@@ -15,6 +15,11 @@
 @import "bootstrap";
 @import "bootstrap/theme";
 
+.rails-form {
+  border-style:solid;
+  border-width:2px;
+}
+
 .navbar {
   	background-color: #263746;
   	border-color: #385167;

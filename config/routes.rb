@@ -1,4 +1,6 @@
 Enerleave::Application.routes.draw do
+  resources :toil_requests
+
   root 'leave_requests#index'
 
   resources :users
