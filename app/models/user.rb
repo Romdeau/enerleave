@@ -7,5 +7,8 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
 
+  has_many :toil_request, dependent: :destroy
+  has_many :spend_toil, dependent: :destroy
+
   ROLES = %w[user manager admin]
 end

@@ -1,1 +1,1 @@
-json.extract! @toil_request, :id, :user_id, :claim_date, :claim_hours, :approver_id, :created_at, :updated_at
+json.extract! @toil_request, :id, :user_id, :initial_amount, :amount, :date_accrued, :approved, :created_at, :updated_at

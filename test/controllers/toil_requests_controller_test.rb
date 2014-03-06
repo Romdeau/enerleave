@@ -18,7 +18,7 @@ class ToilRequestsControllerTest < ActionController::TestCase
 
   test "should create toil_request" do
     assert_difference('ToilRequest.count') do
-      post :create, toil_request: { approver_id: @toil_request.approver_id, claim_date: @toil_request.claim_date, claim_hours: @toil_request.claim_hours, user_id: @toil_request.user_id }
+      post :create, toil_request: { amount: @toil_request.amount, approved: @toil_request.approved, date_accrued: @toil_request.date_accrued, initial_amount: @toil_request.initial_amount, user_id: @toil_request.user_id }
     end
 
     assert_redirected_to toil_request_path(assigns(:toil_request))
@@ -35,7 +35,7 @@ class ToilRequestsControllerTest < ActionController::TestCase
   end
 
   test "should update toil_request" do
-    patch :update, id: @toil_request, toil_request: { approver_id: @toil_request.approver_id, claim_date: @toil_request.claim_date, claim_hours: @toil_request.claim_hours, user_id: @toil_request.user_id }
+    patch :update, id: @toil_request, toil_request: { amount: @toil_request.amount, approved: @toil_request.approved, date_accrued: @toil_request.date_accrued, initial_amount: @toil_request.initial_amount, user_id: @toil_request.user_id }
     assert_redirected_to toil_request_path(assigns(:toil_request))
   end
 

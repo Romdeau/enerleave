@@ -2,22 +2,27 @@
 
 <p>
   <strong>User:</strong>
-  <%= @toil_request.user_id %>
+  <%= @toil_request.user %>
 </p>
 
 <p>
-  <strong>Claim date:</strong>
-  <%= @toil_request.claim_date %>
+  <strong>Initial amount:</strong>
+  <%= @toil_request.initial_amount %>
 </p>
 
 <p>
-  <strong>Claim hours:</strong>
-  <%= @toil_request.claim_hours %>
+  <strong>Amount:</strong>
+  <%= @toil_request.amount %>
 </p>
 
 <p>
-  <strong>Approver:</strong>
-  <%= @toil_request.approver_id %>
+  <strong>Date accrued:</strong>
+  <%= @toil_request.date_accrued %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @toil_request.approved %>
 </p>
 
 <%= link_to 'Edit', edit_toil_request_path(@toil_request) %> |

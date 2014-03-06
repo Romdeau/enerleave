@@ -1,0 +1,7 @@
+<h1>Edit Role for <% @user.email %></h1>
+<% if can? :manage, :all %>
+	<%= render 'role' %>
+
+	<%= link_to 'Show', @user %> |
+	<%= link_to 'Back', users_path %>
+<% end %>

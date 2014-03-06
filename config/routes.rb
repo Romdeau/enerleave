@@ -1,4 +1,6 @@
 Enerleave::Application.routes.draw do
+ 
+
   root 'leave_requests#index'
 
   resources :users
@@ -11,6 +13,7 @@ Enerleave::Application.routes.draw do
   get 'export' => 'leave_requests#export', :as => :export
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
+  get '/users/:id/role' => 'users#role', :as => :role_user
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

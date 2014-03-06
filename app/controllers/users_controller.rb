@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @toil_requests = User.find(params[:id]).toil_request
   end
 
   # GET /users/new
@@ -22,6 +23,10 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  def role
+    @user = User.find(params[:id])
   end
 
   # POST /users
