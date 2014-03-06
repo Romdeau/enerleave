@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @spend_toil.user %>
+</p>
+
+<p>
+  <strong>Initial amount:</strong>
+  <%= @spend_toil.initial_amount %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @spend_toil.amount %>
+</p>
+
+<p>
+  <strong>Date accrued:</strong>
+  <%= @spend_toil.leave_date %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @spend_toil.approved %>
+</p>
+
+<%= link_to 'Edit', edit_spend_toil_path(@spend_toil) %> |
+<%= link_to 'Back', toil_requests_path %>
+<%= link_to "Approve", approve_toil_path(@spend_toil), class: 'btn button_default'%>
