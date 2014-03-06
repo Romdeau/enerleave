@@ -1,0 +1,2 @@
+module SpendToilsHelper
+end

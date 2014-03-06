@@ -7,8 +7,12 @@ class ToilRequestsController < ApplicationController
   def index
     if can? :manage, :all
       @toil_requests = ToilRequest.all
+      @spend_toils = SpendToil.all
+      @user = current_user
     else 
       @toil_requests = current_user.toil_request
+      @spend_toils = current_user.spend_toil
+      @user = current_user
     end
   end
 

@@ -1,0 +1,25 @@
+<%= form_for(@spend_toil) do |f| %>
+  <% if @spend_toil.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@spend_toil.errors.count, "error") %> prohibited this spend_toil from being saved:</h2>
+
+      <ul>
+      <% @spend_toil.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.number_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :leave_date %><br>
+    <%= f.date_select :leave_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
