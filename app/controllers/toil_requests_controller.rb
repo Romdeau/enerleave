@@ -1,10 +1,15 @@
 class ToilRequestsController < ApplicationController
   before_action :set_toil_request, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login
 
   # GET /toil_requests
   # GET /toil_requests.json
   def index
-    @toil_requests = ToilRequest.all
+    if can? :manage, :all
+      @toil_requests = ToilRequest.all
+    else 
+      @toil_requests = current_user.toil_request
+    end
   end
 
   # GET /toil_requests/1
@@ -25,10 +30,12 @@ class ToilRequestsController < ApplicationController
   # POST /toil_requests.json
   def create
     @toil_request = ToilRequest.new(toil_request_params)
+    @toil_request.initial_amount = @toil_request.amount
+    @toil_request.user = current_user
 
     respond_to do |format|
       if @toil_request.save
-        format.html { redirect_to @toil_request, notice: 'Toil request was successfully created.' }
+        format.html { redirect_to toil_requests_path, notice: 'Toil request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @toil_request }
       else
         format.html { render action: 'new' }
@@ -69,6 +76,6 @@ class ToilRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def toil_request_params
-      params.require(:toil_request).permit(:user_id, :claim_date, :claim_hours, :approver_id)
+      params.require(:toil_request).permit(:user_id, :amount, :date_accrued, :approved)
     end
 end

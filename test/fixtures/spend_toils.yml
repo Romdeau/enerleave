@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: 
+  user_id: 1
   initial_amount: 1
   amount: 1
-  date_accrued: 2014-03-04
+  leave_date: 2014-03-04
   approved: MyString
 
 two:
-  user_id: 
+  user_id: 1
   initial_amount: 1
   amount: 1
-  date_accrued: 2014-03-04
+  leave_date: 2014-03-04
   approved: MyString
