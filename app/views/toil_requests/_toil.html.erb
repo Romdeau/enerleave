@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-sm-2"><%= toil_request.user.email %></div>
         <div class="col-sm-2"><%= toil_request.initial_amount %>(<%= toil_request.amount %>)</div>
-        <div class="col-sm-2"><td><%= toil_request.date_accrued %></div>
+        <div class="col-sm-2"><td><%= toil_request.date_accrued_end %></div>
         <div class="col-sm-2"><td><%= toil_request.approved %></div>
         <div class="btn-group col-sm-4">
           <%= link_to "Show", toil_request, class: 'btn button_default' %>

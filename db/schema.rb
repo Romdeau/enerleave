@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304065036) do
+ActiveRecord::Schema.define(version: 20140307060020) do
 
   create_table "leave_requests", force: true do |t|
     t.string   "employee"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20140304065036) do
     t.string   "approved"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "date_accrued_end"
   end
 
   add_index "toil_requests", ["user_id"], name: "index_toil_requests_on_user_id"

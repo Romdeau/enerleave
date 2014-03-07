@@ -94,6 +94,6 @@ class ToilRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def toil_request_params
-      params.require(:toil_request).permit(:user_id, :amount, :date_accrued, :approved)
+      params.require(:toil_request).permit(:user_id, :amount, :date_accrued, :date_accrued_end, :approved)
     end
 end
