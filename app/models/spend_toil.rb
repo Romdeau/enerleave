@@ -1,5 +1,9 @@
 class SpendToil < ActiveRecord::Base
-	belongs_to :user
+  belongs_to :user
+
+  validates :user_id, :leave_date, presence: true
+
+  validates :amount, numericality: { greater_than_or_equal_to: 1 }
 
   def process_leave
     #processing leave transaction
@@ -16,7 +20,7 @@ class SpendToil < ActiveRecord::Base
 	        existing_leave.amount -= leave_amount
 	        self.amount -= leave_amount
 	        existing_leave.save
-	        self.save 
+	        self.save
       #otherwise the request must be for more than the leave available on this request, so subtrac the available from both.
 		else
 			leave_amount = existing_leave.amount
@@ -26,5 +30,16 @@ class SpendToil < ActiveRecord::Base
 			existing_leave.save
 		end
     end
+    true
+  end
+
+  def toil_valid?
+  	# Checks if the date accrued is in the last 30 days. 
+  	# Returns true if less than 30 days old.
+  	if self.leave_date > 30.days.ago and self.approved == 'true'
+  		true
+  	else
+  		false
+  	end
   end
 end

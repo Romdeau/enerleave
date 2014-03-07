@@ -33,14 +33,16 @@ class User < ActiveRecord::Base
   def total_spend
   	total_leave = 0
   	self.spend_toil.each do |toil|
-  		total_leave += toil.amount
+  		if toil.toil_valid?
+        total_leave += toil.amount
+      end
   	end
   	total_leave
   end
 
   def oldest_valid
   	# Finds the oldest valid request for a user.
-  	valid_leave = self.toil_request.select { |toil| toil.date_accrued > 30.days.ago }.select { |toil| toil.amount > 0}
+  	valid_leave = self.toil_request.select { |toil| toil.toil_valid? }.select { |toil| toil.amount > 0}
     valid_leave = valid_leave.sort_by &:date_accrued
     valid_leave.first
   end

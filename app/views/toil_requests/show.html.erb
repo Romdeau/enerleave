@@ -2,17 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @toil_request.user %>
+  <%= @toil_request.user.email %>
 </p>
 
 <p>
-  <strong>Initial amount:</strong>
-  <%= @toil_request.initial_amount %>
-</p>
-
-<p>
-  <strong>Amount:</strong>
-  <%= @toil_request.amount %>
+  <strong>Time accrued (remaining):</strong>
+  <%= @toil_request.initial_amount %> (<%= @toil_request.amount %>)
 </p>
 
 <p>
@@ -25,5 +20,11 @@
   <%= @toil_request.approved %>
 </p>
 
-<%= link_to 'Edit', edit_toil_request_path(@toil_request) %> |
-<%= link_to 'Back', toil_requests_path %>
+<%= link_to 'Show User Toil', user_toil_path(@toil_request.user), class: 'btn button_deafault' %>
+<% if @toil_request.approved == 'false'%>
+	<%= link_to 'Edit', edit_toil_request_path(@toil_request), class: 'btn button_default' %>
+<% end %>
+<%= link_to 'Back', toil_requests_path, class: 'btn button_default' %>
+<% if can? :manage, :all and @toil_request.approved == 'false' %>
+	<%= link_to "Approve", approve_toil_request_path(@toil_request), class: 'btn button_default'%>
+<% end %>

@@ -1,5 +1,6 @@
 <h1>New toil_request</h1>
+<div class="paragraph">
+	<%= render 'form', :this_user => @this_user %>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', toil_requests_path %>
+<%= link_to 'Back', toil_requests_path, class: 'btn' %>

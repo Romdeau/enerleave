@@ -70,6 +70,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def toil
+    @user = User.find(params[:id])
+    @toil_requests = @user.toil_request
+    @spend_toils = @user.spend_toil
+  end
+
+  def create_toil
+    @user = User.find(params[:id])
+    @toil_request = ToilRequest.new
+    @toil_request.user = @user
+    @toil_request.initial_amount = 1
+    @toil_request.amount = 1
+    @toil_request.date_accrued = Time.now
+    @toil_request.approved = 'false'
+    if @toil_request.save
+      redirect_to edit_toil_request_path(@toil_request), notice:"Toil request created as #{@user.email}"
+    else
+      render action: 'toil', alert: "Something went wrong"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
