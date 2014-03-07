@@ -33,7 +33,11 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @user.role = "user"
+    if User.count == 0
+      @user.role = 'admin'
+    else
+      @user.role = "user"
+    end
 
     respond_to do |format|
       if @user.save
@@ -83,6 +87,7 @@ class UsersController < ApplicationController
     @toil_request.initial_amount = 1
     @toil_request.amount = 1
     @toil_request.date_accrued = Time.now
+    @toil_request.date_accrued_end = Time.now
     @toil_request.approved = 'false'
     if @toil_request.save
       redirect_to edit_toil_request_path(@toil_request), notice:"Toil request created as #{@user.email}"

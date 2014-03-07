@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   def oldest_valid
   	# Finds the oldest valid request for a user.
   	valid_leave = self.toil_request.select { |toil| toil.toil_valid? }.select { |toil| toil.amount > 0}
-    valid_leave = valid_leave.sort_by &:date_accrued
+    valid_leave = valid_leave.sort_by &:date_accrued_end
     valid_leave.first
   end
 end
