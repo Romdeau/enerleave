@@ -22,8 +22,9 @@ class ToilRequestsController < ApplicationController
   end
 
   # GET /toil_requests/new
-  def new
+  def new 
     @toil_request = ToilRequest.new
+    @this_user = params[:format]
   end
 
   # GET /toil_requests/1/edit
@@ -34,12 +35,13 @@ class ToilRequestsController < ApplicationController
   # POST /toil_requests.json
   def create
     @toil_request = ToilRequest.new(toil_request_params)
-    @toil_request.initial_amount = @toil_request.amount
     @toil_request.user = current_user
+    @toil_request.initial_amount = @toil_request.amount
+    @toil_request.approved = 'false'
 
     respond_to do |format|
       if @toil_request.save
-        format.html { redirect_to toil_requests_path, notice: 'Toil request was successfully created.' }
+        format.html { redirect_to user_toil_path(@toil_request.user), notice: 'Toil request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @toil_request }
       else
         format.html { render action: 'new' }
@@ -53,6 +55,8 @@ class ToilRequestsController < ApplicationController
   def update
     respond_to do |format|
       if @toil_request.update(toil_request_params)
+        @toil_request.initial_amount = @toil_request.amount
+        @toil_request.save
         format.html { redirect_to @toil_request, notice: 'Toil request was successfully updated.' }
         format.json { head :no_content }
       else
@@ -69,6 +73,16 @@ class ToilRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to toil_requests_url }
       format.json { head :no_content }
+    end
+  end
+
+  def approve_toil
+    @to_approve = ToilRequest.find(params[:id])
+    @to_approve.approved = 'true'
+    if @to_approve.save
+      redirect_to toil_requests_path, notice: 'Toil Request Approved'
+    else
+      redirect_to toil_requests_path, alert: 'Something Went Wrong'
     end
   end
 

@@ -1,57 +1,10 @@
 <h1>Toil Tracking</h1>
 <h2><%= "#{@user.email} has #{@user.total_toil} minutes of toil available"%></h2>
-<div id="content">
-  <h3><%= @user.count_toil %> Toil Requests Totaling <%= @user.total_toil %> minutes</h3>
-  <div class="paragraph">
-    <div class="row">
-      <div class="col-sm-2"><h4>Employee</h6></div>
-      <div class="col-sm-2"><h4>Time (minutes)</h6></div>
-      <div class="col-sm-2"><h4>Date Accrued</h6></div>
-      <div class="col-sm-2"><h4>Approved</h4></div>
-      <div class="col-sm-4"></div>
-    </div> <br />
-    <% @toil_requests.each do |toil_request| %>
-      <div class="row">
-        <div class="col-sm-2"><%= toil_request.user.email %></div>
-        <div class="col-sm-2"><%= toil_request.initial_amount %>(<%= toil_request.amount %>)</div>
-        <div class="col-sm-2"><td><%= toil_request.date_accrued %></div>
-        <div class="col-sm-2"><td><%= toil_request.approved %></div>
-        <div class="btn-group col-sm-4">
-          <%= link_to "Show", toil_request, class: 'btn button_default' %>
-          <%= link_to "Edit", edit_toil_request_path(toil_request), class: 'btn button_default' %>
-          <% if can? :manage, :all %>
-            <%= link_to "Delete", toil_request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn button_default' %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <h3><%= @user.count_spend %> Toil Spends totaling <%= @user.total_spend %> minutes</h3>
-  <div class="paragraph">
-    <div class="row">
-      <div class="col-sm-2"><h4>Employee</h6></div>
-      <div class="col-sm-2"><h4>Time (minutes)</h6></div>
-      <div class="col-sm-2"><h4>Start Date</h6></div>
-      <div class="col-sm-2"><h4>Approved</h4></div>
-      <div class="col-sm-4"></div>
-    </div> <br />
-    <% @spend_toils.each do |spend_toil| %>
-      <div class="row">
-        <div class="col-sm-2"><%= spend_toil.user.email %></div>
-        <div class="col-sm-2"><%= spend_toil.initial_amount%> (<%= spend_toil.amount %>)</div>
-        <div class="col-sm-2"><td><%= spend_toil.leave_date %></div>
-        <div class="col-sm-2"><td><%= spend_toil.approved %></div>
-        <div class="btn-group col-sm-4">
-          <%= link_to "Show", spend_toil, class: 'btn' %>
-          <%= link_to "Edit", edit_spend_toil_path(spend_toil), class: 'btn' %>
-          <% if can? :manage, :all %>
-            <%= link_to "Delete", spend_toil, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+<% if can? :manage, :all %>
+	<h4>NB: You'e logged in as an admin, so the totals reflect all Toil Requests. For individual totals navigate through the users individually <%= link_to "here", users_path%></h4>
+<% end %>
+
+<%= render 'toil' %>
 
 <br>
 

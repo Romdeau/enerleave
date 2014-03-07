@@ -8,12 +8,16 @@
   <div class="paragraph">
     <div class="row">
       <div class="col-sm-3"><h4>Employee</h6></div>
+      <div class="col-sm-2"></div>
       <div class="col-sm-5" ></div>
     </div> <br />
 
   <% @users.each do |user| %>
     <div class="row">
       <div class="col-sm-3"><p><%= user.email %></p></div>
+      <div class="col-sm-2">
+        <%= user.role %>
+      </div>
       <div class="btn-group col-sm-5" >
         <% if can? :manage, user or current_user.id == user.id %>
           <%= link_to "<button type=\"button\" class=\"btn button_default\">Show</button>".html_safe, user %>

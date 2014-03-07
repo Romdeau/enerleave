@@ -1,0 +1,8 @@
+<h1>Toil Tracking</h1>
+<h2><%= "#{@user.email} has #{@user.total_toil} minutes of toil available"%></h2>
+
+<%= render 'toil_requests/toil' %>
+
+<%= link_to "New Toil Request", admin_create_toil_path(@user), class: 'btn' %>
+<%= link_to "Spend Toil", new_spend_toil_path, class: 'btn' %>
+<%= link_to "Back", user_path(@user) %>
