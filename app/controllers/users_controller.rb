@@ -64,6 +64,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_role
+    @user = User.find(params[:id])
+    user_params.delete(:password)
+    user_params.delete(:password_confirmation)
+    if @user.update_many_attributes(user_params)
+      redirect_to @user, notice: 'User role successfully updated.'
+    else
+      render action: 'role'
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
