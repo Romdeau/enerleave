@@ -11,6 +11,7 @@ class LeaveRequestsController < ApplicationController
   # GET /leave_requests/1
   # GET /leave_requests/1.json
   def show
+    @leave_request = LeaveRequest.find(params[:id])
   end
 
   # GET /leave_requests/new
@@ -20,6 +21,7 @@ class LeaveRequestsController < ApplicationController
 
   # GET /leave_requests/1/edit
   def edit
+    @leave_request = LeaveRequest.find(params[:id])
   end
 
   # POST /leave_requests
@@ -41,6 +43,7 @@ class LeaveRequestsController < ApplicationController
   # PATCH/PUT /leave_requests/1
   # PATCH/PUT /leave_requests/1.json
   def update
+    @leave_request = LeaveRequest.find(params[:id])
     respond_to do |format|
       if @leave_request.update(leave_request_params)
         format.html { redirect_to @leave_request, notice: 'Leave request was successfully updated.' }
@@ -84,6 +87,6 @@ class LeaveRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def leave_request_params
-      params.require(:leave_request).permit(:employee, :start_date, :end_date)
+      params.require(:leave_request).permit(:employee, :start_date, :end_date, :leave_type, :comment)
     end
 end

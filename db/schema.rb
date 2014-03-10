@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307060020) do
+ActiveRecord::Schema.define(version: 20140310013054) do
 
   create_table "leave_requests", force: true do |t|
     t.string   "employee"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20140307060020) do
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "leave_type"
+    t.string   "comment"
   end
 
   create_table "spend_toils", force: true do |t|

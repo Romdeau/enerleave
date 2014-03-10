@@ -1,5 +1,8 @@
 class LeaveRequest < ActiveRecord::Base
 	require 'csv'
+  	validates :employee, :leave_type, :end_date, :start_date, presence: true
+
+  	LEAVE_TYPES = %w[annual sick personal compassionate time\ off\ without\ pay defence jury\ duty maternity/parental long\ service\ leave other]
 
 	def self.as_csv
 		CSV.generate do |csv|
