@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Leave Type:</strong>
+  <%= @leave_request.leave_type %>
+</p>
+
+<p>
   <strong>Startdate:</strong>
   <%= @leave_request.start_date %>
 </p>
@@ -15,7 +20,14 @@
   <%= @leave_request.end_date %>
 </p>
 
+<p>
+  <strong>Comment:</strong>
+  <%= @leave_request.comment %>
+</p>
+
 <% if logged_in? %>
-	<%= link_to 'Edit', edit_leave_request_path(@leave_request) %> |
-	<%= link_to 'Back', leave_requests_path %>
+	<div class="btn-group">
+		<%= link_to 'Edit', edit_leave_request_path(@leave_request), class: "btn" %>
+		<%= link_to 'Back', leave_requests_path, class: "btn" %>
+	</div>
 <% end %>

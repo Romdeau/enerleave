@@ -16,12 +16,20 @@
     <%= f.text_field :employee %>
   </div>
   <div class="field">
+    <%= f.label :leave_type %><br>
+    <%= f.collection_select :leave_type, LeaveRequest::LEAVE_TYPES, :to_s, :humanize %>
+  </div>
+  <div class="field">
     <%= f.label :start_date %><br>
     <%= f.date_select :start_date %>
   </div>
   <div class="field">
     <%= f.label :end_date %><br>
     <%= f.date_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_field :comment %>
   </div>
   <div class="actions">
     <%= f.submit %>

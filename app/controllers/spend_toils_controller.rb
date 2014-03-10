@@ -67,9 +67,14 @@ class SpendToilsController < ApplicationController
   def approve_toil
     @to_approve = SpendToil.find(params[:id])
     user_approve = User.find(@to_approve.user_id)
+    @leave_toil = LeaveRequest.new(:employee => user_approve.email, :leave_type => 'TOIL', :start_date => @to_approve.leave_date, :end_date => @to_approve.leave_date)
     if user_approve.total_toil > @to_approve.amount
       if @to_approve.process_leave
-        redirect_to toil_requests_path, notice: "Leave successfully processed"
+        if @leave_toil.save
+          redirect_to toil_requests_path, notice: "Leave successfully processed"
+        else
+          redirect_to toil_requests_path, alert: "Failed to create paired leave"
+        end
       else
         redirect_to toil_requests_path, alert: 'Processing Failed'
       end
