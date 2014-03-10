@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @timeweek.user %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @timeweek.start_date %>
+</p>
+
+<%= link_to 'Edit', edit_timeweek_path(@timeweek) %> |
+<%= link_to 'Back', timeweeks_path %>

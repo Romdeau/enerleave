@@ -1,0 +1,45 @@
+<%= form_for(@timeitem) do |f| %>
+  <% if @timeitem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@timeitem.errors.count, "error") %> prohibited this timeitem from being saved:</h2>
+
+      <ul>
+      <% @timeitem.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :timesheet_id %><br>
+    <%= f.text_field :timesheet_id %>
+  </div>
+  <div class="field">
+    <%= f.label :start_time %><br>
+    <%= f.date_select :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %><br>
+    <%= f.date_select :end_time %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :cost_center_id %><br>
+    <%= f.text_field :cost_center_id %>
+  </div>
+  <div class="field">
+    <%= f.label :project_id %><br>
+    <%= f.text_field :project_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

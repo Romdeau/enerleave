@@ -1,0 +1,39 @@
+<h1>Listing timeitems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Timesheet</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Description</th>
+      <th>Cost center</th>
+      <th>Project</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @timeitems.each do |timeitem| %>
+      <tr>
+        <td><%= timeitem.user %></td>
+        <td><%= timeitem.timesheet %></td>
+        <td><%= timeitem.start_time %></td>
+        <td><%= timeitem.end_time %></td>
+        <td><%= timeitem.description %></td>
+        <td><%= timeitem.cost_center %></td>
+        <td><%= timeitem.project %></td>
+        <td><%= link_to 'Show', timeitem %></td>
+        <td><%= link_to 'Edit', edit_timeitem_path(timeitem) %></td>
+        <td><%= link_to 'Destroy', timeitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Timeitem', new_timeitem_path %>

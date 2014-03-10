@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @timeitem.user %>
+</p>
+
+<p>
+  <strong>Timesheet:</strong>
+  <%= @timeitem.timesheet %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @timeitem.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @timeitem.end_time %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @timeitem.description %>
+</p>
+
+<p>
+  <strong>Cost center:</strong>
+  <%= @timeitem.cost_center %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @timeitem.project %>
+</p>
+
+<%= link_to 'Edit', edit_timeitem_path(@timeitem) %> |
+<%= link_to 'Back', timeitems_path %>

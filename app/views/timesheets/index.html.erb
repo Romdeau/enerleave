@@ -1,0 +1,31 @@
+<h1>Listing timesheets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Timeweek</th>
+      <th>Timesheet date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @timesheets.each do |timesheet| %>
+      <tr>
+        <td><%= timesheet.user %></td>
+        <td><%= timesheet.timeweek %></td>
+        <td><%= timesheet.timesheet_date %></td>
+        <td><%= link_to 'Show', timesheet %></td>
+        <td><%= link_to 'Edit', edit_timesheet_path(timesheet) %></td>
+        <td><%= link_to 'Destroy', timesheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Timesheet', new_timesheet_path %>

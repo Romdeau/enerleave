@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310013054) do
+ActiveRecord::Schema.define(version: 20140310025250) do
+
+  create_table "costcenters", force: true do |t|
+    t.string   "cost_code"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "leave_requests", force: true do |t|
     t.string   "employee"
@@ -23,6 +30,13 @@ ActiveRecord::Schema.define(version: 20140310013054) do
     t.string   "comment"
   end
 
+  create_table "projects", force: true do |t|
+    t.string   "project_number"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "spend_toils", force: true do |t|
     t.integer  "user_id"
     t.integer  "initial_amount"
@@ -32,6 +46,43 @@ ActiveRecord::Schema.define(version: 20140310013054) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "timeitems", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "timesheet_id"
+    t.date     "start_time"
+    t.date     "end_time"
+    t.string   "description"
+    t.integer  "cost_center_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timeitems", ["cost_center_id"], name: "index_timeitems_on_cost_center_id"
+  add_index "timeitems", ["project_id"], name: "index_timeitems_on_project_id"
+  add_index "timeitems", ["timesheet_id"], name: "index_timeitems_on_timesheet_id"
+  add_index "timeitems", ["user_id"], name: "index_timeitems_on_user_id"
+
+  create_table "timesheets", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "timeweek_id"
+    t.date     "timesheet_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timesheets", ["timeweek_id"], name: "index_timesheets_on_timeweek_id"
+  add_index "timesheets", ["user_id"], name: "index_timesheets_on_user_id"
+
+  create_table "timeweeks", force: true do |t|
+    t.integer  "user_id"
+    t.date     "start_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timeweeks", ["user_id"], name: "index_timeweeks_on_user_id"
 
   create_table "toil_requests", force: true do |t|
     t.integer  "user_id"

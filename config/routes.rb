@@ -1,4 +1,14 @@
 Enerleave::Application.routes.draw do
+  resources :projects
+
+  resources :costcenters
+
+  resources :timeitems
+
+  resources :timesheets
+
+  resources :timeweeks
+
   root 'leave_requests#index'
 
   resources :users do

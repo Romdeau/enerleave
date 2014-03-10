@@ -1,0 +1,29 @@
+<h1>Listing timeweeks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Start date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @timeweeks.each do |timeweek| %>
+      <tr>
+        <td><%= timeweek.user %></td>
+        <td><%= timeweek.start_date %></td>
+        <td><%= link_to 'Show', timeweek %></td>
+        <td><%= link_to 'Edit', edit_timeweek_path(timeweek) %></td>
+        <td><%= link_to 'Destroy', timeweek, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Timeweek', new_timeweek_path %>

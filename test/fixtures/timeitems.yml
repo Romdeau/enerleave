@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  timesheet_id: 
+  start_time: 2014-03-10
+  end_time: 2014-03-10
+  description: MyString
+  cost_center_id: 
+  project_id: 
+
+two:
+  user_id: 
+  timesheet_id: 
+  start_time: 2014-03-10
+  end_time: 2014-03-10
+  description: MyString
+  cost_center_id: 
+  project_id: 
