@@ -11,14 +11,23 @@ Enerleave::Application.routes.draw do
   resources :toil_requests
   resources :spend_toils
 
+  #user sessions
   get 'export' => 'leave_requests#export', :as => :export
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
+
+  #user routes
   get '/users/:id/role' => 'users#role', :as => :role_user
+  get '/users/:id/toil' => 'users#toil', :as => :user_toil
+  get '/users/:id/create_toil' => 'users#create_toil', :as => :admin_create_toil
+  patch 'users/:id/update_role' => 'users#update_role'
+
+  #toil routes
   get '/spend_toils/:id/approve_toil' => 'spend_toils#approve_toil', :as => :approve_toil
   get '/toil_requests/:id/approve_toil' => 'toil_requests#approve_toil', :as => :approve_toil_request
-  get '/users/:id/toil' => 'users#toil', :as => :user_toil
-  get '/users/:id/create_toil' => 'users#create_toil', :as => :admin_create_toil 
+
+
+ 
 
 
   # The priority is based upon order of creation: first created -> highest priority.
