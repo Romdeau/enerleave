@@ -1,8 +1,11 @@
+<%= debug params %>
+<%= debug @timeweek %>
+<%= debug @timesheets %>
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>User:</strong>
-  <%= @timeweek.user %>
+  <%= @timeweek.user.email %>
 </p>
 
 <p>
@@ -10,5 +13,10 @@
   <%= @timeweek.start_date %>
 </p>
 
-<%= link_to 'Edit', edit_timeweek_path(@timeweek) %> |
-<%= link_to 'Back', timeweeks_path %>
+<p>
+	This week contains <%= @timesheets.count %> timesheets
+</p>
+
+<%= link_to 'Edit', edit_timeweek_path(@timeweek), class: "btn" %> |
+<%= link_to 'Back', timeweeks_path, class: "btn" %><br>
+<%= link_to 'New Timesheet', new_timeweek_timesheet_path(@timeweek), class: "btn" %>

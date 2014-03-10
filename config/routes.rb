@@ -3,11 +3,11 @@ Enerleave::Application.routes.draw do
 
   resources :costcenters
 
-  resources :timeitems
-
-  resources :timesheets
-
-  resources :timeweeks
+  resources :timeweeks do
+    resources :timesheets do
+      resources :timeitems
+    end
+  end
 
   root 'leave_requests#index'
 

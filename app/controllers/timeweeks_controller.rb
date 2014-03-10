@@ -10,6 +10,8 @@ class TimeweeksController < ApplicationController
   # GET /timeweeks/1
   # GET /timeweeks/1.json
   def show
+    @timeweek = Timeweek.find(params[:id])
+    @timesheets = @timeweek.timesheet
   end
 
   # GET /timeweeks/new
@@ -25,7 +27,7 @@ class TimeweeksController < ApplicationController
   # POST /timeweeks.json
   def create
     @timeweek = Timeweek.new(timeweek_params)
-
+    @timeweek.user = current_user
     respond_to do |format|
       if @timeweek.save
         format.html { redirect_to @timeweek, notice: 'Timeweek was successfully created.' }
