@@ -27,8 +27,8 @@ class TimesheetsController < ApplicationController
   def create
     @timesheet = Timesheet.new(timesheet_params)
     @timesheet.timeweek = Timeweek.find(params[:timeweek_id])
-    @timesheet.user = current_user
-    respond_to do |format|
+    @timesheet.user = @timesheet.timeweek.user
+    respond_to do |format|r
       if @timesheet.save
         format.html { redirect_to timeweek_path(@timesheet.user.id), notice: 'Timesheet was successfully created.' }
         format.json { render action: 'show', status: :created, location: @timesheet }

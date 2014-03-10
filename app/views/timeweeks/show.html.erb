@@ -14,7 +14,18 @@
 </p>
 
 <p>
-	This week contains <%= @timesheets.count %> timesheets
+	This week contains <%= @timesheets.count %> timesheets<br />
+	<% @timesheets.each do |timesheet| %>
+		ID <%= timesheet.id %>
+	    User <%= timesheet.user.email %> 
+	    Week Starting <%= timesheet.timeweek.start_date %> 
+	    Date <%= timesheet.timesheet_date %> 
+	    <%= link_to "Show", [timesheet.timeweek, timesheet] %>
+	    <%= link_to "Edit", [timesheet.timeweek, timesheet], :method => 'edit' %>
+	    <%= link_to 'Destroy', [timesheet.timeweek, timesheet], method: :delete, data: { confirm: 'Are you sure?' } %>
+	    <br />
+	    
+    <% end %>
 </p>
 
 <%= link_to 'Edit', edit_timeweek_path(@timeweek), class: "btn" %> |
