@@ -10,11 +10,9 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :employee %><br>
-    <%= f.text_field :employee %>
-  </div>
+  <div>
+    <strong>Approved:</strong> <%= @leave_request.approved %>
+  </div><br />
   <div class="field">
     <%= f.label :leave_type %><br>
     <%= f.collection_select :leave_type, LeaveRequest::LEAVE_TYPES, :to_s, :humanize %>

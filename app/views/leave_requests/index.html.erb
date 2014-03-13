@@ -2,7 +2,7 @@
 
 <div id="content">
   <div class="container">
-    <h1 style="color: #263746;">Leave Requests Calendar</h1>
+    <h1 style="color: #263746;">Leave Requests Calendar (<%= @leave_requests.count %> Approved)</h1>
   </div>
 </div>
 
@@ -16,10 +16,10 @@
         <div class="col-sm-2"><h4>Enddate</h6></div>
         <div class="col-sm-3"></div>
       </div> <br />
-      
+
       <% @leave_requests.each do |leave_request| %>
         <div class="row">
-          <div class="col-sm-3"><p style="font-size:10px;"><%= leave_request.employee %></p></div>
+          <div class="col-sm-3"><p style="font-size:10px;"><%= User.find(leave_request.user).email %></p></div>
           <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.leave_type %></p></div>
           <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.start_date %></p></div>
           <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.end_date %></p></div>
@@ -36,9 +36,12 @@
       <% if logged_in? %>
         <%= link_to 'New Leave request', new_leave_request_path, class: "btn" %>
       <% end %>
+      <% if can? :manage, :all %>
+        <%= link_to 'Approvals', approvals_leave_requests_path, class: "btn" %>
+      <% end %>
       <br />
     </div>
-    <div class="paragra">
+    <div class="paragraph">
       <% if logged_in? and can? :manage, :all %>
         <%= render 'import' %>
       <% end %>

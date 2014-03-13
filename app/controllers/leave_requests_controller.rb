@@ -4,14 +4,18 @@ class LeaveRequestsController < ApplicationController
   # GET /leave_requests
   # GET /leave_requests.json
   def index
-  #  @leave_requests = LeaveRequest.paginate(:page => params[:page], :per_page => 8)
-  @leave_requests = LeaveRequest.reorder("end_date DESC").page(params[:page]).per_page(8)
+    @leave_requests = LeaveRequest.approved_leave.reorder("end_date DESC").page(params[:page]).per_page(8)
+  end
+
+  def approvals
+    @leave_requests = LeaveRequest.not_approved.reorder("end_date DESC").page(params[:page]).per_page(8)
   end
 
   # GET /leave_requests/1
   # GET /leave_requests/1.json
   def show
     @leave_request = LeaveRequest.find(params[:id])
+    @user = User.find(@leave_request.user)
   end
 
   # GET /leave_requests/new
@@ -28,7 +32,8 @@ class LeaveRequestsController < ApplicationController
   # POST /leave_requests.json
   def create
     @leave_request = LeaveRequest.new(leave_request_params)
-
+    @leave_request.user = current_user
+    @leave_request.approved = 'false'
     respond_to do |format|
       if @leave_request.save
         format.html { redirect_to leave_requests_path, notice: 'Leave request was successfully created.' }
@@ -67,7 +72,7 @@ class LeaveRequestsController < ApplicationController
 
   def export
     @leave = LeaveRequest.all
-    
+
     respond_to do |format|
       format.html
       format.csv { send_data @leave.as_csv }
@@ -87,6 +92,6 @@ class LeaveRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def leave_request_params
-      params.require(:leave_request).permit(:employee, :start_date, :end_date, :leave_type, :comment)
+      params.require(:leave_request).permit(:start_date, :end_date, :leave_type, :comment)
     end
 end

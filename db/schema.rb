@@ -11,17 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310013054) do
+ActiveRecord::Schema.define(version: 20140313044051) do
 
-  create_table "leave_requests", force: true do |t|
-    t.string   "employee"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "leave_type"
-    t.string   "comment"
-  end
+# Could not dump table "leave_requests" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "spend_toils", force: true do |t|
     t.integer  "user_id"
@@ -50,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140310013054) do
     t.string   "email",            null: false
     t.string   "crypted_password", null: false
     t.string   "salt",             null: false
+    t.string   "approved"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
