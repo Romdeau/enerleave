@@ -84,6 +84,16 @@ class LeaveRequestsController < ApplicationController
     redirect_to root_url, notice: "Leave Requests imported."
   end
 
+  def approve_leave
+    @to_approve = LeaveRequest.find(params[:id])
+    @to_approve.approved = 'true'
+    if @to_approve.save
+      redirect_to leave_requests_path, notice: 'Toil Request Approved'
+    else
+      redirect_to leave_requests_path, alert: 'Something Went Wrong'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_leave_request

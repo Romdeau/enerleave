@@ -67,7 +67,7 @@ class SpendToilsController < ApplicationController
   def approve_toil
     @to_approve = SpendToil.find(params[:id])
     user_approve = User.find(@to_approve.user_id)
-    @leave_toil = LeaveRequest.new(:employee => user_approve.email, :leave_type => 'TOIL', :start_date => @to_approve.leave_date, :end_date => @to_approve.leave_date)
+    @leave_toil = LeaveRequest.new(:user => user_approve.id, :leave_type => 'TOIL', :start_date => @to_approve.leave_date, :end_date => @to_approve.leave_date, :approved => 'true')
     if user_approve.total_toil > @to_approve.amount
       if @to_approve.process_leave
         if @leave_toil.save

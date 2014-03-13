@@ -6,50 +6,5 @@
   </div>
 </div>
 
-<div id="content">
-  <div class="container col-md-7">
-    <div class="paragraph">
-      <div class="row">
-        <div class="col-sm-3"><h4>Employee</h6></div>
-        <div class="col-sm-2"><h4>Type</h6></div>
-        <div class="col-sm-2"><h4>Startdate</h6></div>
-        <div class="col-sm-2"><h4>Enddate</h6></div>
-        <div class="col-sm-3"></div>
-      </div> <br />
-
-      <% @leave_requests.each do |leave_request| %>
-        <div class="row">
-          <div class="col-sm-3"><p style="font-size:10px;"><%= User.find(leave_request.user).email %></p></div>
-          <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.leave_type %></p></div>
-          <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.start_date %></p></div>
-          <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.end_date %></p></div>
-          <% if logged_in? and can? :manage, leave_request %>
-            <div class="btn-group col-sm-3" >
-              <%= link_to "Show", leave_request, class: "btn" %>
-              <%= link_to "Edit", edit_leave_request_path(leave_request), class: "btn" %>
-            </div>
-          <% end %>
-        </div> <br />
-      <% end %>
-      <%= will_paginate @leave_requests %>
-      <br />
-      <% if logged_in? %>
-        <%= link_to 'New Leave request', new_leave_request_path, class: "btn" %>
-      <% end %>
-      <% if can? :manage, :all %>
-        <%= link_to 'Approvals', approvals_leave_requests_path, class: "btn" %>
-      <% end %>
-      <br />
-    </div>
-    <div class="paragraph">
-      <% if logged_in? and can? :manage, :all %>
-        <%= render 'import' %>
-      <% end %>
-    </div>
-  </div>
-  <div class="container col-md-5">
-    <div id="calendar"></div>
-  </div>
-  <br />
-  <br />
-</div>
+<%= render 'leave' %>
+  

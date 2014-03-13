@@ -13,8 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20140313044051) do
 
-# Could not dump table "leave_requests" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "leave_requests", force: true do |t|
+    t.integer  "user_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "leave_type"
+    t.string   "comment"
+    t.string   "approved"
+  end
 
   create_table "spend_toils", force: true do |t|
     t.integer  "user_id"

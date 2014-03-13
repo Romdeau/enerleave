@@ -9,7 +9,7 @@ class ToilRequestsController < ApplicationController
       @toil_requests = ToilRequest.all
       @spend_toils = SpendToil.all
       @user = current_user
-    else 
+    else
       @toil_requests = current_user.toil_request
       @spend_toils = current_user.spend_toil
       @user = current_user
@@ -22,7 +22,7 @@ class ToilRequestsController < ApplicationController
   end
 
   # GET /toil_requests/new
-  def new 
+  def new
     @toil_request = ToilRequest.new
     @this_user = params[:format]
   end
@@ -36,7 +36,8 @@ class ToilRequestsController < ApplicationController
   def create
     @toil_request = ToilRequest.new(toil_request_params)
     @toil_request.user = current_user
-    @toil_request.initial_amount = @toil_request.amount
+    @toil_request.initial_amount = @toil_request.amount / 6
+    @toil_request.amount = @toil_request.amount / 6
     @toil_request.approved = 'false'
 
     respond_to do |format|

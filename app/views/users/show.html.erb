@@ -6,7 +6,12 @@
 </p>
 
 <p>
-  <strong>TotalToilRequests:</strong>
+  <strong>Total Leave Requests:</strong>
+  <%= @leave_requests.count %>
+</p>
+
+<p>
+  <strong>Total Toil Requests:</strong>
   <%= @toil_requests.count %>
 </p>
 
@@ -20,6 +25,7 @@
 	<% if current_user.id == @user.id or can? :manage, :all %>
 		<%= link_to "Change Password", edit_user_path(@user), class: 'btn' %>
 		<%= link_to "Toil Requests", user_toil_path(@user), class: 'btn' %>
+    <%= link_to "Leave Requests", user_leave_path(@user), class: 'btn' %>
 	<% end %>
 	<% if can? :manage, :all %>
 		<%= link_to "Edit Role", role_user_path(@user), class: 'btn' %>

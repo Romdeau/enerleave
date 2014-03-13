@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :zero_users_or_authenticated, only: [:new, :create]
   before_filter :require_login, except: [:new, :create]
 
-  
+
   # GET /users
   # GET /users.json
   def index
@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @toil_requests = User.find(params[:id]).toil_request
+    @leave_requests = User.find(params[:id]).leave_request
   end
 
   # GET /users/new
@@ -91,6 +92,11 @@ class UsersController < ApplicationController
     @spend_toils = @user.spend_toil
   end
 
+  def leave
+    @user = User.find(params[:id])
+    @leave_requests = @user.leave_request.reorder("end_date DESC").page(params[:page]).per_page(8)
+  end
+
   def create_toil
     @user = User.find(params[:id])
     @toil_request = ToilRequest.new
@@ -119,7 +125,7 @@ class UsersController < ApplicationController
     end
 
     def not_authenticated
-      redirect_to login_path, alert: "Please login first"      
+      redirect_to login_path, alert: "Please login first"
     end
 
     def zero_users_or_authenticated

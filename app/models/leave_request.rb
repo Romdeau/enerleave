@@ -1,5 +1,8 @@
 class LeaveRequest < ActiveRecord::Base
 	require 'csv'
+
+	belongs_to :user
+
   	validates :leave_type, :end_date, :start_date, presence: true
 		validate :valid_leave_period?
 

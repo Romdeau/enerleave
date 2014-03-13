@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <strong Approved:</strong> <%= @user.approved %>
+  <strong Approved:</strong> <%= @leave_request.approved %>
 </p>
 
 <p>
@@ -34,4 +34,7 @@
 		<%= link_to 'Edit', edit_leave_request_path(@leave_request), class: "btn" %>
 		<%= link_to 'Back', leave_requests_path, class: "btn" %>
 	</div>
+<% end %>
+<% if can? :manage, :all and @leave_request.approved == 'false' %>
+  <%= link_to "Approve", approve_leave_path(@leave_request), class: 'btn button_default'%>
 <% end %>
