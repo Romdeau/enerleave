@@ -43,6 +43,7 @@ class SpendToilsController < ApplicationController
   # PATCH/PUT /spend_toils/1
   # PATCH/PUT /spend_toils/1.json
   def update
+    @spend_toil.initial_amount = @spend_toil.amount
     respond_to do |format|
       if @spend_toil.update(spend_toil_params)
         format.html { redirect_to @spend_toil, notice: 'Spend toil was successfully updated.' }
@@ -67,10 +68,12 @@ class SpendToilsController < ApplicationController
   def approve_toil
     @to_approve = SpendToil.find(params[:id])
     user_approve = User.find(@to_approve.user_id)
-    @leave_toil = LeaveRequest.new(:user => user_approve.id, :leave_type => 'TOIL', :start_date => @to_approve.leave_date, :end_date => @to_approve.leave_date, :approved => 'true')
-    if user_approve.total_toil > @to_approve.amount
+    @leave_toil = LeaveRequest.new(:user => user_approve, :leave_type => 'TOIL', :start_date => @to_approve.leave_date, :end_date => @to_approve.leave_date, :approved => 'true')
+    if user_approve.total_toil >= @to_approve.amount
       if @to_approve.process_leave
         if @leave_toil.save
+          @leave_toil.approved = 'true'
+          @leave_toil.save
           redirect_to toil_requests_path, notice: "Leave successfully processed"
         else
           redirect_to toil_requests_path, alert: "Failed to create paired leave"
