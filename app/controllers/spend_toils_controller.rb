@@ -72,9 +72,12 @@ class SpendToilsController < ApplicationController
     if user_approve.total_toil >= @to_approve.amount
       if @to_approve.process_leave
         if @leave_toil.save
-          @leave_toil.approved = 'true'
-          @leave_toil.save
-          redirect_to toil_requests_path, notice: "Leave successfully processed"
+          @to_approve.approved = 'true'
+          if @to_approve.save
+            redirect_to toil_requests_path, notice: "Leave successfully processed"
+          else
+            redirect_to toil_requests_path, alert: 'Failed to approve'
+          end
         else
           redirect_to toil_requests_path, alert: "Failed to create paired leave"
         end
