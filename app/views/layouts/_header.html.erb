@@ -1,4 +1,4 @@
-  <div class="navbar" role="navigation">
+  <div class="navbar header" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,6 +27,7 @@
                 <% if logged_in? %>
                 <li class="dropdown-header">Data Tools</li>
                 <li><a href="/export.csv">Export</a></li>
+                <li><%= link_to "Import Data", import_data_path %></li>
                 <li><a href="#">One more separated link</a></li>
                 <% end %>
               </ul>
@@ -40,7 +41,7 @@
           <% else %>
           <li> <%= link_to "Register", new_user_path %></li>
           <li> <%= link_to "Login", :login %></li>
-          <% end %>           
+          <% end %>
         </ul>
       </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->

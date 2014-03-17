@@ -11,6 +11,7 @@ Enerleave::Application.routes.draw do
 
   #user sessions
   get 'export' => 'leave_requests#export', :as => :export
+  get 'import_data' => 'leave_requests#import_data', :as => :import_data
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
 

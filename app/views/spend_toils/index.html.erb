@@ -12,9 +12,9 @@
   <tbody>
     <% @spend_toils.each do |spend_toil| %>
       <tr>
-        <td><%= link_to 'Show', spend_toil %></td>
-        <td><%= link_to 'Edit', edit_spend_toil_path(spend_toil) %></td>
-        <td><%= link_to 'Destroy', spend_toil, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', spend_toil, class: "btn btn-xs btn-info" %></td>
+        <td><%= link_to 'Edit', edit_spend_toil_path(spend_toil), class: "btn btn-xs btn-info" %></td>
+        <td><%= link_to 'Destroy', spend_toil, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Spend toil', new_spend_toil_path %>
+<%= link_to 'New Spend toil', new_spend_toil_path, class: "btn btn-sm btn-primary" %>

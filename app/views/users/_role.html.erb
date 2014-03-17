@@ -12,7 +12,6 @@
   <% end %>
 
   <div class="field">
-    <h3> Change role of <%= @user.email %></h3>
     <%= f.label :role %><br />
     <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
   </div>

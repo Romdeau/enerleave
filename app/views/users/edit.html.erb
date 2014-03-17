@@ -1,8 +1,9 @@
-<h1>Edit Password for <% @user.email %></h1>
+<div id="content">
+  <div calss="paragraph">
+    <h1>Edit Password for <%= @user.email %></h1>
 
-<%= render 'password' %>
+    <%= render 'password' %>
 
-
-<%= link_to "<button type=\"button\" class=\"btn button_default\">Back</button>".html_safe, user_path(@user) %>
-
-
+    <%= link_to "<button type=\"button\" class=\"btn button_default\">Back</button>".html_safe, user_path(@user) %>
+  </div>
+</div>

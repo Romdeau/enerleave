@@ -1,5 +1,5 @@
 <div id="content">
-  <div class="container col-md-7">
+  <div class="container col-md-7 eneraque-table">
     <div class="paragraph">
       <div class="row">
         <div class="col-sm-3"><h4>Employee</h6></div>
@@ -17,8 +17,8 @@
           <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.end_date %></p></div>
           <% if logged_in? and can? :manage, leave_request %>
             <div class="btn-group col-sm-3" >
-              <%= link_to "Show", leave_request, class: "btn" %>
-              <%= link_to "Edit", edit_leave_request_path(leave_request), class: "btn" %>
+              <%= link_to "Show", leave_request, class: "btn btn-xs btn-info" %>
+              <%= link_to "Edit", edit_leave_request_path(leave_request), class: "btn btn-xs btn-info" %>
             </div>
           <% end %>
         </div> <br />
@@ -26,17 +26,14 @@
       <%= will_paginate @leave_requests %>
       <br />
       <% if logged_in? %>
-        <%= link_to 'New Leave request', new_leave_request_path, class: "btn" %>
-        <% if can? :manage, :all %>
-          <%= link_to 'Approvals', approvals_leave_requests_path, class: "btn" %>
-        <% end %>
+        <div class="btn-group">
+          <%= link_to 'New Leave request', new_leave_request_path, class: "btn btn-sm btn-success" %>
+          <% if can? :manage, :all %>
+            <%= link_to 'Approvals', approvals_leave_requests_path, class: "btn btn-sm btn-success" %>
+          <% end %>
+        </div>
       <% end %>
       <br />
-    </div>
-    <div class="paragraph">
-      <% if logged_in? and can? :manage, :all %>
-        <%= render 'leave_requests/import' %>
-      <% end %>
     </div>
   </div>
   <div class="container col-md-5">

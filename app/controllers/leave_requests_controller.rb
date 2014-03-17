@@ -84,6 +84,10 @@ class LeaveRequestsController < ApplicationController
     redirect_to root_url, notice: "Leave Requests imported."
   end
 
+  def import_data
+
+  end
+
   def approve_leave
     @to_approve = LeaveRequest.find(params[:id])
     @to_approve.approved = 'true'

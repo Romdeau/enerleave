@@ -1,0 +1,10 @@
+<div class="page-header">
+	<h1>Import Leave requests from .csv</h1>
+</div>
+
+<div class="paragraph">
+	<%= form_tag import_leave_requests_path, multipart: true do %>
+		<%= file_field_tag :file, :class => "btn" %>
+		<%= submit_tag "Import CSV", :class => "btn btn-xs btn-primary" %>
+	<% end %>
+</div>

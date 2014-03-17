@@ -1,4 +1,4 @@
-<h1>Edit Role for <% @user.email %></h1>
+<h1>Edit Role for <%= @user.email %></h1>
 <% if can? :manage, :all %>
 	<%= render 'role' %>
 

@@ -31,10 +31,10 @@
 
 <% if logged_in? %>
 	<div class="btn-group">
-		<%= link_to 'Edit', edit_leave_request_path(@leave_request), class: "btn" %>
-		<%= link_to 'Back', leave_requests_path, class: "btn" %>
+		<%= link_to 'Edit', edit_leave_request_path(@leave_request), class: "btn btn-xs btn-info" %>
+		<%= link_to 'Back', leave_requests_path, class: "btn btn-xs btn-info" %>
 	</div>
 <% end %>
 <% if can? :manage, :all and @leave_request.approved == 'false' %>
-  <%= link_to "Approve", approve_leave_path(@leave_request), class: 'btn button_default'%>
+  <%= link_to "Approve", approve_leave_path(@leave_request), class: 'btn btn-sm btn-warning'%>
 <% end %>

@@ -2,5 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @leave_request %> |
-<%= link_to 'Back', leave_requests_path %>
+<div class="btn-group">
+  <%= link_to 'Show', @leave_request, class: 'btn btn-xs btn-primary' %>
+  <%= link_to 'Back', leave_requests_path, class: 'btn btn-xs btn-primary' %>
+</div>

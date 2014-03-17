@@ -1,5 +1,5 @@
 <div id="content">
-  <div class="container">
+  <div class="paragraph">
     <h1 style="color: #263746;">User Directory</h1>
   </div>
 </div>
@@ -27,7 +27,7 @@
         <% if can? :manage, :all %>
           <%= link_to "Edit Role", role_user_path(user), class: 'btn' %>
         <% end %>
-        
+
       </div>
     </div>
   <% end %>

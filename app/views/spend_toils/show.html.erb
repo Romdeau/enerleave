@@ -3,7 +3,7 @@
   <h1>Toil Leave Request</h1>
 </div>
 <div class="row">
-  <div class="paragraph col-sm-4">  
+  <div class="paragraph col-sm-4">
     <h4>User:</h4>
     <%= @spend_toil.user.email %>
     <h4>Amount (Amount Remaining):</h4>
@@ -16,9 +16,9 @@
 </div>
 
 <% if can? :manage, :all or @spend_toil.approved == 'false'%>
-  <%= link_to 'Edit', edit_spend_toil_path(@spend_toil) %>
+  <%= link_to 'Edit', edit_spend_toil_path(@spend_toil), class: "btn btn-sm btn-primary" %>
 <% end %>
 <%= link_to 'Back', toil_requests_path %>
 <% if @spend_toil.approved == 'false' and can? :manage, :all %>
-  <%= link_to "Approve", approve_toil_path(@spend_toil), class: 'btn button_default'%>
+  <%= link_to "Approve", approve_toil_path(@spend_toil), class: 'btn btn-sm btn-warning'%>
 <% end %>
