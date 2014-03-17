@@ -1,8 +1,14 @@
-<h1>Toil Tracking</h1>
-<h2><%= "#{@user.email} has #{@user.total_toil} minutes of toil available"%></h2>
+<div class="page-header">
+  <h1>Toil Tracking</h1>
+</div>
 
-<%= render 'toil_requests/toil' %>
+<div class="paragraph">
+  <h2><%= "#{@user.email} has #{@user.total_toil} minutes of toil available"%></h2>
 
-<%= link_to "New Toil Request", admin_create_toil_path(@user), class: 'btn' %>
-<%= link_to "Spend Toil", new_spend_toil_path, class: 'btn' %>
-<%= link_to "Back", user_path(@user) %>
+  <%= render 'toil_requests/toil' %>
+  <div class="btn-group">
+    <%= link_to "New Toil Request", admin_create_toil_path(@user), class: 'btn btn-sm btn-info' %>
+    <%= link_to "Spend Toil", new_spend_toil_path, class: 'btn btn-sm btn-info' %>
+    <%= link_to "Back", user_path(@user), class: 'btn btn-sm btn-info' %>
+  </div>
+</div>

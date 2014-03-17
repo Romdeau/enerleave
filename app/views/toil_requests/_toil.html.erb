@@ -47,7 +47,7 @@
             <%= link_to "Edit", edit_spend_toil_path(spend_toil), class: "btn btn-xs btn-info" %>
           <% end %>
           <% if can? :manage, :all %>
-            <%= link_to "Delete", spend_toil, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
+            <%= link_to "Delete", spend_toil, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
           <% end %>
         </div>
       </div>

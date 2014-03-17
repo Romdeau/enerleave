@@ -1,24 +1,28 @@
 <p id="notice"><%= notice %></p>
-<div class="hero">
+<div class="page-header">
   <h1>Toil Leave Request</h1>
 </div>
-<div class="row">
-  <div class="paragraph col-sm-4">
-    <h4>User:</h4>
-    <%= @spend_toil.user.email %>
-    <h4>Amount (Amount Remaining):</h4>
-    <%= @spend_toil.initial_amount %> (<%= @spend_toil.amount %>)
-    <h4>Date accrued:</h4>
-    <%= @spend_toil.leave_date %>
-    <h4>Approved:</h4>
-    <%= @spend_toil.approved %>
+<div class="paragraph">
+  <div class="row">
+    <div class="paragraph col-sm-4">
+      <h4>User:</h4>
+      <%= @spend_toil.user.email %>
+      <h4>Amount (Amount Remaining):</h4>
+      <%= @spend_toil.initial_amount %> (<%= @spend_toil.amount %>)
+      <h4>Date accrued:</h4>
+      <%= @spend_toil.leave_date %>
+      <h4>Approved:</h4>
+      <%= @spend_toil.approved %>
+    </div>
+  </div>
+  <br />
+  <div class="btn-group">
+    <% if can? :manage, :all or @spend_toil.approved == 'false'%>
+      <%= link_to 'Edit', edit_spend_toil_path(@spend_toil), class: "btn btn-sm btn-primary" %>
+    <% end %>
+    <%= link_to 'Back', toil_requests_path, class: "btn btn-sm btn-primary" %>
+    <% if @spend_toil.approved == 'false' and can? :manage, :all %>
+      <%= link_to "Approve", approve_toil_path(@spend_toil), class: 'btn btn-sm btn-warning'%>
+    <% end %>
   </div>
 </div>
-
-<% if can? :manage, :all or @spend_toil.approved == 'false'%>
-  <%= link_to 'Edit', edit_spend_toil_path(@spend_toil), class: "btn btn-sm btn-primary" %>
-<% end %>
-<%= link_to 'Back', toil_requests_path %>
-<% if @spend_toil.approved == 'false' and can? :manage, :all %>
-  <%= link_to "Approve", approve_toil_path(@spend_toil), class: 'btn btn-sm btn-warning'%>
-<% end %>

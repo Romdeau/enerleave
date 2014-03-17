@@ -1,35 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1>Showing User page for <%= @user.email %></h1>
+</div>
+<div class="paragraph">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
 
-<p>
-  <strong>Total Leave Requests:</strong>
-  <%= @leave_requests.count %>
-</p>
+  <p>
+    <strong>Total Leave Requests:</strong>
+    <%= @leave_requests.count %>
+  </p>
 
-<p>
-  <strong>Total Toil Requests:</strong>
-  <%= @toil_requests.count %>
-</p>
+  <p>
+    <strong>Total Toil Requests:</strong>
+    <%= @toil_requests.count %>
+  </p>
 
-<p>
-  <strong>User Type:</strong>
-  <%= @user.role %>
-</p>
+  <p>
+    <strong>User Type:</strong>
+    <%= @user.role %>
+  </p>
 
 
-<div class="btn-group">
-	<% if current_user.id == @user.id or can? :manage, :all %>
-		<%= link_to "Change Password", edit_user_path(@user), class: 'btn' %>
-		<%= link_to "Toil Requests", user_toil_path(@user), class: 'btn' %>
-    <%= link_to "Leave Requests", user_leave_path(@user), class: 'btn' %>
-	<% end %>
-	<% if can? :manage, :all %>
-		<%= link_to "Edit Role", role_user_path(@user), class: 'btn' %>
-	<% end %>
-	<%= link_to "Show All Users", users_path, class: 'btn' %>
-	<%= link_to "Back", leave_requests_path, class: 'btn' %>
+  <div class="btn-group">
+  	<% if current_user.id == @user.id or can? :manage, :all %>
+  		<%= link_to "Change Password", edit_user_path(@user), class: 'btn btn-sm btn-info' %>
+  		<%= link_to "Toil Requests", user_toil_path(@user), class: 'btn btn-sm btn-info' %>
+      <%= link_to "Leave Requests", user_leave_path(@user), class: 'btn btn-sm btn-info' %>
+  	<% end %>
+  	<% if can? :manage, :all %>
+  		<%= link_to "Edit Role", role_user_path(@user), class: 'btn btn-sm btn-info' %>
+  	<% end %>
+  	<%= link_to "Show All Users", users_path, class: 'btn btn-sm btn-info' %>
+  	<%= link_to "Back", leave_requests_path, class: 'btn btn-sm btn-info' %>
+  </div>
 </div>

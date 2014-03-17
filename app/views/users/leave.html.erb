@@ -1,6 +1,10 @@
-<h1>Leave Tracking</h1>
-<h2><%= "#{@user.email} has #{@user.leave_request.count} leave requests"%></h2>
+<div class="page-header">
+  <h1>Leave Tracking</h1>
+</div>
+<div class="paragraph">
+  <h2><%= "#{@user.email} has #{@user.leave_request.count} leave requests"%></h2>
 
-<%= render 'leave_requests/leave' %>
+  <%= render 'leave_requests/leave' %>
 
-<%= link_to "Back", user_path(@user) %>
+  <%= link_to "Back", user_path(@user) %>
+</div>

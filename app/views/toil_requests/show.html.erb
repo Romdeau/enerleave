@@ -1,30 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1>Showing Details for <%= @toil_request.user.email %>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @toil_request.user.email %>
-</p>
+<div class="paragraph">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Time accrued (remaining):</strong>
-  <%= @toil_request.initial_amount %> (<%= @toil_request.amount %>)
-</p>
+  <p>
+    <strong>User:</strong>
+    <%= @toil_request.user.email %>
+  </p>
 
-<p>
-  <strong>Date accrued:</strong>
-  <%= @toil_request.date_accrued %>
-</p>
+  <p>
+    <strong>Time accrued (remaining):</strong>
+    <%= @toil_request.initial_amount %> (<%= @toil_request.amount %>)
+  </p>
 
-<p>
-  <strong>Approved:</strong>
-  <%= @toil_request.approved %>
-</p>
+  <p>
+    <strong>Date accrued:</strong>
+    <%= @toil_request.date_accrued %>
+  </p>
 
-<%= link_to 'Show User Toil', user_toil_path(@toil_request.user), class: 'btn button_deafault' %>
-<% if @toil_request.approved == 'false'%>
-	<%= link_to 'Edit', edit_toil_request_path(@toil_request), class: 'btn button_default' %>
-<% end %>
-<%= link_to 'Back', toil_requests_path, class: 'btn button_default' %>
-<% if can? :manage, :all and @toil_request.approved == 'false' %>
-	<%= link_to "Approve", approve_toil_request_path(@toil_request), class: 'btn button_default'%>
-<% end %>
+  <p>
+    <strong>Approved:</strong>
+    <%= @toil_request.approved %>
+  </p>
+
+  <div class="btn-group">
+    <%= link_to 'Show User Toil', user_toil_path(@toil_request.user), class: 'btn btn-sm btn-primary' %>
+    <% if @toil_request.approved == 'false'%>
+    	<%= link_to 'Edit', edit_toil_request_path(@toil_request), class: 'btn btn-sm btn-primary' %>
+    <% end %>
+    <%= link_to 'Back', toil_requests_path, class: 'btn btn-sm btn-primary' %>
+    <% if can? :manage, :all and @toil_request.approved == 'false' %>
+    	<%= link_to "Approve", approve_toil_request_path(@toil_request), class: 'btn btn-sm btn-warnign'%>
+    <% end %>
+  </div>
+</div>

@@ -1,12 +1,17 @@
-<h1>Toil Tracking</h1>
-<h2><%= "#{@user.email} has #{@user.total_toil} minutes of toil available"%></h2>
-<% if can? :manage, :all %>
-	<h4>NB: You'e logged in as an admin, so the totals reflect all Toil Requests. For individual totals navigate through the users individually <%= link_to "here", users_path%></h4>
-<% end %>
+<div class="page-header">
+	<h1>Toil Tracking</h1>
+</div>
+<div class="paragraph">
+	<h3><%= "#{@user.email} has #{@user.total_toil} minutes of toil available"%></h3>
+	<% if can? :manage, :all %>
+		<h4>NB: You'e logged in as an admin, so the totals reflect all Toil Requests. For individual totals navigate through the users individually <%= link_to "here", users_path%></h4>
+	<% end %>
 
-<%= render 'toil' %>
+	<%= render 'toil' %>
 
-<br>
-
-<%= link_to "New Toil Request", new_toil_request_path, class: 'btn' %>
-<%= link_to "Spend Toil", new_spend_toil_path, class: 'btn' %>
+	<br>
+	<div class="btn-group">
+		<%= link_to "New Toil Request", new_toil_request_path, class: 'btn btn-sm btn-primary' %>
+		<%= link_to "Spend Toil", new_spend_toil_path, class: 'btn btn-sm btn-primary' %>
+	</div>
+</div>
