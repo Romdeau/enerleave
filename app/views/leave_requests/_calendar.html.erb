@@ -10,8 +10,8 @@
           {
             title: '<%= User.find(leave_request.user).email %>',
             start: '<%= leave_request.start_date%>',
-            end: '<%= leave_request.end_date %>',
-            url: '/leave_requests/<%= leave_request.id%>'
+            end: '<%= leave_request.end_date %>'<% if logged_in? %>,
+            url: '/leave_requests/<%= leave_request.id%>'<% end %>
            },
         <% end %>
         {

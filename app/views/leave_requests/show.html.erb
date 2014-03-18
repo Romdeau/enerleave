@@ -34,8 +34,10 @@
   </p>
 
   <div class="btn-group">
-    <% if logged_in? %>
+    <% if can? :manage, :all %>
   		<%= link_to 'Edit', edit_leave_request_path(@leave_request), class: "btn btn-sm btn-info" %>
+    <% end %>
+    <% if logged_in? %>
   		<%= link_to 'Back', leave_requests_path, class: "btn btn-sm btn-info" %>
     <% end %>
     <% if can? :manage, :all and @leave_request.approved == 'false' %>
