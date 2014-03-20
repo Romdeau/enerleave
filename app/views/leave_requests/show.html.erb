@@ -28,10 +28,12 @@
     <%= @leave_request.end_date %>
   </p>
 
+  <% if can? :manage, :all %>
   <p>
     <strong>Comment:</strong>
     <%= @leave_request.comment %>
   </p>
+  <% end %>
 
   <div class="btn-group">
     <% if can? :manage, :all %>
