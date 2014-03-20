@@ -8,7 +8,7 @@
       events: [
         <% @leave_requests.each do |leave_request| %>
           {
-            title: '<%= User.find(leave_request.user).email %>',
+            title: '<%= format_name(User.find(leave_request.user).email) %>',
             start: '<%= leave_request.start_date%>',
             end: '<%= leave_request.end_date %>'<% if logged_in? %>,
             url: '/leave_requests/<%= leave_request.id%>'<% end %>

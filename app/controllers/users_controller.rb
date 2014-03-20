@@ -107,7 +107,7 @@ class UsersController < ApplicationController
     @toil_request.date_accrued_end = Time.now
     @toil_request.approved = 'false'
     if @toil_request.save
-      redirect_to edit_toil_request_path(@toil_request), notice:"Toil request created as #{@user.email}"
+      redirect_to edit_toil_request_path(@toil_request), notice:"Toil request created as #{@user.email}", alert:"remember to enter toil value in total minutes"
     else
       render action: 'toil', alert: "Something went wrong"
     end

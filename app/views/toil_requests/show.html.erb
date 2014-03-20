@@ -32,7 +32,7 @@
     <% end %>
     <%= link_to 'Back', toil_requests_path, class: 'btn btn-sm btn-primary' %>
     <% if can? :manage, :all and @toil_request.approved == 'false' %>
-    	<%= link_to "Approve", approve_toil_request_path(@toil_request), class: 'btn btn-sm btn-warnign'%>
+    	<%= link_to "Approve", approve_toil_request_path(@toil_request), class: 'btn btn-sm btn-warning'%>
     <% end %>
   </div>
 </div>

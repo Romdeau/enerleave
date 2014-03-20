@@ -14,7 +14,7 @@
 
   <% @users.each do |user| %>
     <div class="row">
-      <div class="col-sm-3"><p><%= user.email %></p></div>
+      <div class="col-sm-3"><p><%= format_name(user.email) %></p></div>
       <div class="col-sm-2">
         <%= user.role %>
       </div>

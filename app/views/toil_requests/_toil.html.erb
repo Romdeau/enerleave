@@ -10,7 +10,7 @@
     </div> <br />
     <% @toil_requests.each do |toil_request| %>
       <div class="row">
-        <div class="col-sm-2"><%= toil_request.user.email %></div>
+        <div class="col-sm-2"><%= format_name(toil_request.user.email) %></div>
         <div class="col-sm-2"><%= toil_request.initial_amount %>(<%= toil_request.amount %>)</div>
         <div class="col-sm-2"><td><%= toil_request.date_accrued_end %></div>
         <div class="col-sm-2"><td><%= toil_request.approved %></div>
@@ -37,7 +37,7 @@
     </div> <br />
     <% @spend_toils.each do |spend_toil| %>
       <div class="row">
-        <div class="col-sm-2"><%= spend_toil.user.email %></div>
+        <div class="col-sm-2"><%= format_name(spend_toil.user.email) %></div>
         <div class="col-sm-2"><%= spend_toil.initial_amount%> (<%= spend_toil.amount %>)</div>
         <div class="col-sm-2"><td><%= spend_toil.leave_date %></div>
         <div class="col-sm-2"><td><%= spend_toil.approved %></div>

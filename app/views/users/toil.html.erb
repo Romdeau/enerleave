@@ -3,7 +3,7 @@
 </div>
 
 <div class="paragraph">
-  <h2><%= "#{@user.email} has #{@user.total_toil} minutes of toil available"%></h2>
+  <h2><%= "#{format_name(@user.email)} has #{@user.total_toil} minutes of toil available"%></h2>
 
   <%= render 'toil_requests/toil' %>
   <div class="btn-group">

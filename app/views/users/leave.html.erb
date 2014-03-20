@@ -2,7 +2,7 @@
   <h1>Leave Tracking</h1>
 </div>
 <div class="paragraph">
-  <h2><%= "#{@user.email} has #{@user.leave_request.count} leave requests"%></h2>
+  <h2><%= "#{format_name(@user.email)} has #{@user.leave_request.count} leave requests"%></h2>
 
   <%= render 'leave_requests/leave' %>
 
