@@ -5,4 +5,5 @@ class UserMailer < ActionMailer::Base
     @user = user
     @url = 'http://enerleave.eneraque.com/login'
     mail(to: @user.email, subject: 'Welcome to EnerLeave: Leave Tracking')
+  end
 end
