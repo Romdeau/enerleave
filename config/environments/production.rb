@@ -77,4 +77,12 @@ Enerleave::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Basic Actionmailer Config
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:        'mail.eneraque.com',
+    port:           25,
+    domain:         'eneraque.com'
+  }
 end
