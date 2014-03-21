@@ -36,6 +36,7 @@ class LeaveRequestsController < ApplicationController
     @leave_request.approved = 'false'
     respond_to do |format|
       if @leave_request.save
+        UserMailer.leave_request(current_user).deliver
         format.html { redirect_to leave_requests_path, notice: 'Leave request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @leave_request }
       else

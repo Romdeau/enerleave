@@ -31,6 +31,7 @@ class SpendToilsController < ApplicationController
 
     respond_to do |format|
       if @spend_toil.save
+        UserMailer.toil_request(current_user).deliver
         format.html { redirect_to toil_requests_path, notice: 'Spend toil was successfully created.' }
         format.json { render action: 'show', status: :created, location: @spend_toil }
       else

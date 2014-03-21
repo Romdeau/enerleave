@@ -42,6 +42,7 @@ class ToilRequestsController < ApplicationController
 
     respond_to do |format|
       if @toil_request.save
+        UserMailer.toil_request(current_user).deliver
         format.html { redirect_to user_toil_path(@toil_request.user), notice: 'Toil request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @toil_request }
       else
