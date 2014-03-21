@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to EnerLeave, <%= format_name(@user.email) %></h1>
+    <p>
+      You have successfully signed up to enerleave.eneraque.com,
+      your username is: <%= @user.email %>
+    </p>
+    <p>
+      To Login to Enerleave simply follow this link <%= @url %>.
+    </p>
+  </body>
+</html>
