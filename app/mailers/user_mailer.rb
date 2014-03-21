@@ -17,4 +17,5 @@ class UserMailer < ActionMailer::Base
     @user = user
     @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
     mail(to: enerleaveadmins@eneraque.com, subject: 'New EnerLeave Toil Request')
+  end
 end
