@@ -1,0 +1,28 @@
+<div id="content">
+  <div calss="paragraph">
+    <h1>Edit Manager Email for <%= format_name(@user.email) %></h1>
+
+    <%= form_for @user, :url => {:action => 'update_manager_email'} do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+
+          <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="field">
+       <%= f.label :manager_email %><br />
+       <%= f.text_field :manager_email %>
+      </div>
+      <div class="actions">
+        <%= f.submit class: "btn btn-sm btn-success" %>
+      </div>
+    <% end %>
+
+    <%= link_to "Back", user_path(@user), class: 'btn btn-sm btn-primary' %>
+  </div>
+</div>

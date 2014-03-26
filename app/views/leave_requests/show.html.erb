@@ -10,7 +10,10 @@
   </p>
 
   <p>
-    <strong Approved:</strong> <%= @leave_request.approved %>
+    <strong> Approved:</strong> <%= @leave_request.approved %>
+    <% if @leave_request.approved == "false" %>  
+      (Approval responsibility of <%= @user.manager_email %>)
+    <% end %>
   </p>
 
   <p>
@@ -28,7 +31,7 @@
     <%= @leave_request.end_date %>
   </p>
 
-  <% if can? :manage, :all %>
+  <% if can? :manage, :all or can? :approve, :all %>
   <p>
     <strong>Comment:</strong>
     <%= @leave_request.comment %>
@@ -42,7 +45,7 @@
     <% if logged_in? %>
   		<%= link_to 'Back', leave_requests_path, class: "btn btn-sm btn-info" %>
     <% end %>
-    <% if can? :manage, :all and @leave_request.approved == 'false' %>
+    <% if (can? :manage, :all or can? :approve, :all) and @leave_request.approved == 'false' %>
       <%= link_to "Approve", approve_leave_path(@leave_request), class: 'btn btn-sm btn-warning'%>
     <% end %>
   </div>

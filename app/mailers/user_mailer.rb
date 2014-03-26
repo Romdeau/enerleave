@@ -18,4 +18,10 @@ class UserMailer < ActionMailer::Base
     @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
     mail(to: 'enerleaveadmins@eneraque.com', subject: 'New EnerLeave Toil Request')
   end
+
+  def assign_manager(user)
+    @user = user
+    @url = "http://enerleave.eneraque.com/users/#{@user.id}/"
+    mail(to: @user.manager_email, subject: "You have been assigned as the manager of #{@user.email}")
+  end
 end

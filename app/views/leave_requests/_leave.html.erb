@@ -28,7 +28,7 @@
       <% if logged_in? %>
         <div class="btn-group">
           <%= link_to 'New Leave request', new_leave_request_path, class: "btn btn-sm btn-success" %>
-          <% if can? :manage, :all %>
+          <% if can? :manage, :all or can? :approve, :all %>
             <%= link_to 'Approvals', approvals_leave_requests_path, class: "btn btn-sm btn-success" %>
           <% end %>
         </div>

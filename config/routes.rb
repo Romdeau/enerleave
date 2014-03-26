@@ -17,10 +17,12 @@ Enerleave::Application.routes.draw do
 
   #user routes
   get '/users/:id/role' => 'users#role', :as => :role_user
+  get '/users/:id/manager_email' => 'users#manager_email', :as => :manager_email
   get '/users/:id/toil' => 'users#toil', :as => :user_toil
   get '/users/:id/leave' => 'users#leave', :as => :user_leave
   get '/users/:id/create_toil' => 'users#create_toil', :as => :admin_create_toil
   patch 'users/:id/update_role' => 'users#update_role'
+  patch 'users/:id/update_manager_email' => 'users#update_manager_email'
 
   #leave_request routes
   resources :leave_requests do

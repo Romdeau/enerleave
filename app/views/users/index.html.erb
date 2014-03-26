@@ -26,6 +26,7 @@
         <% end %>
         <% if can? :manage, :all %>
           <%= link_to "Edit Role", role_user_path(user), class: 'btn btn-xs btn-info' %>
+          <%= link_to "Manager Email", manager_email_path(user), class: 'btn btn-xs btn-info' %>
         <% end %>
       </div>
       <% if can? :manage, :all %>

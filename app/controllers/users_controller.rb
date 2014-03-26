@@ -30,6 +30,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def manager_email
+    @user = User.find(params[:id])
+  end
+
   # POST /users
   # POST /users.json
   def create
@@ -71,7 +75,19 @@ class UsersController < ApplicationController
     user_params.delete(:password)
     user_params.delete(:password_confirmation)
     if @user.update_many_attributes(user_params)
-      redirect_to @user, notice: 'User role successfully updated.'
+      redirect_to @user, notice: 'Manager Email successfully updated.'
+    else
+      render action: 'role'
+    end
+  end
+
+  def update_manager_email
+    @user = User.find(params[:id])
+    user_params.delete(:password)
+    user_params.delete(:password_confirmation)
+    if @user.update_many_attributes(user_params)
+      UserMailer.assign_manager(@user).deliver
+      redirect_to @user, notice: 'Manager Email successfully updated.'
     else
       render action: 'role'
     end
