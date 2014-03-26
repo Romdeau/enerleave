@@ -39,6 +39,10 @@ Enerleave::Application.routes.draw do
 
   #help
   get '/help/' => 'help#index', :as => :help_index
+  get '/help/login' => 'help#login', :as => :help_login
+  get '/help/user' => 'help#user', :as => :help_user
+  get '/help/leave' => 'help#leave', :as => :help_leave
+  get '/help/toil' => 'help#toil', :as => :help_toil
 
 
 

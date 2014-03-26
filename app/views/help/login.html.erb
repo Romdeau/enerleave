@@ -1,0 +1,27 @@
+<div class="page-header">
+  <h1>EnerLeave Help: Login</h1>
+</div>
+
+<div id="content">
+  <div class="paragraph">
+    <% if logged_in? %>
+      <p>
+        You're currently logged in as <%=format_name(current_user.email)%><br />
+        To login as another user simply click the <%= link_to "Logout", logout_path %> button above.
+      </p>
+    <% else %>
+      <p>
+        To login simply click the "Login" Button up the top right, or alternatively click <%= link_to "here", login_path %>
+      </p>
+    <% end %>
+  </div>
+  <div class="paragraph">
+    <p>Can't find what you're looking for? Email helpdesk@eneraque.com</p>
+    <ul>
+      <li><%= link_to "Help With Login", help_login_path %></li>
+      <li><%= link_to "Help With Users", help_user_path %></li>
+      <li><%= link_to "Help With Leave Requests", help_leave_path %></li>
+      <li><%= link_to "Help With Toil Requests", help_toil_path %></li>
+    </ul>
+  </div>
+</div>

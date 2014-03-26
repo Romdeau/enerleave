@@ -1,0 +1,49 @@
+<div class="page-header">
+  <h1>EnerLeave Help: Login</h1>
+</div>
+
+<div id="content">
+  <div class="paragraph">
+    <% if !logged_in? %>
+      <p>
+        This help is contextual, but we've noticed that you're not currently logged in, so the links for this help article won't work.<br />
+        Please <%= link_to "Log In", login_path %> first.
+      </p>
+    <% else %>
+      <h4>User Page</h4>
+      <p>
+        By clicking your email in the top right of the top bar (<%= link_to current_user.email, user_path(current_user) %>) you can navigate to your user page.<br />
+        From your user page you can <%= link_to "change your managers email", manager_email_path(current_user) %>, <%= link_to "change your password", edit_user_path(current_user) %>, <%= link_to "view your toil requests", user_toil_path(current_user) %> and <%= link_to "view your leave requests", user_leave_path(current_user) %>.
+      </p>
+      <br />
+      <h4>Change your managers email / Change your password</h4>
+      <p>
+        These are fairly self explanatory, clicking either one will display a form that allows you to change your managers email or your password.<br />
+        Passwords still need to meet minimum complexity requirements otherwise the update will fail.<br />
+        Manager emails still need to be @eneraque.com otherwise the update will fail<br />
+      </p>
+      <br />
+      <h4>View your TOIL requests</h4>
+      <p>
+        This allows you to view your toil requests, the same as if you went to the <%= link_to "Toil Requests", toil_requests_path %> menu item from the top bar.<br />
+        For specific information on this you should refer to the <%= link_to "Help With Toil Requests", help_toil_path %> page.
+      </p>
+      <br />
+    <% end %>
+    <% if can? :manage, :help %>
+      <h4>User Administration</h4>
+      <p>
+        You're logged in as an admin, all user interactions are accessible from the <%= link_to "Users", users_path %> menu item in the top bar. You have access to all the same menu items as the above, but by using the Show button next to users names from the main users catalogue you can access and modify their information directly.
+      </p>
+    <% end %>
+  </div>
+  <div class="paragraph">
+    <p>Can't find what you're looking for? Email helpdesk@eneraque.com</p>
+    <ul>
+      <li><%= link_to "Help With Login", help_login_path %></li>
+      <li><%= link_to "Help With Users", help_user_path %></li>
+      <li><%= link_to "Help With Leave Requests", help_leave_path %></li>
+      <li><%= link_to "Help With Toil Requests", help_toil_path %></li>
+    </ul>
+  </div>
+</div>

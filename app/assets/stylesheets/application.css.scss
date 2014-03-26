@@ -11,9 +11,9 @@
  *= require_self
  *= require_tree .
  */
-
 @import "bootstrap";
-/* @import "bootstrap/theme";
+/* Remember that theres CSS is the scaffolds file as well.
+*  @import "bootstrap/theme";
 */
 body {
   background: #ecf1f5 !important;

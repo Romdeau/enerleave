@@ -35,6 +35,7 @@
           <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+          <li> <%= link_to "Help", help_index_path%></li>
           <% if current_user %>
           <li> <%= link_to "#{current_user.email}", user_path(current_user.id) %></li>
           <li> <%= link_to "Logout", :logout, method: :post %></li>

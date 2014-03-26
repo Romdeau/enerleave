@@ -28,6 +28,7 @@
   <div class="btn-group">
   	<% if current_user.id == @user.id or can? :manage, :all %>
   		<%= link_to "Change Password", edit_user_path(@user), class: 'btn btn-sm btn-info' %>
+      <%= link_to "Change Manager", manager_email_path(@user), class: 'btn btn-sm btn-info' %>
   		<%= link_to "Toil Requests", user_toil_path(@user), class: 'btn btn-sm btn-info' %>
       <%= link_to "Leave Requests", user_leave_path(@user), class: 'btn btn-sm btn-info' %>
   	<% end %>
