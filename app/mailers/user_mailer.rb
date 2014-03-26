@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
   def leave_request(user)
     @user = user
     @url = 'http://enerleave.eneraque.com/leave_requests/approvals'
-    mail(to: 'enerleaveadmins@eneraque.com', subject: 'New EnerLeave Leave Request')
+    mail(to: @user.manager_email, subject: 'New EnerLeave Leave Request')
   end
 
   def toil_request(user)
