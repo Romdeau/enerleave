@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :spend_toil, dependent: :destroy
   has_many :leave_request, dependent: :destroy
 
+  validate :eneraque_email?
+
   ROLES = %w[user manager admin]
 
   def count_toil
@@ -46,5 +48,12 @@ class User < ActiveRecord::Base
   	valid_leave = self.toil_request.select { |toil| toil.toil_valid? }.select { |toil| toil.amount > 0}
     valid_leave = valid_leave.sort_by &:date_accrued_end
     valid_leave.first
+  end
+
+  def eneraque_email?
+    @email_array = manager_email.split("@")
+    if @email_array[1] != "eneraque.com"
+      errors.add(:manager_email, "this is not a valid @eneraque.com email")
+    end
   end
 end
