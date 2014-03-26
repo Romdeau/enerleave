@@ -36,17 +36,21 @@ class ToilRequestsController < ApplicationController
   def create
     @toil_request = ToilRequest.new(toil_request_params)
     @toil_request.user = current_user
-    @toil_request.initial_amount = @toil_request.amount / 6
-    @toil_request.amount = @toil_request.amount / 6
-    @toil_request.approved = 'false'
-
     respond_to do |format|
       if @toil_request.save
-        UserMailer.toil_request(current_user).deliver
-        format.html { redirect_to user_toil_path(@toil_request.user), notice: 'Toil request was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @toil_request }
+        @toil_request.initial_amount = @toil_request.amount / 6
+        @toil_request.amount = @toil_request.amount / 6
+        @toil_request.approved = 'false'
+        if @toil_request.save
+          UserMailer.toil_request(current_user).deliver
+          format.html { redirect_to user_toil_path(@toil_request.user), notice: 'Toil request was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @toil_request }
+        else
+          format.html { render action: 'new', :user_id => params[:user_id] }
+          format.json { render json: @toil_request.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new', :user_id => params[:user_id] }
         format.json { render json: @toil_request.errors, status: :unprocessable_entity }
       end
     end

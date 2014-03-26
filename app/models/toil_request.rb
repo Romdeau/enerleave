@@ -14,6 +14,4 @@ class ToilRequest < ActiveRecord::Base
   		false
   	end
   end
-
-
 end

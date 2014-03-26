@@ -35,7 +35,7 @@ class SpendToilsController < ApplicationController
         format.html { redirect_to toil_requests_path, notice: 'Spend toil was successfully created.' }
         format.json { render action: 'show', status: :created, location: @spend_toil }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new', :user_id => params[:user_id] }
         format.json { render json: @spend_toil.errors, status: :unprocessable_entity }
       end
     end
