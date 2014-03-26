@@ -37,7 +37,8 @@ Enerleave::Application.routes.draw do
   get '/spend_toils/:id/approve_toil' => 'spend_toils#approve_toil', :as => :approve_toil
   get '/toil_requests/:id/approve_toil' => 'toil_requests#approve_toil', :as => :approve_toil_request
 
-
+  #help
+  get '/help/' => 'help#index', :as => :help_index
 
 
 
