@@ -75,6 +75,7 @@ class SpendToilsController < ApplicationController
         if @leave_toil.save
           @to_approve.approved = 'true'
           if @to_approve.save
+            UserMailer.toil_approved(@to_approve.user).deliver
             redirect_to toil_requests_path, notice: "Leave successfully processed"
           else
             redirect_to toil_requests_path, alert: 'Failed to approve'

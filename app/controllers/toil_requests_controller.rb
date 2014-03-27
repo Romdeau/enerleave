@@ -86,6 +86,7 @@ class ToilRequestsController < ApplicationController
     @to_approve = ToilRequest.find(params[:id])
     @to_approve.approved = 'true'
     if @to_approve.save
+      UserMailer.toil_approved(@to_approve.user).deliver
       redirect_to toil_requests_path, notice: 'Toil Request Approved'
     else
       redirect_to toil_requests_path, alert: 'Something Went Wrong'
