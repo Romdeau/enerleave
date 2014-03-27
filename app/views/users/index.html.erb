@@ -20,9 +20,9 @@
       </div>
       <div class="btn-group col-sm-5">
         <% if current_user.id == user.id or can? :manage, :all %>
-          <%= link_to "Change Password", edit_user_path(user), class: 'btn btn-xs btn-info' %>
+          <%= link_to "Show Details", user_path(user), class: 'btn btn-xs btn-info' %>
           <%= link_to "Toil Requests", user_toil_path(user), class: 'btn btn-xs btn-info' %>
-          <%= link_to "Back", leave_requests_path, class: 'btn btn-xs btn-info' %>
+          <%= link_to "Leave Requests", user_leave_path(user), class: 'btn btn-xs btn-info' %>
         <% end %>
         <% if can? :manage, :all %>
           <%= link_to "Edit Role", role_user_path(user), class: 'btn btn-xs btn-info' %>

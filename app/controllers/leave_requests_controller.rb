@@ -92,7 +92,9 @@ class LeaveRequestsController < ApplicationController
   def approve_leave
     @to_approve = LeaveRequest.find(params[:id])
     @to_approve.approved = 'true'
+    @user = @to_approve.user
     if @to_approve.save
+      UserMailer.leave_approved(@user).deliver
       redirect_to leave_requests_path, notice: 'Toil Request Approved'
     else
       redirect_to leave_requests_path, alert: 'Something Went Wrong'
