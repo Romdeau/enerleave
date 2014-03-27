@@ -2,12 +2,13 @@
   <div class="container col-md-6 eneraque-table">
     <div class="paragraph">
       <div class="row header-row">
-        <div class="col-sm-3"><h4>Employee</h6></div>
-        <div class="col-sm-2"><h4>Type</h6></div>
-        <div class="col-sm-2"><h4>Startdate</h6></div>
-        <div class="col-sm-2"><h4>Enddate</h6></div>
-        <div class="col-sm-3"></div>
-      </div> <br />
+        <div class="col-sm-3 ener-header"><h4>Employee</h6></div>
+        <div class="col-sm-2 ener-header"><h4>Type</h6></div>
+        <div class="col-sm-2 ener-header"><h4>Startdate</h6></div>
+        <div class="col-sm-2 ener-header"><h4>Enddate</h6></div>
+        <div class="col-sm-3 ener-header"></div>
+      </div>
+      <hr style="margin-bottom:5px;margin-top:5px;">
 
       <% @leave_requests.each do |leave_request| %>
         <div class="row">
@@ -21,7 +22,7 @@
               <%= link_to "Edit", edit_leave_request_path(leave_request), class: "btn btn-xs btn-info" %>
             </div>
           <% end %>
-        </div> <br />
+        </div>
       <% end %>
       <%= will_paginate @leave_requests %>
       <br />
