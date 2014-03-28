@@ -36,4 +36,10 @@ class UserMailer < ActionMailer::Base
     @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
     mail(to: @user.email, cc: "laura.pringle@eneraque.com", subject: 'Your Toil Request was approved')
   end
+
+  def reset_password_email(user)
+    @user = user
+    @url  = edit_password_reset_url(user.reset_password_token)
+    mail(:to => user.email, :subject => "Your password has been reset")
+  end
 end
