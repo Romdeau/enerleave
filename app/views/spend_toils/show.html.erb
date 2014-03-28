@@ -3,18 +3,26 @@
   <h1>Toil Leave Request</h1>
 </div>
 <div class="paragraph">
-  <div class="row">
-    <div class="paragraph col-sm-4">
-      <h4>User:</h4>
-      <%= @spend_toil.user.email %>
-      <h4>Amount (Amount Remaining):</h4>
-      <%= @spend_toil.initial_amount %> (<%= @spend_toil.amount %>)
-      <h4>Date accrued:</h4>
-      <%= @spend_toil.leave_date %>
-      <h4>Approved:</h4>
-      <%= @spend_toil.approved %>
-    </div>
-  </div>
+  <p id="notice"><%= notice %></p>
+
+  <p class="row">
+    <div class="col-sm-3"><strong>User:</strong></div>
+    <div class="col-sm-2"><%= @spend_toil.user.email %></div>
+  </p>
+
+  <p class="row">
+    <div class="col-sm-3"><strong>Amount (Amount Remaining):</strong></div>
+    <div class="col-sm-2"><%= @spend_toil.initial_amount %> (<%= @spend_toil.amount %>)</div>
+  </p>
+  <p class="row">
+    <div class="col-sm-3"><strong>Date accrued:</strong></div>
+    <div class="col-sm-2"><%= @spend_toil.leave_date %></div>
+  </p>
+  <p class="row">
+    <div class="col-sm-3"><strong>Approved:</strong></div>
+    <div class="col-sm-2"><%= @spend_toil.approved %></div>
+  </p>
+  <div class="row" style="margin-bottom:20px;"></div>
   <br />
   <div class="btn-group">
     <% if can? :manage, :all or @spend_toil.approved == 'false'%>

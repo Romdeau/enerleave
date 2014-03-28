@@ -5,26 +5,26 @@
 <div class="paragraph">
   <p id="notice"><%= notice %></p>
 
-  <p>
-    <strong>User:</strong>
-    <%= @toil_request.user.email %>
+  <p class="row">
+    <div class="col-xs-3"><strong>User:</strong></div>
+    <div class="col-xs-2"><%= @toil_request.user.email %></div>
   </p>
 
-  <p>
-    <strong>Time accrued (remaining):</strong>
-    <%= @toil_request.initial_amount %> (<%= @toil_request.amount %>)
+  <p class="row">
+    <div class="col-xs-3"><strong>Time accrued (remaining):</strong></div>
+    <div class="col-xs-2"><%= @toil_request.initial_amount %> (<%= @toil_request.amount %>)</div>
   </p>
 
-  <p>
-    <strong>Date accrued:</strong>
-    <%= @toil_request.date_accrued %>
+  <p class="row">
+    <div class="col-xs-3"><strong>Date accrued:</strong></div>
+    <div class="col-xs-2"><%= @toil_request.date_accrued %></div>
   </p>
 
-  <p>
-    <strong>Approved:</strong>
-    <%= @toil_request.approved %>
+  <p class="row">
+    <div class="col-xs-3"><strong>Approved:</strong></div>
+    <div class="col-xs-2"><%= @toil_request.approved %></div>
   </p>
-
+  <div class="row" style="margin-bottom:20px;"></div>
   <div class="btn-group">
     <%= link_to 'Show User Toil', user_toil_path(@toil_request.user), class: 'btn btn-sm btn-primary' %>
     <% if @toil_request.approved == 'false'%>
