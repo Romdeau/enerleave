@@ -3,19 +3,19 @@
     <h4 class="ener-highlight"><%= @user.count_toil %> Toil Requests Totaling <%= @user.total_toil %> minutes</h4>
     <div class="paragraph">
       <div class="row">
-        <div class="col-sm-2 ener-header"><h4>Employee</h6></div>
+        <div class="col-sm-3 ener-header"><h4>Employee</h6></div>
         <div class="col-sm-2 ener-header"><h4>Time (minutes)</h6></div>
-        <div class="col-sm-2 ener-header"><h4>Date Accrued</h6></div>
-        <div class="col-sm-2 ener-header"><h4>Approved</h4></div>
-        <div class="col-sm-4"></div>
+        <div class="col-sm-3 ener-header"><h4>Date Accrued</h6></div>
+        <div class="col-sm-1 ener-header"><h4>Approved</h4></div>
+        <div class="col-sm-3"></div>
       </div> <hr style="margin-top:5px;margin-bottom:5px;">
       <% @toil_requests.each do |toil_request| %>
         <div class="row">
-          <div class="col-sm-2"><%= format_name(toil_request.user.email) %></div>
+          <div class="col-sm-3"><%= format_name(toil_request.user.email) %></div>
           <div class="col-sm-2"><%= toil_request.initial_amount %>(<%= toil_request.amount %>)</div>
-          <div class="col-sm-2"><td><%= toil_request.date_accrued_end %></div>
-          <div class="col-sm-2"><td><%= toil_request.approved %></div>
-          <div class="btn-group col-sm-4">
+          <div class="col-sm-3"><td><%= toil_request.date_accrued_end %></div>
+          <div class="col-sm-1"><td><%= toil_request.approved %></div>
+          <div class="btn-group col-sm-3">
             <%= link_to "Show", toil_request, class: "btn btn-xs btn-info" %>
             <% if toil_request.approved == 'false' %>
               <%= link_to "Edit", edit_toil_request_path(toil_request), class: "btn btn-xs btn-info" %>
@@ -32,19 +32,19 @@
     <h4 class="ener-highlight"><%= @user.count_spend %> Toil Spends totaling <%= @user.total_spend %> minutes</h4>
     <div class="paragraph">
       <div class="row">
-        <div class="col-sm-2 ener-header"><h4>Employee</h6></div>
+        <div class="col-sm-3 ener-header"><h4>Employee</h6></div>
         <div class="col-sm-2 ener-header"><h4>Time (minutes)</h6></div>
-        <div class="col-sm-2 ener-header"><h4>Start Date</h6></div>
-        <div class="col-sm-2 ener-header"><h4>Approved</h4></div>
-        <div class="col-sm-4 ener-header"></div>
+        <div class="col-sm-3 ener-header"><h4>Start Date</h6></div>
+        <div class="col-sm-1 ener-header"><h4>Approved</h4></div>
+        <div class="col-sm-3 ener-header"></div>
       </div> <hr style="margin-top:5px;margin-bottom:5px;">
       <% @spend_toils.each do |spend_toil| %>
         <div class="row">
-          <div class="col-sm-2"><%= format_name(spend_toil.user.email) %></div>
+          <div class="col-sm-3"><%= format_name(spend_toil.user.email) %></div>
           <div class="col-sm-2"><%= spend_toil.initial_amount%> (<%= spend_toil.amount %>)</div>
-          <div class="col-sm-2"><td><%= spend_toil.leave_date %></div>
-          <div class="col-sm-2"><td><%= spend_toil.approved %></div>
-          <div class="btn-group col-sm-4">
+          <div class="col-sm-3"><td><%= spend_toil.leave_date %></div>
+          <div class="col-sm-1"><td><%= spend_toil.approved %></div>
+          <div class="btn-group col-sm-3">
             <%= link_to "Show", spend_toil, class: "btn btn-xs btn-info" %>
             <% if spend_toil.approved == 'false' %>
               <%= link_to "Edit", edit_spend_toil_path(spend_toil), class: "btn btn-xs btn-info" %>
