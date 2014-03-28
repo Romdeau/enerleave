@@ -31,6 +31,7 @@ class SpendToilsController < ApplicationController
 
     respond_to do |format|
       if @spend_toil.save
+        UserAudit.create({:user => current_user, :action => "created toil spend request", :end_user => @spend_toil.user.email})
         UserMailer.toil_request(current_user).deliver
         format.html { redirect_to toil_requests_path, notice: 'Spend toil was successfully created.' }
         format.json { render action: 'show', status: :created, location: @spend_toil }
@@ -47,6 +48,7 @@ class SpendToilsController < ApplicationController
     @spend_toil.initial_amount = @spend_toil.amount
     respond_to do |format|
       if @spend_toil.update(spend_toil_params)
+        UserAudit.create({:user => current_user, :action => "updated toil spend request", :end_user => @spend_toil.user.email})
         format.html { redirect_to @spend_toil, notice: 'Spend toil was successfully updated.' }
         format.json { head :no_content }
       else
@@ -59,6 +61,7 @@ class SpendToilsController < ApplicationController
   # DELETE /spend_toils/1
   # DELETE /spend_toils/1.json
   def destroy
+    UserAudit.create({:user => current_user, :action => "destroyed toil spend request", :end_user => @spend_toil.user.email})
     @spend_toil.destroy
     respond_to do |format|
       format.html { redirect_to spend_toils_url }
@@ -75,6 +78,7 @@ class SpendToilsController < ApplicationController
         if @leave_toil.save
           @to_approve.approved = 'true'
           if @to_approve.save
+            UserAudit.create({:user => current_user, :action => "approved toil spend request", :description => "#{@to_approve.id} ending #{@to_approve.leave_date} for #{@to_approve.amount} minutes", :end_user => @to_approve.user.email})
             UserMailer.toil_approved(@to_approve.user).deliver
             redirect_to toil_requests_path, notice: "Leave successfully processed"
           else

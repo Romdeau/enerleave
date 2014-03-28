@@ -72,9 +72,11 @@ class UsersController < ApplicationController
 
   def update_role
     @user = User.find(params[:id])
+    @old_role = @user.role
     user_params.delete(:password)
     user_params.delete(:password_confirmation)
     if @user.update_many_attributes(user_params)
+      UserAudit.create({:user => current_user, :action => "changed user role", :description => "Role changed from #{@old_role} to #{@user.role}", :end_user => @user.email})
       redirect_to @user, notice: 'Manager Email successfully updated.'
     else
       render action: 'role'
@@ -86,6 +88,7 @@ class UsersController < ApplicationController
     user_params.delete(:password)
     user_params.delete(:password_confirmation)
     if @user.update_many_attributes(user_params)
+      UserAudit.create({:user => current_user, :action => "updatedted manager email", :end_user => @user.email})
       UserMailer.assign_manager(@user).deliver
       redirect_to @user, notice: 'Manager Email successfully updated.'
     else
@@ -96,6 +99,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    UserAudit.create({:user => current_user, :action => "user destroyed", :end_user => @user.email})
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url }
@@ -124,6 +128,7 @@ class UsersController < ApplicationController
     @toil_request.date_accrued_end = Time.now
     @toil_request.approved = 'false'
     if @toil_request.save
+      UserAudit.create({:user => current_user, :action => "created toil request while impersonating user", :end_user => @user.email})
       redirect_to edit_toil_request_path(@toil_request), notice:"Toil request created as #{@user.email}", alert:"remember to enter toil value in total minutes"
     else
       render action: 'toil', alert: "Something went wrong"

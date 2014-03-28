@@ -36,6 +36,7 @@ class LeaveRequestsController < ApplicationController
     @leave_request.approved = 'false'
     respond_to do |format|
       if @leave_request.save
+        UserAudit.create({:user => current_user, :action => "created leave request", :end_user => @leave_request.user.email})
         UserMailer.leave_request(current_user).deliver
         format.html { redirect_to leave_requests_path, notice: 'Leave request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @leave_request }
@@ -52,6 +53,7 @@ class LeaveRequestsController < ApplicationController
     @leave_request = LeaveRequest.find(params[:id])
     respond_to do |format|
       if @leave_request.update(leave_request_params)
+        UserAudit.create({:user => current_user, :action => "updated leave request", :end_user => @leave_request.user.email})
         format.html { redirect_to @leave_request, notice: 'Leave request was successfully updated.' }
         format.json { head :no_content }
       else
@@ -64,6 +66,7 @@ class LeaveRequestsController < ApplicationController
   # DELETE /leave_requests/1
   # DELETE /leave_requests/1.json
   def destroy
+    UserAudit.create({:user => current_user, :action => "destroyed leave request", :end_user => @leave_request.user.email})
     @leave_request.destroy
     respond_to do |format|
       format.html { redirect_to leave_requests_url }
@@ -94,6 +97,7 @@ class LeaveRequestsController < ApplicationController
     @to_approve.approved = 'true'
     @user = @to_approve.user
     if @to_approve.save
+      UserAudit.create({:user => current_user, :action => "approved leave request", :description => "#{@to_approve.id} ending #{@to_approve.end_date} (#{@to_approve.comment} )", :end_user => @to_approve.user.email})
       UserMailer.leave_approved(@user).deliver
       redirect_to leave_requests_path, notice: 'Toil Request Approved'
     else

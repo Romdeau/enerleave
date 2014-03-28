@@ -42,6 +42,7 @@ class ToilRequestsController < ApplicationController
         @toil_request.amount = @toil_request.amount / 6
         @toil_request.approved = 'false'
         if @toil_request.save
+          UserAudit.create({:user => current_user, :action => "created toil request", :end_user => @toil_request.user.email})
           UserMailer.toil_request(current_user).deliver
           format.html { redirect_to user_toil_path(@toil_request.user), notice: 'Toil request was successfully created.' }
           format.json { render action: 'show', status: :created, location: @toil_request }
@@ -63,6 +64,7 @@ class ToilRequestsController < ApplicationController
       if @toil_request.update(toil_request_params)
         @toil_request.initial_amount = @toil_request.amount
         @toil_request.save
+        UserAudit.create({:user => current_user, :action => "updated toil request", :end_user => @toil_request.user.email})
         format.html { redirect_to @toil_request, notice: 'Toil request was successfully updated.' }
         format.json { head :no_content }
       else
@@ -75,6 +77,7 @@ class ToilRequestsController < ApplicationController
   # DELETE /toil_requests/1
   # DELETE /toil_requests/1.json
   def destroy
+    UserAudit.create({:user => current_user, :action => "destroyed toil request", :end_user => @toil_request.user.email})
     @toil_request.destroy
     respond_to do |format|
       format.html { redirect_to toil_requests_url }
@@ -86,6 +89,7 @@ class ToilRequestsController < ApplicationController
     @to_approve = ToilRequest.find(params[:id])
     @to_approve.approved = 'true'
     if @to_approve.save
+      UserAudit.create({:user => current_user, :action => "approved toil request", :description => "#{@to_approve.id} ending #{@to_approve.date_accrued_end} for #{@to_approve.amount} minutes", :end_user => @to_approve.user.email})
       UserMailer.toil_approved(@to_approve.user).deliver
       redirect_to toil_requests_path, notice: 'Toil Request Approved'
     else

@@ -1,0 +1,29 @@
+<% if can? :manage, :all %>
+  <h1>Listing user_audits</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>User</th>
+        <th>Action</th>
+        <th>End user</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user_audits.each do |user_audit| %>
+        <tr>
+          <td><%= user_audit.created_at %></td>
+          <td><%= link_to format_name(user_audit.user.email), user_audit %></td>
+          <td><%= user_audit.action %></td>
+          <td><%= format_name(user_audit.end_user) %></td>
+          <td><%= user_audit.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -1,0 +1,26 @@
+<% if can? :manage :all %>
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>User:</strong>
+    <%= @user_audit.user %>
+  </p>
+
+  <p>
+    <strong>Action:</strong>
+    <%= @user_audit.action %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @user_audit.description %>
+  </p>
+
+  <p>
+    <strong>End user:</strong>
+    <%= @user_audit.end_user %>
+  </p>
+
+  <%= link_to 'Edit', edit_user_audit_path(@user_audit) %> |
+  <%= link_to 'Back', user_audits_path %>
+<% end %>

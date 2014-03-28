@@ -1,4 +1,6 @@
 Enerleave::Application.routes.draw do
+  resources :user_audits
+
   get "password_resets/create"
   get "password_resets/edit"
   get "password_resets/update"
@@ -9,6 +11,7 @@ Enerleave::Application.routes.draw do
   end
   resources :user_sessions
   resources :password_resets
+  resources :user_audits
 
   resources :toil_requests
   resources :spend_toils

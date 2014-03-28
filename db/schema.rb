@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140328041015) do
+ActiveRecord::Schema.define(version: 20140328050640) do
 
   create_table "leave_requests", force: true do |t|
     t.integer  "user_id"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 20140328041015) do
   end
 
   add_index "toil_requests", ["user_id"], name: "index_toil_requests_on_user_id"
+
+  create_table "user_audits", force: true do |t|
+    t.integer  "user_id"
+    t.string   "action"
+    t.string   "description"
+    t.string   "end_user"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_audits", ["user_id"], name: "index_user_audits_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                           null: false
