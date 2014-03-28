@@ -1,16 +1,14 @@
-<div id="content">
-  <div class="paragraph">
-    <h1 style="color: #263746;">User Directory</h1>
-  </div>
+<div class="peage-header">
+  <h1>User Directory</h1>
 </div>
 
 <div id="content">
   <div class="paragraph">
     <div class="row">
-      <div class="col-sm-3"><h4>Employee</h6></div>
-      <div class="col-sm-2"></div>
-      <div class="col-sm-5" ></div>
-    </div> <br />
+      <div class="col-sm-3 ener-header"><h4>Employee</h6></div>
+      <div class="col-sm-2 ener-header"><h4>Role</h4></div>
+      <div class="col-sm-5 ener-header"><h4>Actions</h4></div>
+    </div> <hr style="margin-top:5px;margin-bottom:5px;">
 
   <% @users.each do |user| %>
     <div class="row">
@@ -34,6 +32,7 @@
       <% end %>
     </div>
   <% end %>
+  </div>
 </div>
 
 <br>
