@@ -88,6 +88,7 @@ class UsersController < ApplicationController
     user_params.delete(:password)
     user_params.delete(:password_confirmation)
     if @user.update_many_attributes(user_params)
+      @user.check_manager
       UserAudit.create({:user => current_user, :action => "updatedted manager email", :end_user => @user.email})
       UserMailer.assign_manager(@user).deliver
       redirect_to @user, notice: 'Manager Email successfully updated.'

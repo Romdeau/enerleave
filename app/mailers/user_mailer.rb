@@ -42,4 +42,10 @@ class UserMailer < ActionMailer::Base
     @url  = edit_password_reset_url(user.reset_password_token)
     mail(:to => user.email, :subject => "Your password has been reset")
   end
+
+  def notify_not_manager(user)
+    @user = user
+    @url = "http://enerleave.eneraque.com/users/#{user}/"
+    mail(to: "thomas.taege@eneraque.com", cc: "laura.pringle@eneraque.com", subject: "User has assigned a manager who is not a manager")
+  end
 end

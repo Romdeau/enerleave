@@ -56,4 +56,11 @@ class User < ActiveRecord::Base
       errors.add(:manager_email, "this is not a valid @eneraque.com email")
     end
   end
+
+  def check_manager
+    @manager = User.find_by email: manager_email
+    if @manager == nil or @manager.role == "user"
+      UserMailer.notify_not_manager(self).deliver
+    end
+  end
 end
