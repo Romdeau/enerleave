@@ -5,18 +5,18 @@
 <div id="content">
   <div class="paragraph">
     <div class="row">
-      <div class="col-sm-3 ener-header"><h4>Employee</h6></div>
+      <div class="col-sm-2 ener-header"><h4>Employee</h6></div>
       <div class="col-sm-2 ener-header"><h4>Role</h4></div>
-      <div class="col-sm-5 ener-header"><h4>Actions</h4></div>
+      <div class="col-sm-6 ener-header"><h4>Actions</h4></div>
     </div> <hr style="margin-top:5px;margin-bottom:5px;">
 
   <% @users.each do |user| %>
     <div class="row">
-      <div class="col-sm-3"><p><%= format_name(user.email) %></p></div>
+      <div class="col-sm-2"><p><%= format_name(user.email) %></p></div>
       <div class="col-sm-2">
         <%= user.role %>
       </div>
-      <div class="btn-group col-sm-5">
+      <div class="btn-group col-sm-6">
         <% if current_user.id == user.id or can? :manage, :all %>
           <%= link_to "Show Details", user_path(user), class: 'btn btn-xs btn-info' %>
           <%= link_to "Toil Requests", user_toil_path(user), class: 'btn btn-xs btn-info' %>
@@ -27,9 +27,11 @@
           <%= link_to "Manager Email", manager_email_path(user), class: 'btn btn-xs btn-info' %>
         <% end %>
       </div>
-      <% if can? :manage, :all %>
-        <%= link_to "Delete", user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
-      <% end %>
+      <div class="col-sm-2">
+        <% if can? :manage, :all %>
+          <%= link_to "Delete", user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+        <% end %>
+      </div>
     </div>
   <% end %>
   </div>
