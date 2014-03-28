@@ -6,8 +6,8 @@ class ToilRequestsController < ApplicationController
   # GET /toil_requests.json
   def index
     if can? :manage, :all
-      @toil_requests = ToilRequest.all
-      @spend_toils = SpendToil.all
+      @toil_requests = ToilRequest.all.reorder("date_accrued_end DESC")
+      @spend_toils = SpendToil.all.reorder("leave_date DESC")
       @user = current_user
     else
       @toil_requests = current_user.toil_request

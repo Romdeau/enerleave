@@ -105,8 +105,8 @@ class UsersController < ApplicationController
 
   def toil
     @user = User.find(params[:id])
-    @toil_requests = @user.toil_request
-    @spend_toils = @user.spend_toil
+    @toil_requests = @user.toil_request.reorder("date_accrued_end DESC")
+    @spend_toils = @user.spend_toil.reorder("leave_date DESC")
   end
 
   def leave

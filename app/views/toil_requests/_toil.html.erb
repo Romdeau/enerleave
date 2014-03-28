@@ -1,10 +1,10 @@
 <div id="content" class="row">
   <div class="col-sm-6">
-    <h4 class="ener-highlight"><%= @user.count_toil %> Toil Requests Totaling <%= @user.total_toil %> minutes</h4>
+    <h4 class="ener-highlight"><%= @user.count_toil %> Toil Requests: <%= @user.total_toil %> available minutes of approved toil</h4>
     <div class="paragraph">
       <div class="row">
         <div class="col-sm-3 ener-header"><h4>Employee</h6></div>
-        <div class="col-sm-2 ener-header"><h4>Time (minutes)</h6></div>
+        <div class="col-sm-2 ener-header"><h4>Time(m)</h6></div>
         <div class="col-sm-3 ener-header"><h4>Date Accrued</h6></div>
         <div class="col-sm-1 ener-header"><h4>Approved</h4></div>
         <div class="col-sm-3"></div>
@@ -29,11 +29,11 @@
     </div>
   </div>
   <div class="col-sm-6">
-    <h4 class="ener-highlight"><%= @user.count_spend %> Toil Spends totaling <%= @user.total_spend %> minutes</h4>
+    <h4 class="ener-highlight"><%= @user.count_spend %> Toil Spends</h4>
     <div class="paragraph">
       <div class="row">
         <div class="col-sm-3 ener-header"><h4>Employee</h6></div>
-        <div class="col-sm-2 ener-header"><h4>Time (minutes)</h6></div>
+        <div class="col-sm-2 ener-header"><h4>Time(m)</h6></div>
         <div class="col-sm-3 ener-header"><h4>Start Date</h6></div>
         <div class="col-sm-1 ener-header"><h4>Approved</h4></div>
         <div class="col-sm-3 ener-header"></div>
@@ -41,7 +41,7 @@
       <% @spend_toils.each do |spend_toil| %>
         <div class="row">
           <div class="col-sm-3"><%= format_name(spend_toil.user.email) %></div>
-          <div class="col-sm-2"><%= spend_toil.initial_amount%> (<%= spend_toil.amount %>)</div>
+          <div class="col-sm-2"><%= spend_toil.initial_amount%> <% if can? :manage, :all %>(<%= spend_toil.amount %>)<% end %></div>
           <div class="col-sm-3"><td><%= spend_toil.leave_date %></div>
           <div class="col-sm-1"><td><%= spend_toil.approved %></div>
           <div class="btn-group col-sm-3">
