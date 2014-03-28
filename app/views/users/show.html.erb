@@ -4,26 +4,26 @@
 <div class="paragraph">
   <p id="notice"><%= notice %></p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
+  <p class="row">
+    <div class="col-sm-2"><strong>Email:</strong></div>
+    <div class="col-sm-2"><%= @user.email %></div>
   </p>
 
-  <p>
-    <strong>Total Leave Requests:</strong>
-    <%= @leave_requests.count %>
+  <p class="row">
+    <div class="col-sm-2"><strong>Total Leave Requests:</strong></div>
+    <div class="col-sm-2"><%= @leave_requests.count %></div>
   </p>
 
-  <p>
-    <strong>Total Toil Requests:</strong>
-    <%= @toil_requests.count %>
+  <p class="row">
+    <div class="col-sm-2"><strong>Total Toil Requests:</strong></div>
+    <div class="col-sm-2"><%= @toil_requests.count %></div>
   </p>
 
-  <p>
-    <strong>User Type:</strong>
-    <%= @user.role %>
+  <p class="row">
+    <div class="col-sm-2"><strong>User Type:</strong></div>
+    <div class="col-sm-2"><%= @user.role %></div>
   </p>
-
+  <div class="row" style="margin-bottom:20px;"></div>
 
   <div class="btn-group">
   	<% if current_user.id == @user.id or can? :manage, :all %>
@@ -31,11 +31,13 @@
       <%= link_to "Change Manager", manager_email_path(@user), class: 'btn btn-sm btn-info' %>
   		<%= link_to "Toil Requests", user_toil_path(@user), class: 'btn btn-sm btn-info' %>
       <%= link_to "Leave Requests", user_leave_path(@user), class: 'btn btn-sm btn-info' %>
-  	<% end %>
+  	</div><br>
+    <div class="btn-group" style="margin-top:10px;">
+    <% end %>
   	<% if can? :manage, :all %>
-  		<%= link_to "Edit Role", role_user_path(@user), class: 'btn btn-sm btn-info' %>
+  		<%= link_to "Edit Role", role_user_path(@user), class: 'btn btn-sm btn-primary' %>
   	<% end %>
-  	<%= link_to "Show All Users", users_path, class: 'btn btn-sm btn-info' %>
-  	<%= link_to "Back", leave_requests_path, class: 'btn btn-sm btn-info' %>
+  	<%= link_to "Show All Users", users_path, class: 'btn btn-sm btn-primary' %>
+  	<%= link_to "Back", leave_requests_path, class: 'btn btn-sm btn-primary' %>
   </div>
 </div>

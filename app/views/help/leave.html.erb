@@ -11,18 +11,21 @@
       </p>
     <% else %>
       <h4>Leave Requests</h4>
-      <p>
+      <hr align="left" style="margin-top:0px;margin-bottom:5px;width:15%;">
+      <p style="margin-left:10px;">
         The <%= link_to "Leave Requests", leave_requests_path %> page displays a list of approved leave dates on the right and a calendar representation of this on the right.<br />
         From this page you can lodge a new leave request by selecting <%= link_to 'New Leave request', new_leave_request_path %>.
       </p>
       <h4>Lodging a Leave Request</h4>
-      <p>
+      <hr align="left" style="margin-top:0px;margin-bottom:5px;width:15%;">
+      <p style="margin-left:10px;">
         Set the leave type (Annual, Personal, Sick, etc.) from the dropdown box, then select your start and end dates. Add a comment where necessary. <br />
         Once lodged your manager will be emailed with the request, and when approved you will recieve a notification.
       </p>
       <% if can? :approve, :all %>
         <h4>Managers: Approving Leave Requests</h4>
-        <p>
+        <hr align="left" style="margin-top:0px;margin-bottom:5px;width:15%;">
+        <p style="margin-left:10px;">
           Pending leave requests are accessed from the <%= link_to 'Approvals', approvals_leave_requests_path %> button located next to the new leave request button.<br />
           From the approvals page you approve a request by either selecting it in the calendar or with the show button from the list pane, then selecting the orange "Approve" button from the resulting page.<br />
           Once approved the user is emailed that their request has been approved and it will now appear on the approved leave page.
@@ -30,7 +33,8 @@
       <% end %>
       <% if can? :manage, :all %>
         <h4>Admins: Approving Leave Requests</h4>
-        <p>
+        <hr align="left" style="margin-top:0px;margin-bottom:5px;width:15%;">
+        <p style="margin-left:10px;">
           Pending leave requests are accessed from the <%= link_to 'Approvals', approvals_leave_requests_path %> button located next to the new leave request button.<br />
           From the approvals page you approve a request by either selecting it in the calendar or with the show button from the list pane, then selecting the orange "Approve" button from the resulting page.<br />
           You can also edit leave requests using the edit button before they are approved if any details need to be changed.<br />

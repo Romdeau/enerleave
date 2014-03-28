@@ -1,8 +1,12 @@
-<h1>Editing Leave Request for <%= User.find(@leave_request.user).email %></h1>
-
-<%= render 'form' %>
-
-<div class="btn-group">
-  <%= link_to 'Show', @leave_request, class: 'btn btn-xs btn-primary' %>
-  <%= link_to 'Back', leave_requests_path, class: 'btn btn-xs btn-primary' %>
+<div class="page-header">
+  <h1>Editing Leave Request for <%= User.find(@leave_request.user).email %></h1>
+</div>
+<div id="content">
+  <div class="paragraph" style="margin-left:20px;">
+    <%= render 'form' %>
+  </div>
+  <div class="btn-group">
+    <%= link_to 'Show', @leave_request, class: 'btn btn-xs btn-primary' %>
+    <%= link_to 'Back', leave_requests_path, class: 'btn btn-xs btn-primary' %>
+  </div>
 </div>

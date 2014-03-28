@@ -9,13 +9,9 @@
 		<% end %>
 
 		<%= render 'toil' %>
-
-		<br>
 	</div>
 </div>
-<div class="row">
-	<div class="col-sm-12 btn-group">
-		<%= link_to "New Toil Request", new_toil_request_path, class: 'btn btn-sm btn-primary' %>
-		<%= link_to "Spend Toil", new_spend_toil_path, class: 'btn btn-sm btn-primary' %>
-	</div>
+<div class="btn-group" style="margin-top:20px;">
+	<%= link_to "New Toil Request", new_toil_request_path, class: 'btn btn-sm btn-success' %>
+	<%= link_to "Spend Toil", new_spend_toil_path, class: 'btn btn-sm btn-success' %>
 </div>

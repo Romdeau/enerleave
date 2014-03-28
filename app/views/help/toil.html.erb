@@ -11,7 +11,8 @@
       </p>
     <% else %>
       <h4>Toil Leave Tracking</h4>
-      <p>
+      <hr align="left" style="margin-top:0px;margin-bottom:5px;width:15%;">
+      <p style="margin-left:10px;">
         The toil system is broken into 2 parts;
         <ul>
           <li>Toil Requests (where you accrue toil time through hours worked)</li>
@@ -21,22 +22,26 @@
         From the <% link_to "Toil Requests", toil_requests_path %> you can see your available totals of toil time. Each toil request shows its approval status, the amount of time the toil request was for and in brackets the amount of time left unallocated. Approved time that falls outside 30 days from accrual is no longer usable and will not be reflected in your toil total.
       </p>
       <h4>Toil Requests</h4>
-      <p>
+      <hr align="left" style="margin-top:0px;margin-bottom:5px;width:15%;">
+      <p style="margin-left:10px;">
         Toil requests are lodged from the <%= link_to "New Toil Request", new_toil_request_path %> button. A toil request should be lodged in minutes. A toil request also has a start and end date for if you wanted to lodge a request for a time period. The Toil requests 30 day expiry is calculated from the end date. Toil requests are then lodged at a rate of 1 minute gained per 6 minutes lodged. This will not be reflected in your total until it is approved.
       </p>
       <% if can? :manage, :all %>
         <h4>Admins: Approving Toil Requests</h4>
-        <p>
+        <hr align="left" style="margin-top:0px;margin-bottom:5px;width:15%;">
+        <p style="margin-left:10px;">
           Toil requests are approved either from the <% link_to "Toil Requests", toil_requests_path %> (which can be overwhelming because of volume), or from the <%= link_to "Users", users_path %> individual page (via the show button, then toil requests) which will show only that users toil requests. Because of routing after lodging a request or making an approval you will always be routed back to the main toil requests page. Approvals are simply handled by the "Approve" button and can only be edited before they're approved.
         </p>
       <% end %>
         <h4>Spend Toil</h4>
-        <p>
+        <hr align="left" style="margin-top:0px;margin-bottom:5px;width:15%;">
+        <p style="margin-left:10px;">
           To spend your toil you create a request with the <%= link_to "Spend Toil", new_spend_toil_path %> button. A toil spend request has the amount of leave you're applying for in minutes and the date the request is for. You can lodge a spend toil request if you dont have enough available toil hours (for example, you have pending toil requests to accompany it), but the request cannot be approved until the required time is available.
         </p>
         <% if can? :manage, :all %>
           <h4>Admins: Approving Toil Spend Requests</h4>
-          <p>
+          <hr align="left" style="margin-top:0px;margin-bottom:5px;width:15%;">
+          <p style="margin-left:10px;">
             Toil Spend Requests are approved either from the <% link_to "Toil Requests", toil_requests_path %> (which can be overwhelming because of volume), or from the <%= link_to "Users", users_path %> individual page (via the show button, then toil requests) which will show only that users toil requests. Because of routing after lodging a request or making an approval you will always be routed back to the main toil requests page. Approvals are simply handled by the "Approve" button and can only be edited before they're approved. You cannot approve a toil spend request without the required amount of toil being available.
           </p>
         <% end %>

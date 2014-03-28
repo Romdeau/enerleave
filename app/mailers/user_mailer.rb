@@ -28,12 +28,12 @@ class UserMailer < ActionMailer::Base
   def leave_approved(user)
     @user = user
     @url = "http://enerleave.eneraque.com/"
-    mail(to: @user.email, subject: "Your leave request was approved")
+    mail(to: @user.email, cc: "laura.pringle@eneraque.com", subject: "Your leave request was approved")
   end
 
   def toil_approved(user)
     @user = user
     @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
-    mail(to: @user.email, subject: 'Your Toil Request was approved')
+    mail(to: @user.email, cc: "laura.pringle@eneraque.com", subject: 'Your Toil Request was approved')
   end
 end
