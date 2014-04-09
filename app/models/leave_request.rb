@@ -3,7 +3,7 @@ class LeaveRequest < ActiveRecord::Base
 
 	belongs_to :user
 
-  	validates :leave_type, :end_date, :start_date, presence: true
+  	validates :leave_type, :end_date, :start_date, :comment, presence: true
 		validate :valid_leave_period?
 
   	LEAVE_TYPES = %w[annual sick personal compassionate time\ off\ without\ pay defence jury\ duty maternity/parental long\ service\ leave other]
