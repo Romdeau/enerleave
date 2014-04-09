@@ -99,9 +99,9 @@ class LeaveRequestsController < ApplicationController
     if @to_approve.save
       UserAudit.create({:user => current_user, :action => "approved leave request", :description => "#{@to_approve.id} ending #{@to_approve.end_date} (#{@to_approve.comment} )", :end_user => @to_approve.user.email})
       UserMailer.leave_approved(@user).deliver
-      redirect_to leave_requests_path, notice: 'Toil Request Approved'
+      redirect_to approvals_leave_requests_path, notice: 'Toil Request Approved'
     else
-      redirect_to leave_requests_path, alert: 'Something Went Wrong'
+      redirect_to approvals_leave_requests_path, alert: 'Something Went Wrong'
     end
   end
 
