@@ -35,12 +35,14 @@
       <% end %>
       <%= will_paginate @leave_requests %>
       <br />
-      <% if logged_in? %>
-        <%= link_to 'New Leave request', new_leave_request_path, class: "btn btn-xs btn-primary" %>
-      <% end %>
-      <% if can? :manage, :all %>
-        <%= link_to 'Approved', leave_requests_path, class: "btn btn-xs btn-primary" %>
-      <% end %>
+      <div class="btn-group">
+        <% if logged_in? %>
+          <%= link_to 'New Leave request', new_leave_request_path, class: "btn btn-sm btn-primary" %>
+        <% end %>
+        <% if can? :manage, :all %>
+          <%= link_to 'Approved', leave_requests_path, class: "btn btn-sm btn-primary" %>
+        <% end %>
+      </div>
       <br />
     </div>
   </div>
