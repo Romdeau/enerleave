@@ -3,11 +3,11 @@
 </div>
 <div id="content">
 	<div class="paragraph">
-		<h4 class="ener-highlight"><%= "#{@user.email} has #{@user.total_toil} minutes of toil available"%></h4>
+		<h4 class="ener-highlight">For information on eligibility please consult the Eneraque Toil Policy</h4>
+		<h4><%= "#{@user.email} has #{@user.total_toil} minutes of toil available"%></h4>
 		<% if can? :manage, :all %>
 			<h4>NB: You'e logged in as an admin, so the totals reflect all Toil Requests. For individual totals navigate through the users individually <%= link_to "here", users_path%></h4>
 		<% end %>
-
 		<%= render 'toil' %>
 	</div>
 </div>

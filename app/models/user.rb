@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                              :integer          not null, primary key
+#  email                           :string(255)      not null
+#  crypted_password                :string(255)      not null
+#  salt                            :string(255)      not null
+#  approved                        :string(255)
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  role                            :string(255)
+#  manager_email                   :string(255)
+#  reset_password_token            :string(255)
+#  reset_password_token_expires_at :datetime
+#  reset_password_email_sent_at    :datetime
+#
+
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
@@ -12,6 +30,7 @@ class User < ActiveRecord::Base
   has_many :leave_request, dependent: :destroy
 
   validate :eneraque_email?
+  validate :user_email?
 
   ROLES = %w[user manager admin]
 
@@ -48,6 +67,13 @@ class User < ActiveRecord::Base
   	valid_leave = self.toil_request.select { |toil| toil.toil_valid? }.select { |toil| toil.amount > 0}
     valid_leave = valid_leave.sort_by &:date_accrued_end
     valid_leave.first
+  end
+
+  def user_email?
+    @email_array = email.split("@")
+    if @email_array[1] != "eneraque.com"
+      errors.add(:email, "this is not a valid @eneraque.com email")
+    end
   end
 
   def eneraque_email?

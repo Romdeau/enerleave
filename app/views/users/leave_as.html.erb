@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h1>New Leave Request</h1>
+</div>
+<div id="content">
+  <div class="paragraph" style="margin-left:20px;">
+    <%= form_for @leave_request, :url => {:action => 'create_as'} do |f| %>
+      <% if @leave_request.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@leave_request.errors.count, "error") %> prohibited this leave_request from being saved:</h2>
+
+          <ul>
+          <% @leave_request.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div>
+        <strong>Approved:</strong> <%= @leave_request.approved %>
+      </div><br />
+      <div class="field">
+        <%= f.label :leave_type %><br>
+        <%= f.collection_select :leave_type, LeaveRequest::LEAVE_TYPES, :to_s, :humanize %>
+      </div>
+      <div class="field">
+        <%= f.label :start_date %><br>
+        <%= f.date_select :start_date %>
+      </div>
+      <div class="field">
+        <%= f.label :end_date %><br>
+        <%= f.date_select :end_date %>
+      </div>
+      <div class="field">
+        <strong>Reason / Comment</strong><br>
+        <%= f.text_field :comment %>
+      </div>
+      <div class="actions">
+        <%= f.submit class: "btn btn-sm btn-success" %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to 'Back', leave_requests_path, class: "btn btn-sm btn-primary" %>
+</div>

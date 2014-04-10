@@ -136,6 +136,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def leave_as
+    @leave_request = LeaveRequest.new
+    @user = User.find(params[:id])
+  end
+
+  def create_as
+    @leave_request = LeaveRequest.new(leave_request_params)
+    @leave_request.user = User.find(params[:id])
+    @leave_request.approved = 'false'
+    respond_to do |format|
+      if @leave_request.save
+        UserAudit.create({:user => @leave_request.user, :action => "#{current_user.email} created a leave request for #{@leave_request.user.email}", :end_user => @leave_request.user.email})
+        UserMailer.leave_request(@leave_request.user).deliver
+        format.html { redirect_to leave_requests_path, notice: 'Leave request was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @leave_request }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @leave_request.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -145,6 +167,10 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :role, :manager_email)
+    end
+
+    def leave_request_params
+      params.require(:leave_request).permit(:start_date, :end_date, :leave_type, :comment)
     end
 
     def not_authenticated

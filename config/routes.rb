@@ -30,6 +30,8 @@ Enerleave::Application.routes.draw do
   get '/users/:id/create_toil' => 'users#create_toil', :as => :admin_create_toil
   patch 'users/:id/update_role' => 'users#update_role'
   patch 'users/:id/update_manager_email' => 'users#update_manager_email'
+  post 'users/:id/create_as' => 'users#create_as', :as => :create_as
+  get '/users/:id/leave_as' => 'users#leave_as', :as => :leave_as
 
   #leave_request routes
   resources :leave_requests do

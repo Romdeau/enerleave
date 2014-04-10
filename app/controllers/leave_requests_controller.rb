@@ -66,10 +66,12 @@ class LeaveRequestsController < ApplicationController
   # DELETE /leave_requests/1
   # DELETE /leave_requests/1.json
   def destroy
+    @leave_request = LeaveRequest.find(params[:id])
     UserAudit.create({:user => current_user, :action => "destroyed leave request", :end_user => @leave_request.user.email})
     @leave_request.destroy
+    UserMailer.reject_leave(@leave_request.user, @leave_request).deliver
     respond_to do |format|
-      format.html { redirect_to leave_requests_url }
+      format.html { redirect_to leave_requests_url, notice: "Leave Request Rejected." }
       format.json { head :no_content }
     end
   end

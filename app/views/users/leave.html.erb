@@ -5,7 +5,7 @@
   <div class="paragraph">
     <h2><%= "#{format_name(@user.email)} has #{@user.leave_request.count} leave requests"%></h2>
     <div style="margin-left:20px;margin-bottom:20px;">
-      <%= render 'leave_requests/leave' %>
+      <%= render 'leave_requests/leave_as' %>
     </div>
     <%= link_to "Back", user_path(@user), class: "btn btn-sm btn-primary" %>
   </div>

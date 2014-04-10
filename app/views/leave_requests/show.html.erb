@@ -48,6 +48,7 @@
     <% end %>
     <% if (can? :manage, :all or can? :approve, :all) and @leave_request.approved == 'false' %>
       <%= link_to "Approve", approve_leave_path(@leave_request), class: 'btn btn-sm btn-warning'%>
+      <%= link_to "Reject", @leave_request, method: :delete, class: 'btn btn-sm btn-danger' %>
     <% end %>
   </div>
 </div>
