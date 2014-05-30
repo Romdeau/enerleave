@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>Editing spend_toil</h1>
+</div>
+<div class="paragraph">
+  <%= form_for (@spend_toil), :url => {toil_request_path => @toil_request}, :html => {:method => :destroy} do |f| %>
+    <% if @spend_toil.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@spend_toil.errors.count, "error") %> prohibited this spend_toil from being saved:</h2>
+
+        <ul>
+        <% @spend_toil.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :comment %><br>
+      <%= f.text_field :comment %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Destroy Request", class: "btn btn-sm btn-success", data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
+  <div class="btn-group">
+    <%= link_to 'Back', @spend_toil, class: "btn btn-sm btn-primary" %>
+  </div>
+</div>

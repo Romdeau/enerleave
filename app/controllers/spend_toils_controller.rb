@@ -21,6 +21,10 @@ class SpendToilsController < ApplicationController
   def edit
   end
 
+  def delete
+    @spend_toil = SpendToil.find(params[:id])
+  end
+
   # POST /spend_toils
   # POST /spend_toils.json
   def create
@@ -62,7 +66,9 @@ class SpendToilsController < ApplicationController
   # DELETE /spend_toils/1.json
   def destroy
     UserAudit.create({:user => current_user, :action => "destroyed toil spend request", :end_user => @spend_toil.user.email})
+    @comment = spend_toil_params[:comment]
     @spend_toil.destroy
+    UserMailer.reject_toil_spend(@spend_toil.user, @spend_toil, @comment).deliver
     respond_to do |format|
       format.html { redirect_to spend_toils_url }
       format.json { head :no_content }
@@ -103,6 +109,6 @@ class SpendToilsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spend_toil_params
-      params.require(:spend_toil).permit(:user_id, :amount, :leave_date, :approved)
+      params.require(:spend_toil).permit(:user_id, :amount, :leave_date, :approved, :comment)
     end
 end

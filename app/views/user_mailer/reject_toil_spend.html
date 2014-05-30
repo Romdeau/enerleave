@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your Leave Request has been rejected</h1>
+    <p>
+      Your manager or an admin has rejected your leave request.<br><br>
+      The reason supplied for this was: <%= @comment %><br><br>
+      This leave request was created at <%= @toil_spend.created_at %>.<br>
+      This leave request was created for <%= @toil_spend.amount %> minutes.<br>
+      Start Date: <%= @toil_spend.leave_date %><br>
+      This Leave Request will need to be relodged.
+    </p>
+  </body>
+</html>

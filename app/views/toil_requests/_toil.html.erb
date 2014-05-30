@@ -20,9 +20,6 @@
             <% if toil_request.approved == 'false' %>
               <%= link_to "Edit", edit_toil_request_path(toil_request), class: "btn btn-xs btn-info" %>
             <% end %>
-            <% if can? :manage, :all %>
-              <%= link_to "Delete", toil_request, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
-            <% end %>
           </div>
         </div>
       <% end %>
@@ -48,9 +45,6 @@
             <%= link_to "Show", spend_toil, class: "btn btn-xs btn-info" %>
             <% if spend_toil.approved == 'false' %>
               <%= link_to "Edit", edit_spend_toil_path(spend_toil), class: "btn btn-xs btn-info" %>
-            <% end %>
-            <% if can? :manage, :all %>
-              <%= link_to "Delete", spend_toil, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
             <% end %>
           </div>
         </div>

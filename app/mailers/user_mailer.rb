@@ -55,4 +55,18 @@ class UserMailer < ActionMailer::Base
     @comment = comment
     mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@leave.start_date}; #{@leave.comment} has been rejected")
   end
+
+  def reject_toil(user, toil, comment)
+    @user = user
+    @toil = toil
+    @comment = comment
+    mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@toil.date_accrued}; has been rejected")
+  end
+
+  def reject_toil_spend(user, toil_spend, comment)
+    @user = user
+    @toil_spend = toil_spend
+    @comment = comment
+    mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@toil_spend.leave_date}; has been rejected")
+  end
 end

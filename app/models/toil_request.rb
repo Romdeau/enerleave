@@ -20,6 +20,8 @@ class ToilRequest < ActiveRecord::Base
 
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
 
+  attr_accessor :comment
+
   def toil_valid?
   	# Checks if the date accrued is in the last 30 days.
   	# Returns true if less than 30 days old.

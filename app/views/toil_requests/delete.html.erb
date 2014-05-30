@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>Editing toil_request</h1>
+</div>
+<div class="paragraph">
+  <%= form_for (@toil_request), :url => {toil_request_path => @toil_request}, :html => {:method => :destroy} do |f| %>
+    <% if @toil_request.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@toil_request.errors.count, "error") %> prohibited this toil_request from being saved:</h2>
+
+        <ul>
+        <% @toil_request.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :comment %><br>
+      <%= f.text_field :comment %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Destroy Request", class: "btn btn-sm btn-danger", data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
+  <div class="btn-group">
+    <%= link_to 'Back', @toil_request, class: "btn btn-sm btn-primary" %>
+  </div>
+</div>

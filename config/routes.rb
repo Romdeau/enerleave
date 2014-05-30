@@ -42,11 +42,17 @@ Enerleave::Application.routes.draw do
   end
   get '/leave_requests/:id/approve_toil' => 'leave_requests#approve_leave', :as => :approve_leave
   get '/leave_requests/:id/delete' => 'leave_requests#delete', :as => :delete_leave
-  post '/leave_requests/:id/delete' => 'leave_requests#delete_destroy', :as => :destroy_leave
+  post '/leave_requests/:id/delete' => 'leave_requests#destroy'
+
+  #spend toil routes
+  get '/spend_toils/:id/approve_toil' => 'spend_toils#approve_toil', :as => :approve_toil
+  get '/spend_toils/:id/delete' => 'spend_toils#delete', :as => :delete_toil_spend
+  post '/spend_toils/:id/delete' => 'spend_toils#destroy'
 
   #toil routes
-  get '/spend_toils/:id/approve_toil' => 'spend_toils#approve_toil', :as => :approve_toil
   get '/toil_requests/:id/approve_toil' => 'toil_requests#approve_toil', :as => :approve_toil_request
+  get '/toil_requests/:id/delete' => 'toil_requests#delete', :as => :delete_toil
+  post '/toil_requests/:id/delete' => 'toil_requests#destroy'
 
   #help
   get '/help/' => 'help#index', :as => :help_index

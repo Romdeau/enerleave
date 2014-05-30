@@ -19,7 +19,7 @@
         <%= f.text_field :comment %>
       </div>
       <div class="actions">
-        <%= f.submit "Destroy Request", class: "btn btn-sm btn-danger" %>
+        <%= f.submit "Destroy Request", class: "btn btn-sm btn-danger", data: { confirm: 'Are you sure?' } %>
       </div>
     <% end %>
 

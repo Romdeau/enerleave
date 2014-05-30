@@ -29,6 +29,11 @@ class ToilRequestsController < ApplicationController
 
   # GET /toil_requests/1/edit
   def edit
+
+  end
+
+  def delete
+    @toil_request = ToilRequest.find(params[:id])
   end
 
   # POST /toil_requests
@@ -78,7 +83,9 @@ class ToilRequestsController < ApplicationController
   # DELETE /toil_requests/1.json
   def destroy
     UserAudit.create({:user => current_user, :action => "destroyed toil request", :end_user => @toil_request.user.email})
+    @comment = toil_request_params[:comment]
     @toil_request.destroy
+    UserMailer.reject_toil(@toil_request.user, @toil_request, @comment).deliver
     respond_to do |format|
       format.html { redirect_to toil_requests_url }
       format.json { head :no_content }
@@ -105,6 +112,6 @@ class ToilRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def toil_request_params
-      params.require(:toil_request).permit(:user_id, :amount, :date_accrued, :date_accrued_end, :approved)
+      params.require(:toil_request).permit(:user_id, :amount, :date_accrued, :date_accrued_end, :approved, :comment)
     end
 end

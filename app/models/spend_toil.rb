@@ -19,6 +19,8 @@ class SpendToil < ActiveRecord::Base
 
   validates :amount, numericality: { greater_than_or_equal_to: 0 }
 
+  attr_accessor :comment
+
   def process_leave
     #processing leave transaction
     #find the user for this toil leave request

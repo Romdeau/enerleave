@@ -69,7 +69,7 @@ class LeaveRequestsController < ApplicationController
 
   # DELETE /leave_requests/1
   # DELETE /leave_requests/1.json
-  def delete_destroy
+  def destroy
     @leave_request = LeaveRequest.find(params[:id])
     @comment = leave_request_params[:comment]
     UserAudit.create({:user => current_user, :action => "destroyed leave request", :end_user => @leave_request.user.email})

@@ -31,6 +31,7 @@
     <%= link_to 'Back', toil_requests_path, class: "btn btn-sm btn-primary" %>
     <% if @spend_toil.approved == 'false' and can? :manage, :all %>
       <%= link_to "Approve", approve_toil_path(@spend_toil), class: 'btn btn-sm btn-warning'%>
+      <%= link_to "Reject", delete_toil_spend_path(@spend_toil), class: 'btn btn-sm btn-danger'%>
     <% end %>
   </div>
 </div>
