@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>Destroy leave request for for <%= User.find(@leave_request.user).email %></h1>
+</div>
+<div id="content">
+  <div class="paragraph" style="margin-left:20px;">
+    <%= form_for (@leave_request), :url => {leave_request_path => @leave_request}, :html => {:method => :destroy} do |f| %>
+      <% if @leave_request.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@leave_request.errors.count, "error") %> prohibited this leave_request from being saved:</h2>
+          <ul>
+          <% @leave_request.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="field">
+        <strong>Reason for Deletion</strong><br>
+        <%= f.text_field :comment %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Destroy Request", class: "btn btn-sm btn-danger" %>
+      </div>
+    <% end %>
+
+  </div>
+  <div class="btn-group">
+    <%= link_to 'Back', leave_requests_path, class: 'btn btn-xs btn-primary' %>
+  </div>
+</div>

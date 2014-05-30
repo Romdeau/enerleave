@@ -41,6 +41,8 @@ Enerleave::Application.routes.draw do
     end
   end
   get '/leave_requests/:id/approve_toil' => 'leave_requests#approve_leave', :as => :approve_leave
+  get '/leave_requests/:id/delete' => 'leave_requests#delete', :as => :delete_leave
+  post '/leave_requests/:id/delete' => 'leave_requests#delete_destroy', :as => :destroy_leave
 
   #toil routes
   get '/spend_toils/:id/approve_toil' => 'spend_toils#approve_toil', :as => :approve_toil

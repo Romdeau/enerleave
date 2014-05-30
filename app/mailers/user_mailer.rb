@@ -49,9 +49,10 @@ class UserMailer < ActionMailer::Base
     mail(to: "thomas.taege@eneraque.com", cc: "laura.pringle@eneraque.com", subject: "User has assigned a manager who is not a manager")
   end
 
-  def reject_leave(user, leave)
+  def reject_leave(user, leave, comment)
     @user = user
     @leave = leave
-    mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@leave.start_date}; #{@leave.comment} has been rejected") 
+    @comment = comment
+    mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@leave.start_date}; #{@leave.comment} has been rejected")
   end
 end
