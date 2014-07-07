@@ -1,0 +1,24 @@
+<%= render 'thismonth' %>
+<%= render 'nextmonth' %>
+<%= render 'twomonth' %>
+<%= render 'threemonth' %>
+
+<div class="page-header">
+  <h1 style="color: #263746;">Leave Requests Calendar (<%= @leave_requests.count %> Approved)</h1>
+</div>
+
+<div class="container col-md-6">
+  <div id="thismonth"></div>
+</div>
+
+<div class="container col-md-6">
+  <div id="nextmonth"></div>
+</div>
+
+<div class="container col-md-6">
+  <div id="twomonth"></div>
+</div>
+
+<div class="container col-md-6">
+  <div id="threemonth"></div>
+</div>

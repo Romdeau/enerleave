@@ -4,7 +4,10 @@ Enerleave::Application.routes.draw do
   get "password_resets/create"
   get "password_resets/edit"
   get "password_resets/update"
-  root 'leave_requests#index'
+  root 'homepage#index'
+
+  #homepage controller
+  get 'index' => 'homepage#index', :as => :homepage
 
   resources :users do
 
