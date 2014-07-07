@@ -63,3 +63,6 @@ gem 'newrelic_rpm'
 
 #pagination
 gem 'will_paginate'
+
+#date errors
+gem 'rails-i18n'
