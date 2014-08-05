@@ -1,4 +1,6 @@
 Enerleave::Application.routes.draw do
+  resources :part_days
+
   resources :user_audits
 
   get "password_resets/create"

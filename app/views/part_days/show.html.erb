@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Leave request:</strong>
+  <%= @part_day.leave_request %>
+</p>
+
+<p>
+  <strong>Leave date:</strong>
+  <%= @part_day.leave_date %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @part_day.time %>
+</p>
+
+<%= link_to 'Edit', edit_part_day_path(@part_day) %> |
+<%= link_to 'Back', part_days_path %>

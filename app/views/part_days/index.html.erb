@@ -1,0 +1,31 @@
+<h1>Listing part_days</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Leave request</th>
+      <th>Leave date</th>
+      <th>Time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @part_days.each do |part_day| %>
+      <tr>
+        <td><%= part_day.leave_request %></td>
+        <td><%= part_day.leave_date %></td>
+        <td><%= part_day.time %></td>
+        <td><%= link_to 'Show', part_day %></td>
+        <td><%= link_to 'Edit', edit_part_day_path(part_day) %></td>
+        <td><%= link_to 'Destroy', part_day, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Part day', new_part_day_path %>

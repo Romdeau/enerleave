@@ -1,0 +1,29 @@
+<%= form_for(@part_day) do |f| %>
+  <% if @part_day.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@part_day.errors.count, "error") %> prohibited this part_day from being saved:</h2>
+
+      <ul>
+      <% @part_day.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :leave_request_id %><br>
+    <%= f.text_field :leave_request_id %>
+  </div>
+  <div class="field">
+    <%= f.label :leave_date %><br>
+    <%= f.datetime_select :leave_date %>
+  </div>
+  <div class="field">
+    <%= f.label :time %><br>
+    <%= f.number_field :time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

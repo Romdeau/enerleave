@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140328050640) do
+ActiveRecord::Schema.define(version: 20140805064850) do
 
   create_table "leave_requests", force: true do |t|
     t.integer  "user_id"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20140328050640) do
     t.string   "comment"
     t.string   "approved"
   end
+
+  create_table "part_days", force: true do |t|
+    t.integer  "leave_request_id"
+    t.datetime "leave_date"
+    t.integer  "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "part_days", ["leave_request_id"], name: "index_part_days_on_leave_request_id"
 
   create_table "spend_toils", force: true do |t|
     t.integer  "user_id"

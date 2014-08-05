@@ -18,6 +18,8 @@ class LeaveRequest < ActiveRecord::Base
 
 	belongs_to :user
 
+	has_many :part_days
+
   	validates :leave_type, :end_date, :start_date, :comment, presence: true
 		validate :valid_leave_period?
 

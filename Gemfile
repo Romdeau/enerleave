@@ -13,6 +13,8 @@ end
 
 group :production do
 	gem 'pg'
+	gem 'rb-readline'
+	gem 'newrelic_rpm'
 end
 
 # Use SCSS for stylesheets
@@ -59,7 +61,7 @@ end
 
 gem 'sorcery'
 gem 'cancancan', '~> 1.7'
-gem 'newrelic_rpm'
+
 
 #pagination
 gem 'will_paginate'
