@@ -1,5 +1,5 @@
 Enerleave::Application.routes.draw do
-  resources :part_days
+
 
   resources :user_audits
 
@@ -20,6 +20,7 @@ Enerleave::Application.routes.draw do
 
   resources :toil_requests
   resources :spend_toils
+  resources :part_days, only: [:index, :show, :edit, :update, :destroy]
 
   #user sessions
   get 'export' => 'leave_requests#export', :as => :export
@@ -40,6 +41,7 @@ Enerleave::Application.routes.draw do
 
   #leave_request routes
   resources :leave_requests do
+    resources :part_days, only: [:new, :create]
     collection do
       post :import
       get :approvals

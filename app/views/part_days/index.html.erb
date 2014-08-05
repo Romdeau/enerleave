@@ -1,26 +1,28 @@
 <h1>Listing part_days</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Leave request</th>
-      <th>Leave date</th>
-      <th>Time</th>
-      <th></th>
-      <th></th>
+      <th class="ener-header">Leave request</th>
+      <th class="ener-header">Leave date</th>
+      <th class="ener-header">Time</th>
       <th></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="searchable">
     <% @part_days.each do |part_day| %>
       <tr>
         <td><%= part_day.leave_request %></td>
         <td><%= part_day.leave_date %></td>
         <td><%= part_day.time %></td>
-        <td><%= link_to 'Show', part_day %></td>
-        <td><%= link_to 'Edit', edit_part_day_path(part_day) %></td>
-        <td><%= link_to 'Destroy', part_day, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <div class="btn-group">
+            <%= link_to 'Show', part_day %>
+            <%= link_to 'Edit', edit_part_day_path(part_day) %>
+            <%= link_to 'Destroy', part_day, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

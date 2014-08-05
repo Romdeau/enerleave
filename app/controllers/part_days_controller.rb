@@ -24,8 +24,11 @@ class PartDaysController < ApplicationController
   # POST /part_days
   # POST /part_days.json
   def create
-    @part_day = PartDay.new(part_day_params)
-
+    @part_day = PartDay.new
+    @leave_request = LeaveRequest.find(params[:id])
+    @part_day.leave_request = @leave_request
+    @part_day.leave_date = part_day_params[:leave_request]
+    @part_day.time = part_day_params[:time]
     respond_to do |format|
       if @part_day.save
         format.html { redirect_to @part_day, notice: 'Part day was successfully created.' }

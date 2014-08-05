@@ -16,6 +16,7 @@ class LeaveRequestsController < ApplicationController
   def show
     @leave_request = LeaveRequest.find(params[:id])
     @user = User.find(@leave_request.user)
+    @part_days = @leave_request.part_days
   end
 
   # GET /leave_requests/new

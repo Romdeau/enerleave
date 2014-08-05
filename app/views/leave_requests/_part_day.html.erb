@@ -1,0 +1,30 @@
+<div class="paragraph">
+  <div class="row">
+    <h3>Part Days</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="ener-header">Leave Date</th>
+          <th class="ener-header">Time</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="searchable">
+        <% @part_days.each do |part_day| %>
+          <tr>
+            <td><%= part_day.leave_date %></td>
+            <td><%= part_day.time %></td>
+            <td>
+              <div class="btn-group">
+                <%= link_to 'Show', part_day %>
+                <%= link_to 'Edit', edit_part_day_path(part_day) %>
+                <%= link_to 'Destroy', part_day, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= link_to "New Part Day", new_leave_request_part_day_path(@leave_request), class: "btn btn-sm btn-success"%>
+</div>

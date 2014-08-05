@@ -2,53 +2,60 @@
   <h1>Leave Request</h1>
 </div>
 <div class="paragraph">
-  <p id="notice"><%= notice %></p>
+  <div class="row">
+    <div class="col-sm-4">
+      <p id="notice"><%= notice %></p>
 
-  <p class="row">
-    <div class="col-xs-2"><strong>Employee:</strong></div>
-    <div class="col-xs-2"><%= @user.email %></div>
-  </p>
+      <p>
+        <div><strong>Employee:</strong></div>
+        <div><%= @user.email %></div>
+      </p>
 
-  <p class="row">
-    <div class="col-xs-2"><strong> Approved:</strong></div>
-    <div class="col-xs-2"><%= @leave_request.approved %></div>
-    <% if @leave_request.approved == "false" %>
-      <div class="col-xs-8">(Approval responsibility of <%= @user.manager_email %>)</div>
-    <% end %>
-  </p>
+      <p>
+        <div><strong> Approved:</strong></div>
+        <div><%= @leave_request.approved %></div>
+        <% if @leave_request.approved == "false" %>
+          <div>(Approval responsibility of <%= @user.manager_email %>)</div>
+        <% end %>
+      </p>
 
-  <p class="row">
-    <div class="col-xs-2"><strong>Leave Type:</strong></div>
-    <div class="col-xs-2"><%= @leave_request.leave_type %></div>
-  </p>
+      <p>
+        <div><strong>Leave Type:</strong></div>
+        <div><%= @leave_request.leave_type %></div>
+      </p>
 
-  <p class="row">
-    <div class="col-xs-2"><strong>Startdate:</strong></div>
-    <div class="col-xs-2"><%= @leave_request.start_date %></div>
-  </p>
+      <p>
+        <div><strong>Startdate:</strong></div>
+        <div><%= @leave_request.start_date %></div>
+      </p>
 
-  <p class="row">
-    <div class="col-xs-2"><strong>Enddate:</strong></div>
-    <div class="col-xs-2"><%= @leave_request.end_date %></div>
-  </p>
+      <p>
+        <div><strong>Enddate:</strong></div>
+        <div><%= @leave_request.end_date %></div>
+      </p>
 
-  <% if can? :manage, :all or can? :approve, :all %>
-  <p class="row">
-    <div class="col-xs-2"><strong>Comment:</strong></div>
-    <div class="col-xs-2"><%= @leave_request.comment %></div>
-  </p>
-  <% end %>
-  <div class="row" style="margin-bottom:20px;"></div>
-  <div class="btn-group col-xs-4">
-    <% if can? :manage, :all %>
-      <%= link_to 'Edit', edit_leave_request_path(@leave_request), class: "btn btn-sm btn-info" %>
-    <% end %>
-    <% if logged_in? %>
-      <%= link_to 'Back', leave_requests_path, class: "btn btn-sm btn-info" %>
-    <% end %>
-    <% if (can? :manage, :all or can? :approve, :all) and @leave_request.approved == 'false' %>
-      <%= link_to "Approve", approve_leave_path(@leave_request), class: 'btn btn-sm btn-warning'%>
-      <%= link_to "Reject", delete_leave_path(@leave_request), class: 'btn btn-sm btn-danger' %>
-    <% end %>
+      <% if can? :manage, :all or can? :approve, :all %>
+      <p>
+        <div><strong>Comment:</strong></div>
+        <div><%= @leave_request.comment %></div>
+      </p>
+      <% end %>
+      <div class="btn-group">
+        <% if can? :manage, :all %>
+          <%= link_to 'Edit', edit_leave_request_path(@leave_request), class: "btn btn-sm btn-info" %>
+          <%= link_to 'Create Part Day', new_leave_request_part_day_path(@leave_request), class: "btn btn-sm btn-success" %>
+        <% end %>
+        <% if logged_in? %>
+          <%= link_to 'Back', leave_requests_path, class: "btn btn-sm btn-info" %>
+        <% end %>
+        <% if (can? :manage, :all or can? :approve, :all) and @leave_request.approved == 'false' %>
+          <%= link_to "Approve", approve_leave_path(@leave_request), class: 'btn btn-sm btn-warning'%>
+          <%= link_to "Reject", delete_leave_path(@leave_request), class: 'btn btn-sm btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <%= render 'part_day' %>
+    </div>
   </div>
 </div>
