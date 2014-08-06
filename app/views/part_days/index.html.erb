@@ -1,33 +1,34 @@
-<h1>Listing part_days</h1>
+<div class="page-header">
+  <h1>Listing part_days</h1>
+</div>
+<div class="container">
+  <div class="paragraph">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="ener-header">Part Day Date</th>
+          <th class="ener-header">part Day Start Time</th>
+          <th class="ener-header">Part Day End Time</th>
+          <th></th>
+        </tr>
+      </thead>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th class="ener-header">Leave request</th>
-      <th class="ener-header">Leave date</th>
-      <th class="ener-header">Time</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody class="searchable">
-    <% @part_days.each do |part_day| %>
-      <tr>
-        <td><%= part_day.leave_request %></td>
-        <td><%= part_day.leave_date %></td>
-        <td><%= part_day.time %></td>
-        <td>
-          <div class="btn-group">
-            <%= link_to 'Show', part_day %>
-            <%= link_to 'Edit', edit_part_day_path(part_day) %>
-            <%= link_to 'Destroy', part_day, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Part day', new_part_day_path %>
+      <tbody class="searchable">
+        <% @part_days.each do |part_day| %>
+          <tr>
+            <td><%= part_day.part_date %></td>
+            <td><%= part_day.part_start %></td>
+            <td><%= part_day.part_end %></td>
+            <td>
+              <div class="btn-group">
+                <%= link_to 'Show', part_day %>
+                <%= link_to 'Edit', edit_part_day_path(part_day) %>
+                <%= link_to 'Destroy', part_day, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

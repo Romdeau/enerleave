@@ -33,6 +33,9 @@ GEM
     bootstrap-sass (3.2.0.1)
       sass (~> 3.2)
     builder (3.1.4)
+    business_time (0.7.3)
+      activesupport (>= 3.1.0)
+      tzinfo
     cancancan (1.9.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -145,6 +148,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bootstrap-sass
+  business_time
   cancancan (~> 1.7)
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)

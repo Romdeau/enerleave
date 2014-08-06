@@ -4,8 +4,9 @@
 #
 #  id               :integer          not null, primary key
 #  leave_request_id :integer
-#  leave_date       :datetime
-#  time             :integer
+#  part_date        :date
+#  part_start       :datetime
+#  part_end         :datetime
 #  created_at       :datetime
 #  updated_at       :datetime
 #

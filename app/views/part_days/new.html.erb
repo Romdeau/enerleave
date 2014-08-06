@@ -1,5 +1,11 @@
-<h1>New part_day</h1>
+<div class="page-header">
+  <h1>New part_day</h1>
+</div>
 
-<%= render 'form' %>
+<div class="container">
+  <div class="paragraph">
+    <%= render 'form' %>
 
-<%= link_to 'Back', part_days_path %>
+    <%= link_to 'Back', leave_request_path(params[:leave_request_id]), class: "btn btn-sm btn-info" %>
+  </div>
+</div>

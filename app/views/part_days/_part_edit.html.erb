@@ -1,4 +1,4 @@
-<%= form_for [@leave_request, @part_day], :url => {:action => 'create'} do |f| %>
+<%= form_for(@part_day) do |f| %>
   <% if @part_day.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@part_day.errors.count, "error") %> prohibited this part_day from being saved:</h2>

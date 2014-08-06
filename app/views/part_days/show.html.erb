@@ -1,19 +1,26 @@
-<p id="notice"><%= notice %></p>
-
+<div class="page-header">
+  <h3>Part Day Details</h3>
+  <p>This part day is for  <%= @part_day.part_length %> </p>
+</div>
+<div class="container">
+<div class="paragraph">
 <p>
   <strong>Leave request:</strong>
-  <%= @part_day.leave_request %>
+  <%= @part_day.part_date %>
 </p>
 
 <p>
   <strong>Leave date:</strong>
-  <%= @part_day.leave_date %>
+  <%= @part_day.part_start.to_s(:time) %>
 </p>
 
 <p>
   <strong>Time:</strong>
-  <%= @part_day.time %>
+  <%= @part_day.part_end.to_s(:time) %>
 </p>
-
-<%= link_to 'Edit', edit_part_day_path(@part_day) %> |
-<%= link_to 'Back', part_days_path %>
+</div>
+<div class="btn-group">
+<%= link_to 'Edit', edit_part_day_path(@part_day), class: "btn btn-sm btn-success" %>
+<%= link_to 'Back', @part_day.leave_request, class: "btn btn-sm btn-info" %>
+</div>
+</div>

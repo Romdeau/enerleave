@@ -17,6 +17,9 @@ group :production do
 	gem 'newrelic_rpm'
 end
 
+# Business Time to determine business days.
+gem 'business_time'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

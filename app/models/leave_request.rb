@@ -22,11 +22,21 @@ class LeaveRequest < ActiveRecord::Base
 
   	validates :leave_type, :end_date, :start_date, :comment, presence: true
 		validate :valid_leave_period?
+		validate :not_weekend?
 
   	LEAVE_TYPES = %w[annual sick personal compassionate time\ off\ without\ pay defence jury\ duty maternity/parental long\ service\ leave other]
 
 	scope :approved_leave, -> { where approved: 'true' }
 	scope :not_approved, -> { where approved: 'false'}
+
+	def not_weekend?
+		if start_date.saturday? or start_date.sunday?
+			errors.add(:start_date, "#{start_date} is a weekend.")
+		end
+		if end_date.saturday? or end_date.sunday?
+			errors.add(:end_date, "#{end_date} is a weekend.")
+		end
+	end
 
 	def valid_leave_period?
 		if self.end_date >= self.start_date

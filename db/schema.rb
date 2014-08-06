@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20140805064850) do
 
   create_table "part_days", force: true do |t|
     t.integer  "leave_request_id"
-    t.datetime "leave_date"
-    t.integer  "time"
+    t.date     "part_date"
+    t.datetime "part_start"
+    t.datetime "part_end"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

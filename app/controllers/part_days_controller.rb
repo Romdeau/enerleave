@@ -25,13 +25,11 @@ class PartDaysController < ApplicationController
   # POST /part_days.json
   def create
     @part_day = PartDay.new
-    @leave_request = LeaveRequest.find(params[:id])
+    @leave_request = LeaveRequest.find(params[:leave_request_id])
     @part_day.leave_request = @leave_request
-    @part_day.leave_date = part_day_params[:leave_request]
-    @part_day.time = part_day_params[:time]
     respond_to do |format|
-      if @part_day.save
-        format.html { redirect_to @part_day, notice: 'Part day was successfully created.' }
+      if @part_day.update(part_day_params)
+        format.html { redirect_to @leave_request, notice: 'Part day was successfully created.' }
         format.json { render action: 'show', status: :created, location: @part_day }
       else
         format.html { render action: 'new' }
@@ -43,8 +41,11 @@ class PartDaysController < ApplicationController
   # PATCH/PUT /part_days/1
   # PATCH/PUT /part_days/1.json
   def update
+    @part_day = PartDay.find(params[:id])
+    @leave_request = @part_day.leave_request
+    @part_day.update(part_day_params)
     respond_to do |format|
-      if @part_day.update(part_day_params)
+      if @part_day.save
         format.html { redirect_to @part_day, notice: 'Part day was successfully updated.' }
         format.json { head :no_content }
       else
@@ -57,9 +58,10 @@ class PartDaysController < ApplicationController
   # DELETE /part_days/1
   # DELETE /part_days/1.json
   def destroy
+    @leave_request = @part_day.leave_request
     @part_day.destroy
     respond_to do |format|
-      format.html { redirect_to part_days_url }
+      format.html { redirect_to @leave_request }
       format.json { head :no_content }
     end
   end
@@ -72,6 +74,6 @@ class PartDaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def part_day_params
-      params.require(:part_day).permit(:leave_request_id, :leave_date, :time)
+      params.require(:part_day).permit(:leave_request_id, :part_date, :part_start, :part_end)
     end
 end

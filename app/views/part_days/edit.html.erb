@@ -1,6 +1,12 @@
-<h1>Editing part_day</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @part_day %> |
-<%= link_to 'Back', part_days_path %>
+<div class="page-header">
+  <h1>Editing part_day</h1>
+</div>
+<div class="container">
+  <div class="paragraph">
+    <%= render 'part_edit' %>
+    <div class="btn-group">
+      <%= link_to 'Show', @part_day, class: "btn btn-sm btn-primary" %>
+      <%= link_to 'Back', leave_request_path(@part_day.leave_request), class: "btn btn-sm btn-info" %>
+    </div>
+  </div>
+</div>

@@ -2,8 +2,9 @@ class CreatePartDays < ActiveRecord::Migration
   def change
     create_table :part_days do |t|
       t.references :leave_request, index: true
-      t.datetime :leave_date
-      t.integer :time
+      t.date :part_date
+      t.datetime :part_start
+      t.datetime :part_end
 
       t.timestamps
     end
