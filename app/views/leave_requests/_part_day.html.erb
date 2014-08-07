@@ -13,9 +13,9 @@
       <tbody class="searchable">
         <% @part_days.each do |part_day| %>
           <tr>
-            <td><%= part_day.part_date %></td>
-            <td><%= part_day.part_start %></td>
-            <td><%= part_day.part_end %></td>
+            <td><%= part_day.part_date.to_s(:long) %></td>
+            <td><%= part_day.part_start.to_s(:time) %></td>
+            <td><%= part_day.part_end.to_s(:time) %></td>
             <td>
               <div class="btn-group">
                 <%= link_to 'Show', part_day, class: "btn btn-xs btn-info" %>
