@@ -6,7 +6,10 @@
   <body>
     <h1>A new leave request has been generated for: <%= @user.email %></h1>
     <p>
-      This leave request requires admin approval.
+      This leave request requires admin approval.<br>
+      <%= @leave_request.start_date.to_s(:long) %> to <%= @leave_request.end_date.to_s(:long) %><br>
+      Leave Type: <%= @leave_request.leave_type %><br>
+      Comment: <%= @leave_request.comment %>
     </p>
     <p>
       To Login to Enerleave simply follow this link <%= @url %>.

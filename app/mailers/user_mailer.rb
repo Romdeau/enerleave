@@ -7,7 +7,8 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: 'Welcome to EnerLeave: Leave Tracking')
   end
 
-  def leave_request(user)
+  def leave_request(user, leave_request)
+    @leave_request = leave_request
     @user = user
     @url = 'http://enerleave.eneraque.com/leave_requests/approvals'
     mail(to: @user.manager_email, cc: "laura.pringle@eneraque.com", subject: 'New EnerLeave Leave Request')
@@ -49,9 +50,10 @@ class UserMailer < ActionMailer::Base
     mail(to: "thomas.taege@eneraque.com", cc: "laura.pringle@eneraque.com", subject: "User has assigned a manager who is not a manager")
   end
 
-  def reject_leave(user, leave, comment)
-    @user = user
+  def reject_leave(rejecting_user, leave, comment)
     @leave = leave
+    @user = @leave.user
+    @rejecting_user = rejecting_user
     @comment = comment
     mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@leave.start_date}; #{@leave.comment} has been rejected")
   end

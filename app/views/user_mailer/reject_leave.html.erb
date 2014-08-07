@@ -6,7 +6,7 @@
   <body>
     <h1>Your Leave Request has been rejected</h1>
     <p>
-      Your manager or an admin has rejected your leave request.<br><br>
+      <%= @rejecting_user.email %> has rejected your leave request.<br><br>
       The reason supplied for this was: <%= @comment %><br><br>
       This leave request was created at <%= @leave.created_at %>.<br>
       Start Date: <%= @leave.start_date %><br>

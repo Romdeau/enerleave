@@ -42,7 +42,7 @@ class LeaveRequestsController < ApplicationController
     respond_to do |format|
       if @leave_request.save
         UserAudit.create({:user => current_user, :action => "created leave request", :end_user => @leave_request.user.email})
-        UserMailer.leave_request(current_user).deliver
+        UserMailer.leave_request(current_user, @leave_request).deliver
         format.html { redirect_to leave_requests_path, notice: 'Leave request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @leave_request }
       else
@@ -75,7 +75,7 @@ class LeaveRequestsController < ApplicationController
     @comment = leave_request_params[:comment]
     UserAudit.create({:user => current_user, :action => "destroyed leave request", :end_user => @leave_request.user.email})
     @leave_request.destroy
-    UserMailer.reject_leave(@leave_request.user, @leave_request, @comment).deliver
+    UserMailer.reject_leave(current_user, @leave_request, @comment).deliver
     respond_to do |format|
       format.html { redirect_to approvals_leave_requests_url, notice: "Leave Request Rejected." }
       format.json { head :no_content }
