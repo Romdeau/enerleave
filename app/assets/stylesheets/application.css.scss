@@ -21,6 +21,12 @@ $brand-danger:#263746;
 /* Remember that theres CSS is the scaffolds file as well.
 *  @import "bootstrap/theme";
 */
+
+.brand {
+  position: relative;
+  top: 5px;
+}
+
 body {
   background: #ecf1f5 !important;
 }
@@ -160,4 +166,9 @@ h4 {
     color: #444;
     background-color: transparent;
   }
+}
+
+.nav-title {
+  font-size: 18px;
+  text-align: center;
 }
