@@ -26,8 +26,9 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.manager_email, subject: "You have been assigned as the manager of #{@user.email}")
   end
 
-  def leave_approved(user)
+  def leave_approved(user, approving_user)
     @user = user
+    @approving_user = approving_user
     @url = "http://enerleave.eneraque.com/"
     mail(to: @user.email, cc: "laura.pringle@eneraque.com", subject: "Your leave request was approved")
   end
