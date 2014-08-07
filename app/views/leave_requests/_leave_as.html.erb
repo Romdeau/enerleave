@@ -16,12 +16,14 @@
           <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.leave_type %></p></div>
           <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.start_date %></p></div>
           <div class="col-sm-2"><p style="font-size:10px;"><%= leave_request.end_date %></p></div>
-          <% if logged_in? and (can? :manage, leave_request or current_user.id == leave_request.user.id) %>
-            <div class="btn-group col-sm-3" >
+          <div class="btn-group col-sm-3" >
+            <% if logged_in? and (can? :manage, leave_request or current_user.id == leave_request.user.id) %>
               <%= link_to "Show", leave_request, class: "btn btn-xs btn-info" %>
+            <% end %>
+            <% if logged_in? and (can? :manage, leave_request or (current_user.id == leave_request.user.id and leave_request.approved == "false")) %>
               <%= link_to "Edit", edit_leave_request_path(leave_request), class: "btn btn-xs btn-info" %>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       <% end %>
       <%= will_paginate @leave_requests %>
