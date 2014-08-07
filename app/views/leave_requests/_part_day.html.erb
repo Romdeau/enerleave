@@ -19,8 +19,10 @@
             <td>
               <div class="btn-group">
                 <%= link_to 'Show', part_day, class: "btn btn-xs btn-info" %>
-                <%= link_to 'Edit', edit_part_day_path(part_day), class: "btn btn-xs btn-info" %>
-                <%= link_to 'Destroy', part_day, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-info" %>
+                <% if logged_in? and (can? :manage, leave_request or (current_user.id == leave_request.user.id and leave_request.approved == "false")) %>
+                  <%= link_to 'Edit', edit_part_day_path(part_day), class: "btn btn-xs btn-info" %>
+                  <%= link_to 'Destroy', part_day, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-info" %>
+                <% end %>
               </div>
             </td>
           </tr>
