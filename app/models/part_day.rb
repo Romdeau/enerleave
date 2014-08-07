@@ -26,7 +26,7 @@ class PartDay < ActiveRecord::Base
   def not_repeat?
     leave_item = LeaveRequest.find(leave_request_id)
     leave_item.part_days.each do |partday|
-      if partday.part_date == part_date
+      if partday.part_date == part_date and partday.id != id
         errors.add(:part_date, "#{part_date} already exists in this leave request.")
       end
     end
