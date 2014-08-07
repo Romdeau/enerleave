@@ -30,5 +30,7 @@
       </tbody>
     </table>
   </div>
-  <%= link_to "New Part Day", new_leave_request_part_day_path(@leave_request), class: "btn btn-sm btn-success"%>
+  <% if logged_in? and (can? :manage, leave_request or (current_user.id == leave_request.user.id and leave_request.approved == "false")) %>
+    <%= link_to "New Part Day", new_leave_request_part_day_path(@leave_request), class: "btn btn-sm btn-success"%>
+  <% end %>
 </div>
