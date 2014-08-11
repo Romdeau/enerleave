@@ -28,6 +28,7 @@
                 <% if logged_in? %>
                 <li class="dropdown-header">Data Tools</li>
                 <li><a href="/export.csv">Export</a></li>
+                <li><a href="/users/export.csv">Export Users</a></li>
                 <li><%= link_to "Import Data", import_data_path %></li>
                 <li><a href="#">One more separated link</a></li>
                 <% end %>

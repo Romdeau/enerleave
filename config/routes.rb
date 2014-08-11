@@ -1,5 +1,5 @@
 Enerleave::Application.routes.draw do
-
+  get 'users/export' => 'users#export', :as => :users_export
 
   resources :user_audits
 

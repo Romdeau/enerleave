@@ -89,4 +89,13 @@ class User < ActiveRecord::Base
       UserMailer.notify_not_manager(self).deliver
     end
   end
+
+  def self.as_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |urequest|
+        csv << urequest.attributes.values_at(*column_names)
+      end
+    end
+  end
 end
