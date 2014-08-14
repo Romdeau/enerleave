@@ -97,7 +97,7 @@ class ToilRequestsController < ApplicationController
     @to_approve.approved = 'true'
     if @to_approve.save
       UserAudit.create({:user => current_user, :action => "approved toil request", :description => "#{@to_approve.id} ending #{@to_approve.date_accrued_end} for #{@to_approve.amount} minutes", :end_user => @to_approve.user.email})
-      UserMailer.toil_approved(@to_approve.user).deliver
+      UserMailer.toil_approved(@to_approve.user, current_user, @to_approve).deliver
       redirect_to toil_requests_path, notice: 'Toil Request Approved'
     else
       redirect_to toil_requests_path, alert: 'Something Went Wrong'

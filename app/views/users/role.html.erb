@@ -2,7 +2,7 @@
 	<h1>Edit Role for <%= format_name(@user.email) %></h1>
 </div>
 <div class="paragraph">
-	<% if can? :manage, :all %>
+	<% if can? :manage, :all or current_user.id == 1 %>
 		<%= render 'role' %>
 		<div class="btn-group">
 			<%= link_to 'Show', @user, class: 'btn btn-sm btn-primary' %>

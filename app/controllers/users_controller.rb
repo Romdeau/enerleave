@@ -77,7 +77,7 @@ class UsersController < ApplicationController
     user_params.delete(:password_confirmation)
     if @user.update_many_attributes(user_params)
       UserAudit.create({:user => current_user, :action => "changed user role", :description => "Role changed from #{@old_role} to #{@user.role}", :end_user => @user.email})
-      redirect_to @user, notice: 'Manager Email successfully updated.'
+      redirect_to @user, notice: 'User Role successfully updated.'
     else
       render action: 'role'
     end
