@@ -148,7 +148,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @leave_request.save
         UserAudit.create({:user => @leave_request.user, :action => "#{current_user.email} created a leave request for #{@leave_request.user.email}", :end_user => @leave_request.user.email})
-        UserMailer.leave_request(@leave_request.user).deliver
+        UserMailer.leave_request(@leave_request.user, @leave_request).deliver
         format.html { redirect_to leave_requests_path, notice: 'Leave request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @leave_request }
       else
