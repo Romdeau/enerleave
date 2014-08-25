@@ -22,6 +22,10 @@ Enerleave::Application.routes.draw do
   resources :spend_toils
   resources :part_days, only: [:index, :show, :edit, :update, :destroy]
 
+  #admin routes
+  get '/reporting/approved_request/' => 'homepage#approved_select', :as => :approved_select
+  get '/reporting/approved_request/:start_date/:end_date' => 'homepage#approved_filter', :as => :approved_filter
+
   #user sessions
   get 'export' => 'leave_requests#export', :as => :export
   get 'import_data' => 'leave_requests#import_data', :as => :import_data
