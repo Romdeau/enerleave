@@ -16,7 +16,8 @@
 //= require turbolinks
 // Loads all Boostrap javascritps
 //= require bootstrap
-//= require moment.min.js
+//= require moment
+//= require bootstrap-datetimepicker
 //= require fullcalendar.min.js
 // require_tree .
 

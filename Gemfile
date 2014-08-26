@@ -17,6 +17,10 @@ group :production do
 	gem 'newrelic_rpm'
 end
 
+#Datetime Picker
+gem 'momentjs-rails', '>= 2.8.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 3.1.2'
+
 # Business Time to determine business days.
 gem 'business_time'
 

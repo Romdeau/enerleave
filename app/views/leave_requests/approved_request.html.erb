@@ -2,5 +2,13 @@
   <h1>Approved Requests between <%= @start_date %> and <%= @end_date %></h1>
   <h4>There are <%= @unapproved_requests.count %> unapproved requests in this period</h4>
 </div>
-
-<%= render 'leave_table' %>
+<div class="row">
+  <div class="col-lg-6">
+    <h4>Approved Requests</h4>
+    <%= render 'leave_table' %>
+  </div>
+  <div class="col-lg-6">
+    <h4>Unapproved Requests</h4>
+    <%= render 'unapproved_table' %>
+  </div>
+</div>

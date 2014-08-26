@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody class="searchable">
-    <% @leave_requests.each do |leave| %>
+    <% @unapproved_requests.each do |leave| %>
     <tr>
       <td><%= link_to leave.user.email, leave_request_path(leave) %></td>
       <td><%= leave.leave_type %></td>
