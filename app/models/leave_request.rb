@@ -54,6 +54,38 @@ class LeaveRequest < ActiveRecord::Base
 		end
 	end
 
+	def leave_between?(date_start, date_end)
+		if self.approved == 'true'
+			if self.start_date >= Date.strptime("{ #{date_start} }", "{ %Y-%m-%d }")
+				if self.end_date <= Date.strptime("{ #{date_end} }", "{ %Y-%m-%d }")
+					true
+				else
+					false
+				end
+			else
+				false
+			end
+		else
+			false
+		end
+	end
+
+	def unapproved_between?(date_start, date_end)
+		if self.approved == 'false'
+			if self.start_date >= Date.strptime("{ #{date_start} }", "{ %Y-%m-%d }")
+				if self.end_date <= Date.strptime("{ #{date_end} }", "{ %Y-%m-%d }")
+					true
+				else
+					false
+				end
+			else
+				false
+			end
+		else
+			false
+		end
+	end
+
 	def self.as_csv
 		CSV.generate do |csv|
 			csv << column_names

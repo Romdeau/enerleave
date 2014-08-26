@@ -113,6 +113,18 @@ class LeaveRequestsController < ApplicationController
     end
   end
 
+  def approved_select
+    @leave_request = LeaveRequest.new
+  end
+
+  def approved_request
+    @leaver_params = params[:leave_request]
+    @start_date = @leaver_params[:start_date]
+    @end_date = @leaver_params[:end_date]
+    @leave_requests = LeaveRequest.select { |leave| leave.leave_between?(@start_date, @end_date) }
+    @unapproved_requests = LeaveRequest.select { |leave| leave.unapproved_between?(@start_date, @end_date) }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_leave_request
