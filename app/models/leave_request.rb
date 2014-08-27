@@ -57,7 +57,7 @@ class LeaveRequest < ActiveRecord::Base
 	def leave_between?(date_start, date_end)
 		if self.approved == 'true'
 			if self.start_date >= Date.strptime("{ #{date_start} }", "{ %m/%d/%Y }")
-				if self.end_date <= Date.strptime("{ #{date_end} }", "{ %m/%d/%Y }")
+				if self.start_date <= Date.strptime("{ #{date_end} }", "{ %m/%d/%Y }")
 					true
 				else
 					false
@@ -73,7 +73,7 @@ class LeaveRequest < ActiveRecord::Base
 	def unapproved_between?(date_start, date_end)
 		if self.approved == 'false'
 			if self.start_date >= Date.strptime("{ #{date_start} }", "{ %m/%d/%Y }")
-				if self.end_date <= Date.strptime("{ #{date_end} }", "{ %m/%d/%Y }")
+				if self.start_date <= Date.strptime("{ #{date_end} }", "{ %m/%d/%Y }")
 					true
 				else
 					false
