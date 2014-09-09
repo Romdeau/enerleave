@@ -78,8 +78,18 @@ class LeaveRequest < ActiveRecord::Base
 				else
 					false
 				end
-			else
-				false
+			elsif self.start_date <= Date.strptime("{ #{date_start} }", "{ %m/%d/%Y }")
+				if self.end_date >= Date.strptime("{ #{date_end} }", "{ %m/%d/%Y }")
+					true
+				else
+					false
+				end
+			elsif self.end_date >= Date.strptime("{ #{date_start} }", "{ %m/%d/%Y }")
+				if self.end_date <= Date.strptime("{ #{date_end} }", "{ %m/%d/%Y }")
+					true
+				else
+					false
+				end
 			end
 		else
 			false
