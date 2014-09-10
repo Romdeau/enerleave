@@ -113,6 +113,18 @@ class LeaveRequestsController < ApplicationController
     end
   end
 
+  def unapprove_leave
+    @to_approve = LeaveRequest.find(params[:id])
+    @to_approve.approved = 'false'
+    @user = @to_approve.user
+    if @to_approve.save
+      UserAudit.create({:user => current_user, :action => "unapproved leave request", :description => "request ##{@to_approve.id} ending #{@to_approve.end_date} (#{@to_approve.comment} )", :end_user => @to_approve.user.email})
+      redirect_to @to_approve, notice: 'Toil Request Unapproved'
+    else
+      redirect_to approvals_leave_requests_path, alert: 'Something Went Wrong'
+    end
+  end
+
   def approved_select
     @leave_request = LeaveRequest.new
   end

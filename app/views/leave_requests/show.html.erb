@@ -53,6 +53,9 @@
           <%= link_to "Approve", approve_leave_path(@leave_request), class: 'btn btn-sm btn-warning'%>
           <%= link_to "Reject", delete_leave_path(@leave_request), class: 'btn btn-sm btn-danger' %>
         <% end %>
+        <% if (can? :manage, :all) and @leave_request.approved == 'true' %>
+          <%= link_to "Unapprove", unapprove_leave_path(@leave_request), class: 'btn btn-sm btn-danger'%>
+        <% end %>
       </div>
     </div>
     <div class="col-sm-8">
