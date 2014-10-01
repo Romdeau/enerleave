@@ -15,9 +15,27 @@
       <tr>
         <td><%= travel_leg.date_start.strftime("%A %B %d %Y") %></td>
         <td><%= travel_leg.date_end.strftime("%A %B %d %Y") %></td>
-        <td><%= travel_leg.flight %></td>
-        <td><%= travel_leg.car %></td>
-        <td><%= travel_leg.accommodation %></td>
+        <td>
+          <% if travel_leg.flight == true %>
+          <span class="glyphicon glyphicon-ok"></span>
+          <% else %>
+          <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+        <td>
+          <% if travel_leg.car== true %>
+          <span class="glyphicon glyphicon-ok"></span>
+          <% else %>
+          <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+        <td>
+          <% if travel_leg.accommodation== true %>
+          <span class="glyphicon glyphicon-ok"></span>
+          <% else %>
+          <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
         <td>
           <%= link_to 'Show', travel_request_travel_leg_path(@travel_request, travel_leg.id), class: "btn btn-xs btn-primary" %>
         </td>

@@ -1,6 +1,9 @@
-<h1>Editing travel_leg</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @travel_leg %> |
-<%= link_to 'Back', travel_legs_path %>
+<div class="page-header">
+  <h1>Editing Travel Leg</h1>
+</div>
+<div class="content">
+  <%= render 'form' %>
+  <div class="btn-group">
+    <%= link_to 'Back', travel_request_travel_leg_path(params[:travel_request_id],@travel_leg), class: "btn btn-sm btn-primary" %>
+  </div>
+</div>

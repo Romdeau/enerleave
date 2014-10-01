@@ -6,6 +6,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th class="ener-header">Requester</th>
         <th class="ener-header">Start date</th>
         <th class="ener-header">End date</th>
         <th class="ener-header">Comment</th>
@@ -16,8 +17,9 @@
     <tbody class="searchable">
       <% @travel_requests.each do |travel_request| %>
         <tr>
-          <td><%= travel_request.start_date %></td>
-          <td><%= travel_request.end_date %></td>
+          <td><%= format_name(travel_request.user.email) %></td>
+          <td><%= travel_request.start_date.strftime("%B %d %Y") %></td>
+          <td><%= travel_request.end_date.strftime("%B %d %Y") %></td>
           <td><%= travel_request.comment %></td>
           <td>
             <div class="btn-group">

@@ -1,44 +1,48 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h4>Viewing Leg for Travel Request</h4>
+</div>
+<div class="content">
+  <p>
+    <strong>Date start:</strong>
+    <%= @travel_leg.date_start %>
+  </p>
 
-<p>
-  <strong>Date start:</strong>
-  <%= @travel_leg.date_start %>
-</p>
+  <p>
+    <strong>Date end:</strong>
+    <%= @travel_leg.date_end %>
+  </p>
 
-<p>
-  <strong>Date end:</strong>
-  <%= @travel_leg.date_end %>
-</p>
+  <p>
+    <strong>Flight:</strong>
+    <%= @travel_leg.flight %>
+  </p>
 
-<p>
-  <strong>Flight:</strong>
-  <%= @travel_leg.flight %>
-</p>
+  <p>
+    <strong>Flight comment:</strong>
+    <%= @travel_leg.flight_comment %>
+  </p>
 
-<p>
-  <strong>Flight comment:</strong>
-  <%= @travel_leg.flight_comment %>
-</p>
+  <p>
+    <strong>Car:</strong>
+    <%= @travel_leg.car %>
+  </p>
 
-<p>
-  <strong>Car:</strong>
-  <%= @travel_leg.car %>
-</p>
+  <p>
+    <strong>Car comment:</strong>
+    <%= @travel_leg.car_comment %>
+  </p>
 
-<p>
-  <strong>Car comment:</strong>
-  <%= @travel_leg.car_comment %>
-</p>
+  <p>
+    <strong>Accommodation:</strong>
+    <%= @travel_leg.accommodation %>
+  </p>
 
-<p>
-  <strong>Accommodation:</strong>
-  <%= @travel_leg.accommodation %>
-</p>
-
-<p>
-  <strong>Accommodation:</strong>
-  <%= @travel_leg.accommodation %>
-</p>
-
-<%= link_to 'Edit', edit_travel_leg_path(@travel_leg) %> |
-<%= link_to 'Back', travel_legs_path %>
+  <p>
+    <strong>Accommodation:</strong>
+    <%= @travel_leg.accommodation %>
+  </p>
+  <div class="btn-group">
+    <%= link_to 'Edit', edit_travel_request_travel_leg_path(params[:travel_request_id], @travel_leg.id), class: "btn btn-sm btn-primary" %>
+    <%= link_to 'Back', travel_request_path(params[:travel_request_id]), class: "btn btn-sm btn-primary" %>
+  </div>
+</div>
