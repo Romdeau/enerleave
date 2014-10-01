@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @travel_request.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @travel_request.end_date %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @travel_request.comment %>
+</p>
+
+<%= link_to 'Edit', edit_travel_request_path(@travel_request) %> |
+<%= link_to 'Back', travel_requests_path %>

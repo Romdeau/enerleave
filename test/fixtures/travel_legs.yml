@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: travel_legs
+#
+#  id                :integer          not null, primary key
+#  date_start        :datetime
+#  date_end          :datetime
+#  flight            :boolean
+#  flight_comment    :string(255)
+#  car               :boolean
+#  car_comment       :string(255)
+#  accommodation     :string(255)
+#  travel_request_id :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_start: 2014-10-01 14:07:40
+  date_end: 2014-10-01 14:07:40
+  flight: false
+  flight_comment: MyString
+  car: false
+  car_comment: MyString
+  accommodation: false
+  accommodation: MyString
+
+two:
+  date_start: 2014-10-01 14:07:40
+  date_end: 2014-10-01 14:07:40
+  flight: false
+  flight_comment: MyString
+  car: false
+  car_comment: MyString
+  accommodation: false
+  accommodation: MyString

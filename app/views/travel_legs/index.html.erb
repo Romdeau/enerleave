@@ -1,0 +1,41 @@
+<h1>Listing travel_legs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date start</th>
+      <th>Date end</th>
+      <th>Flight</th>
+      <th>Flight comment</th>
+      <th>Car</th>
+      <th>Car comment</th>
+      <th>Accommodation</th>
+      <th>Accommodation</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @travel_legs.each do |travel_leg| %>
+      <tr>
+        <td><%= travel_leg.date_start %></td>
+        <td><%= travel_leg.date_end %></td>
+        <td><%= travel_leg.flight %></td>
+        <td><%= travel_leg.flight_comment %></td>
+        <td><%= travel_leg.car %></td>
+        <td><%= travel_leg.car_comment %></td>
+        <td><%= travel_leg.accommodation %></td>
+        <td><%= travel_leg.accommodation %></td>
+        <td><%= link_to 'Show', travel_leg %></td>
+        <td><%= link_to 'Edit', edit_travel_leg_path(travel_leg) %></td>
+        <td><%= link_to 'Destroy', travel_leg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Travel leg', new_travel_leg_path %>

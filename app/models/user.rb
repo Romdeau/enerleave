@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :toil_request, dependent: :destroy
   has_many :spend_toil, dependent: :destroy
   has_many :leave_request, dependent: :destroy
+  has_many :travel_request
 
   validate :eneraque_email?
   validate :user_email?

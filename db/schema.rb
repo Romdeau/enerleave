@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805064850) do
+ActiveRecord::Schema.define(version: 20141001040740) do
 
   create_table "leave_requests", force: true do |t|
     t.integer  "user_id"
@@ -57,6 +57,29 @@ ActiveRecord::Schema.define(version: 20140805064850) do
   end
 
   add_index "toil_requests", ["user_id"], name: "index_toil_requests_on_user_id"
+
+  create_table "travel_legs", force: true do |t|
+    t.integer  "travel_request_id"
+    t.datetime "date_start"
+    t.datetime "date_end"
+    t.boolean  "flight"
+    t.string   "flight_comment"
+    t.boolean  "car"
+    t.string   "car_comment"
+    t.boolean  "accommodation"
+    t.string   "accommodation_comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "travel_requests", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_audits", force: true do |t|
     t.integer  "user_id"

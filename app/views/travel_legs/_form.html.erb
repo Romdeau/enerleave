@@ -1,0 +1,49 @@
+<%= form_for(@travel_leg) do |f| %>
+  <% if @travel_leg.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@travel_leg.errors.count, "error") %> prohibited this travel_leg from being saved:</h2>
+
+      <ul>
+      <% @travel_leg.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date_start %><br>
+    <%= f.datetime_select :date_start %>
+  </div>
+  <div class="field">
+    <%= f.label :date_end %><br>
+    <%= f.datetime_select :date_end %>
+  </div>
+  <div class="field">
+    <%= f.label :flight %><br>
+    <%= f.check_box :flight %>
+  </div>
+  <div class="field">
+    <%= f.label :flight_comment %><br>
+    <%= f.text_field :flight_comment %>
+  </div>
+  <div class="field">
+    <%= f.label :car %><br>
+    <%= f.check_box :car %>
+  </div>
+  <div class="field">
+    <%= f.label :car_comment %><br>
+    <%= f.text_field :car_comment %>
+  </div>
+  <div class="field">
+    <%= f.label :accommodation %><br>
+    <%= f.check_box :accommodation %>
+  </div>
+  <div class="field">
+    <%= f.label :accommodation %><br>
+    <%= f.text_field :accommodation %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

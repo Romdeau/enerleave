@@ -136,6 +136,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def spend_toil
+    @user = User.find(params[:id])
+    @toil_request = SpendToil.new
+    @toil_request.user = @user
+    @toil_request.initial_amount = 1
+    @toil_request.amount = 1
+    @toil_request.date_accrued = Time.now
+    @toil_request.date_accrued_end = Time.now
+    @toil_request.approved = 'false'
+    if @toil_request.save
+      UserAudit.create({:user => current_user, :action => "created toil request while impersonating user", :end_user => @user.email})
+      redirect_to edit_spend_toil_path(@toil_request), notice:"Toil request created as #{@user.email}", alert:"remember to enter toil value in total minutes"
+    else
+      render action: 'toil', alert: "Something went wrong"
+    end
+  end
+
   def leave_as
     @leave_request = LeaveRequest.new
     @user = User.find(params[:id])
