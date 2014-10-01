@@ -1,41 +1,46 @@
-<h1>Listing travel_legs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Date start</th>
-      <th>Date end</th>
-      <th>Flight</th>
-      <th>Flight comment</th>
-      <th>Car</th>
-      <th>Car comment</th>
-      <th>Accommodation</th>
-      <th>Accommodation</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @travel_legs.each do |travel_leg| %>
+<div class="page-header">
+  <h1>Listing travel_legs</h1>
+</div>
+<div class="content">
+  <input id="filter" type="text" class="form-control" placeholder="Search For...">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= travel_leg.date_start %></td>
-        <td><%= travel_leg.date_end %></td>
-        <td><%= travel_leg.flight %></td>
-        <td><%= travel_leg.flight_comment %></td>
-        <td><%= travel_leg.car %></td>
-        <td><%= travel_leg.car_comment %></td>
-        <td><%= travel_leg.accommodation %></td>
-        <td><%= travel_leg.accommodation %></td>
-        <td><%= link_to 'Show', travel_leg %></td>
-        <td><%= link_to 'Edit', edit_travel_leg_path(travel_leg) %></td>
-        <td><%= link_to 'Destroy', travel_leg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th class="ener-header">Date start</th>
+        <th class="ener-header">Date end</th>
+        <th class="ener-header">Flight</th>
+        <th class="ener-header">Flight comment</th>
+        <th class="ener-header">Car</th>
+        <th class="ener-header">Car comment</th>
+        <th class="ener-header">Accommodation</th>
+        <th class="ener-header">Accommodation</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Travel leg', new_travel_leg_path %>
+    <tbody class="searchable">
+      <% @travel_legs.each do |travel_leg| %>
+        <tr>
+          <td><%= travel_leg.date_start %></td>
+          <td><%= travel_leg.date_end %></td>
+          <td><%= travel_leg.flight %></td>
+          <td><%= travel_leg.flight_comment %></td>
+          <td><%= travel_leg.car %></td>
+          <td><%= travel_leg.car_comment %></td>
+          <td><%= travel_leg.accommodation %></td>
+          <td><%= travel_leg.accommodation %></td>
+          <td>
+            <div class="btn-group">
+              <%= link_to 'Show', travel_leg, class: "btn btn-xs btn-primary" %>
+              <%= link_to 'Edit', edit_travel_leg_path(travel_leg), class: "btn btn-xs btn-primary" %>
+              <% if can? :manage, :all %>
+                <%= link_to 'Destroy', travel_leg, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Travel leg', new_travel_leg_path, class: "btn btn-sm btn-primary" %>
+</div>

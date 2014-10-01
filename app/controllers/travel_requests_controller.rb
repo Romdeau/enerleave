@@ -1,5 +1,6 @@
 class TravelRequestsController < ApplicationController
   before_action :set_travel_request, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login, except: [:index, :show]
 
   # GET /travel_requests
   # GET /travel_requests.json
@@ -10,6 +11,7 @@ class TravelRequestsController < ApplicationController
   # GET /travel_requests/1
   # GET /travel_requests/1.json
   def show
+    @travel_legs = @travel_request.travel_leg
   end
 
   # GET /travel_requests/new
@@ -25,7 +27,7 @@ class TravelRequestsController < ApplicationController
   # POST /travel_requests.json
   def create
     @travel_request = TravelRequest.new(travel_request_params)
-
+    @travel_request.user = current_user
     respond_to do |format|
       if @travel_request.save
         format.html { redirect_to @travel_request, notice: 'Travel request was successfully created.' }

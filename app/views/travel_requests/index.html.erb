@@ -1,31 +1,36 @@
-<h1>Listing travel_requests</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Start date</th>
-      <th>End date</th>
-      <th>Comment</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @travel_requests.each do |travel_request| %>
+<div class="page-header">
+ <h1>Listing travel_requests</h1>
+</div>
+<div class="content">
+  <input id="filter" type="text" class="form-control" placeholder="Search For...">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= travel_request.start_date %></td>
-        <td><%= travel_request.end_date %></td>
-        <td><%= travel_request.comment %></td>
-        <td><%= link_to 'Show', travel_request %></td>
-        <td><%= link_to 'Edit', edit_travel_request_path(travel_request) %></td>
-        <td><%= link_to 'Destroy', travel_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th class="ener-header">Start date</th>
+        <th class="ener-header">End date</th>
+        <th class="ener-header">Comment</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New Travel request', new_travel_request_path %>
+    <tbody class="searchable">
+      <% @travel_requests.each do |travel_request| %>
+        <tr>
+          <td><%= travel_request.start_date %></td>
+          <td><%= travel_request.end_date %></td>
+          <td><%= travel_request.comment %></td>
+          <td>
+            <div class="btn-group">
+              <%= link_to 'Show', travel_request, class: "btn btn-sm btn-primary" %>
+              <%= link_to 'Edit', edit_travel_request_path(travel_request), class: "btn btn-sm btn-primary" %>
+              <% if can? :manage, :all %>
+                <%= link_to 'Destroy', travel_request, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Travel request', new_travel_request_path, class: "btn btn-sm btn-success" %>
+</div>

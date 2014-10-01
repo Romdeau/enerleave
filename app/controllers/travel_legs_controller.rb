@@ -24,11 +24,12 @@ class TravelLegsController < ApplicationController
   # POST /travel_legs
   # POST /travel_legs.json
   def create
+    @travel_request = TravelRequest.find(params[:travel_request_id])
     @travel_leg = TravelLeg.new(travel_leg_params)
-
+    @travel_leg.travel_request = @travel_request
     respond_to do |format|
       if @travel_leg.save
-        format.html { redirect_to @travel_leg, notice: 'Travel leg was successfully created.' }
+        format.html { redirect_to @travel_request, notice: 'Travel leg was successfully created.' }
         format.json { render action: 'show', status: :created, location: @travel_leg }
       else
         format.html { render action: 'new' }

@@ -1,5 +1,5 @@
 Enerleave::Application.routes.draw do
-  
+
   resources :travel_requests do
     resources :travel_legs
   end

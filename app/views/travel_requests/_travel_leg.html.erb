@@ -1,0 +1,27 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="ener-header">Date start</th>
+      <th class="ener-header">Date end</th>
+      <th class="ener-header">Flight</th>
+      <th class="ener-header">Car</th>
+      <th class="ener-header">Accommodation</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody class="searchable">
+    <% @travel_legs.each do |travel_leg| %>
+      <tr>
+        <td><%= travel_leg.date_start.strftime("%A %B %d %Y") %></td>
+        <td><%= travel_leg.date_end.strftime("%A %B %d %Y") %></td>
+        <td><%= travel_leg.flight %></td>
+        <td><%= travel_leg.car %></td>
+        <td><%= travel_leg.accommodation %></td>
+        <td>
+          <%= link_to 'Show', travel_request_travel_leg_path(@travel_request, travel_leg.id), class: "btn btn-xs btn-primary" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
