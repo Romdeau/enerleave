@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Preffered location:</strong>
+  <%= @accommodation.preffered_location %>
+</p>
+
+<p>
+  <strong>Check in:</strong>
+  <%= @accommodation.check_in %>
+</p>
+
+<p>
+  <strong>Check out:</strong>
+  <%= @accommodation.check_out %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @accommodation.comment %>
+</p>
+
+<%= link_to 'Edit', edit_accommodation_path(@accommodation) %> |
+<%= link_to 'Back', accommodations_path %>

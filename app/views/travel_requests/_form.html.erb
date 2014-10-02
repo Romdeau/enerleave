@@ -1,29 +1,73 @@
-<%= form_for(@travel_request) do |f| %>
-  <% if @travel_request.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@travel_request.errors.count, "error") %> prohibited this travel_request from being saved:</h2>
+<div class="row">
+  <div class="col-lg-6">
+    <%= form_for (@travel_request), :html => {class: "form-horizontal edit-stock"} do |f| %>
+      <% if @travel_request.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@travel_request.errors.count, "error") %> prohibited this travel_request from being saved:</h2>
 
-      <ul>
-      <% @travel_request.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+          <ul>
+          <% @travel_request.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+      <div class="field form-group">
+        <%= f.label :start_date, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <div class="input-group" id="StartDateTimePicker">
+            <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            <% if @travel_request.start_date != nil %>
+              <%= f.text_field :start_date, class: "form-control", value: @formatted_start_date %>
+            <% else %>
+              <%= f.text_field :start_date, class: "form-control" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :end_date, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <div class="input-group" id="EndDateTimePicker">
+            <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            <% if @travel_request.end_date != nil %>
+              <%= f.text_field :end_date, class: "form-control", value: @formatted_end_date %>
+            <% else %>
+              <%= f.text_field :end_date, class: "form-control" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :comment, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :comment, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="actions btn-group">
+        <%= f.submit class: "btn btn-sm btn-success" %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $('#StartDateTimePicker').datetimepicker({
+      pickTime: false
+    });
+  });
+  $(function () {
+    $('#EndDateTimePicker').datetimepicker({
+      pickTime: false
+    });
+  });
+</script>

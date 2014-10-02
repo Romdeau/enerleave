@@ -11,7 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001040740) do
+ActiveRecord::Schema.define(version: 20141002053832) do
+
+  create_table "accommodations", force: true do |t|
+    t.integer  "travel_leg_id"
+    t.string   "preffered_location"
+    t.datetime "check_in"
+    t.datetime "check_out"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "car_hires", force: true do |t|
+    t.integer  "travel_leg_id"
+    t.string   "driver"
+    t.string   "pickup_location"
+    t.datetime "pickup_date"
+    t.datetime "dropoff_date"
+    t.string   "dropoff_location"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "flights", force: true do |t|
+    t.integer  "travel_leg_id"
+    t.string   "preffered_flight"
+    t.string   "preffered_time"
+    t.string   "takeoff_location"
+    t.string   "landing_location"
+    t.datetime "flight_date"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "leave_requests", force: true do |t|
     t.integer  "user_id"
@@ -62,12 +96,7 @@ ActiveRecord::Schema.define(version: 20141001040740) do
     t.integer  "travel_request_id"
     t.datetime "date_start"
     t.datetime "date_end"
-    t.boolean  "flight"
-    t.string   "flight_comment"
-    t.boolean  "car"
-    t.string   "car_comment"
-    t.boolean  "accommodation"
-    t.string   "accommodation_comment"
+    t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

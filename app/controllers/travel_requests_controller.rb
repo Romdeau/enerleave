@@ -21,6 +21,8 @@ class TravelRequestsController < ApplicationController
 
   # GET /travel_requests/1/edit
   def edit
+    @formatted_start_date = @travel_request.start_date.strftime('%d/%m/%Y')
+    @formatted_end_date = @travel_request.end_date.strftime('%d/%m/%Y')
   end
 
   # POST /travel_requests

@@ -8,12 +8,7 @@
       <tr>
         <th class="ener-header">Date start</th>
         <th class="ener-header">Date end</th>
-        <th class="ener-header">Flight</th>
-        <th class="ener-header">Flight comment</th>
-        <th class="ener-header">Car</th>
-        <th class="ener-header">Car comment</th>
-        <th class="ener-header">Accommodation</th>
-        <th class="ener-header">Accommodation</th>
+        <th class="ener-header">Comment</th>
         <th></th>
       </tr>
     </thead>
@@ -23,12 +18,7 @@
         <tr>
           <td><%= travel_leg.date_start %></td>
           <td><%= travel_leg.date_end %></td>
-          <td><%= travel_leg.flight %></td>
-          <td><%= travel_leg.flight_comment %></td>
-          <td><%= travel_leg.car %></td>
-          <td><%= travel_leg.car_comment %></td>
-          <td><%= travel_leg.accommodation %></td>
-          <td><%= travel_leg.accommodation %></td>
+          <td><%= travel_leg.comment %></td>
           <td>
             <div class="btn-group">
               <%= link_to 'Show', travel_leg, class: "btn btn-xs btn-primary" %>

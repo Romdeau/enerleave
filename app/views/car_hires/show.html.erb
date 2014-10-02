@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Driver:</strong>
+  <%= @car_hire.driver %>
+</p>
+
+<p>
+  <strong>Pickup location:</strong>
+  <%= @car_hire.pickup_location %>
+</p>
+
+<p>
+  <strong>Pickup date:</strong>
+  <%= @car_hire.pickup_date %>
+</p>
+
+<p>
+  <strong>Dropoff date:</strong>
+  <%= @car_hire.dropoff_date %>
+</p>
+
+<p>
+  <strong>Dropoff location:</strong>
+  <%= @car_hire.dropoff_location %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @car_hire.comment %>
+</p>
+
+<%= link_to 'Edit', edit_car_hire_path(@car_hire) %> |
+<%= link_to 'Back', car_hires_path %>

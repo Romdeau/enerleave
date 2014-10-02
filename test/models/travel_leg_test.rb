@@ -3,14 +3,10 @@
 # Table name: travel_legs
 #
 #  id                :integer          not null, primary key
+#  travel_request_id :integer
 #  date_start        :datetime
 #  date_end          :datetime
-#  flight            :boolean
-#  flight_comment    :string(255)
-#  car               :boolean
-#  car_comment       :string(255)
-#  accommodation     :string(255)
-#  travel_request_id :integer
+#  comment           :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime
 #

@@ -1,9 +1,4 @@
 Enerleave::Application.routes.draw do
-
-  resources :travel_requests do
-    resources :travel_legs
-  end
-
   get 'users/export' => 'users#export', :as => :users_export
 
   resources :user_audits
@@ -26,6 +21,14 @@ Enerleave::Application.routes.draw do
   resources :toil_requests
   resources :spend_toils
   resources :part_days, only: [:index, :show, :edit, :update, :destroy]
+
+  resources :travel_requests do
+    resources :travel_legs do
+      resources :car_hires
+      resources :accommodations
+      resources :flights
+    end
+  end
 
   #admin routes
   get '/reports/approved_select/' => 'leave_requests#approved_select', :as => :approved_select

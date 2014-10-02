@@ -13,34 +13,10 @@
   </p>
 
   <p>
-    <strong>Flight:</strong>
-    <%= @travel_leg.flight %>
-  </p>
-
-  <p>
-    <strong>Flight comment:</strong>
-    <%= @travel_leg.flight_comment %>
-  </p>
-
-  <p>
-    <strong>Car:</strong>
-    <%= @travel_leg.car %>
-  </p>
-
-  <p>
-    <strong>Car comment:</strong>
-    <%= @travel_leg.car_comment %>
-  </p>
-
-  <p>
     <strong>Accommodation:</strong>
-    <%= @travel_leg.accommodation %>
+    <%= @travel_leg.comment %>
   </p>
-
-  <p>
-    <strong>Accommodation:</strong>
-    <%= @travel_leg.accommodation %>
-  </p>
+  
   <div class="btn-group">
     <%= link_to 'Edit', edit_travel_request_travel_leg_path(params[:travel_request_id], @travel_leg.id), class: "btn btn-sm btn-primary" %>
     <%= link_to 'Back', travel_request_path(params[:travel_request_id]), class: "btn btn-sm btn-primary" %>

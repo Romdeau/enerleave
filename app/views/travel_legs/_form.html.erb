@@ -46,33 +46,9 @@
       </div>
 
       <div class="field form-group">
-        <%= f.label :flight, "Flight Required?", class: "col-sm-3 control-label" %>
+        <%= f.label :comment, class: "col-sm-3 control-label" %>
         <div class="col-sm-9">
-          <div class="input-group">
-            <span class="input-group-addon"><%= f.check_box :flight %></span>
-            <%= f.text_field :flight_comment, class: "form-control" %>
-          </div>
-          <p class="help-block">Example block-level help text here.</p>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :flight, "Hire Car Required?", class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <div class="input-group">
-            <span class="input-group-addon"><%= f.check_box :car %></span>
-            <%= f.text_field :car_comment, class: "form-control" %>
-          </div>
-          <p class="help-block">Example block-level help text here.</p>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :flight, "Accommodation Required?", class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <div class="input-group">
-            <span class="input-group-addon"><%= f.check_box :accommodation %></span>
-            <%= f.text_field :accommodation_comment, class: "form-control" %>
-          </div>
-          <p class="help-block">Example block-level help text here.</p>
+          <%= f.text_field :comment, class: "form-control" %>
         </div>
       </div>
 

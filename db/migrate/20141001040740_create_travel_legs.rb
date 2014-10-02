@@ -4,12 +4,7 @@ class CreateTravelLegs < ActiveRecord::Migration
       t.belongs_to :travel_request
       t.datetime :date_start
       t.datetime :date_end
-      t.boolean :flight
-      t.string :flight_comment
-      t.boolean :car
-      t.string :car_comment
-      t.boolean :accommodation
-      t.string :accommodation_comment
+      t.string :comment
 
       t.timestamps
     end
