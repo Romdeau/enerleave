@@ -1,33 +1,65 @@
-<%= form_for(@accommodation) do |f| %>
-  <% if @accommodation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@accommodation.errors.count, "error") %> prohibited this accommodation from being saved:</h2>
+<div class="row">
+  <div class="col-lg-8">
+    <%= form_for [@travel_request, @travel_leg, @accommodation], :url => {:action => 'create'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
+      <% if @accommodation.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@accommodation.errors.count, "error") %> prohibited this accommodation from being saved:</h2>
 
-      <ul>
-      <% @accommodation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+          <ul>
+          <% @accommodation.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :preffered_location %><br>
-    <%= f.text_field :preffered_location %>
+      <div class="field form-group">
+        <%= f.label :preffered_location, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :preffered_location, class: "form-control" %>
+          <p class="help-block">Leave blank if you do not have a preference.</p>
+        </div>
+      </div>
+      <div class="field form-group">
+        <%= f.label :check_in, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <div class="input-group" id="StartDateTimePicker">
+            <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            <%= f.text_field :check_in, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="field form-group">
+        <%= f.label :check_out, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <div class="input-group" id="EndDateTimePicker">
+            <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            <%= f.text_field :check_out, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="field form-group">
+        <%= f.label :comment, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :comment, class: "form-control" %>
+        </div>
+      </div>
+      <div class="actions col-sm-offset-4 col-sm-8">
+        <%= f.submit class: "btn btn-sm btn-success" %>
+      </div>
+    <% end %>
+
+    <script type="text/javascript">
+      $(function () {
+        $('#StartDateTimePicker').datetimepicker();
+      });
+      $(function () {
+        $('#EndDateTimePicker').datetimepicker();
+      });
+    </script>
   </div>
-  <div class="field">
-    <%= f.label :check_in %><br>
-    <%= f.datetime_select :check_in %>
-  </div>
-  <div class="field">
-    <%= f.label :check_out %><br>
-    <%= f.datetime_select :check_out %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

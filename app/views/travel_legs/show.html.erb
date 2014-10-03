@@ -2,23 +2,37 @@
   <h4>Viewing Leg for Travel Request</h4>
 </div>
 <div class="content">
-  <p>
-    <strong>Date start:</strong>
-    <%= @travel_leg.date_start %>
-  </p>
+  <div class="row">
+    <div class="col-lg-4">
+      <h4>Leg Detail</h4>
+      <p>
+        <strong>Date start:</strong>
+        <%= @travel_leg.date_start %>
+      </p>
 
-  <p>
-    <strong>Date end:</strong>
-    <%= @travel_leg.date_end %>
-  </p>
+      <p>
+        <strong>Date end:</strong>
+        <%= @travel_leg.date_end %>
+      </p>
 
-  <p>
-    <strong>Accommodation:</strong>
-    <%= @travel_leg.comment %>
-  </p>
-  
-  <div class="btn-group">
-    <%= link_to 'Edit', edit_travel_request_travel_leg_path(params[:travel_request_id], @travel_leg.id), class: "btn btn-sm btn-primary" %>
-    <%= link_to 'Back', travel_request_path(params[:travel_request_id]), class: "btn btn-sm btn-primary" %>
+      <p>
+        <strong>Comment:</strong>
+        <%= @travel_leg.comment %>
+      </p>
+    </div>
+    <div class="col-lg-8">
+      <%= render 'show_bookings' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 btn-group">
+      <%= link_to 'Edit', edit_travel_request_travel_leg_path(params[:travel_request_id], @travel_leg.id), class: "btn btn-sm btn-primary" %>
+      <%= link_to 'Back', travel_request_path(params[:travel_request_id]), class: "btn btn-sm btn-primary" %>
+    </div>
+    <div class="col-lg-8 btn-group">
+      <%= link_to 'Add Flight', new_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
+      <%= link_to 'Add Accommodation', new_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
+      <%= link_to 'Add Car Hire', new_travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
+    </div>
   </div>
 </div>

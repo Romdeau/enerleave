@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-6">
-    <%= form_for [@travel_request, @travel_leg, @flight], :url => {:action => 'create'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
+    <%= form_for [@travel_request, @travel_leg, @flight], :url => {:action => 'update'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
       <% if @flight.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@flight.errors.count, "error") %> prohibited this flight from being saved:</h2>
@@ -34,7 +34,11 @@
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>
-            <%= f.text_field :flight_date, class: "form-control" %>
+            <% if @flight.flight_date != nil %>
+              <%= f.text_field :flight_date, class: "form-control", value: @formatted_flight_date %>
+            <% else %>
+              <%= f.text_field :flight_date, class: "form-control" %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -51,7 +55,11 @@
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
-            <%= f.text_field :return_date, class: "form-control" %>
+            <% if @flight.return_date != nil %>
+              <%= f.text_field :return_date, class: "form-control", value: @formatted_return_date %>
+            <% else %>
+              <%= f.text_field :return_date, class: "form-control" %>
+            <% end %>
           </div>
         </div>
       </div>

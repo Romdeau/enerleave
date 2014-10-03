@@ -24,8 +24,11 @@ class CarHiresController < ApplicationController
   # POST /car_hires
   # POST /car_hires.json
   def create
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
     @car_hire = CarHire.new(car_hire_params)
-
+    @car_hire.travel_leg = @travel_leg
+    @car_hire.booked = false
     respond_to do |format|
       if @car_hire.save
         format.html { redirect_to @car_hire, notice: 'Car hire was successfully created.' }

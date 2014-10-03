@@ -10,6 +10,9 @@ class TravelLegsController < ApplicationController
   # GET /travel_legs/1
   # GET /travel_legs/1.json
   def show
+    @flights = @travel_leg.flight
+    @accommodation = @travel_leg.accommodation
+    @car_hire = @travel_leg.car_hire
   end
 
   # GET /travel_legs/new
@@ -19,8 +22,8 @@ class TravelLegsController < ApplicationController
 
   # GET /travel_legs/1/edit
   def edit
-    @formatted_start_date = @travel_leg.date_start.strftime('%d-%m-%Y')
-    @formatted_end_date = @travel_leg.date_end.strftime('%d-%m-%Y')
+    @formatted_start_date = @travel_leg.date_start.strftime('%d/%m/%Y')
+    @formatted_end_date = @travel_leg.date_end.strftime('%d/%m/%Y')
   end
 
   # POST /travel_legs

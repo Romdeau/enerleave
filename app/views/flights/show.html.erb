@@ -19,6 +19,7 @@
   <strong>Landing location:</strong>
   <%= @flight.landing_location %>
 </p>
-
-<%= link_to 'Edit', edit_flight_path(@flight) %> |
-<%= link_to 'Back', flights_path %>
+<div class="btn-group">
+  <%= link_to 'Edit', edit_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:travel_leg_id], @flight), class: "btn btn-sm btn-primary" %>
+  <%= link_to 'Back', travel_request_travel_leg_path(params[:travel_request_id], params[:travel_leg_id]), class: "btn btn-sm btn-info" %>
+</div>

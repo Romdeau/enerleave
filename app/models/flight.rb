@@ -12,8 +12,22 @@
 #  comment          :string(255)
 #  created_at       :datetime
 #  updated_at       :datetime
+#  booked           :boolean
+#  booking_comment  :string(255)
+#  return           :boolean
 #
 
 class Flight < ActiveRecord::Base
   belongs_to :travel_leg
+
+  validates :takeoff_location, :landing_location, presence: true
+  validate :valid_return
+
+  def valid_return
+    if self.return == true and self.return_date == nil
+      errors.add(:return_date, "A return flight must have a date")
+    elsif self.return == false and self.return_date != nil
+      errors.add(:return, "A one way flight cannot have a return date")
+    end
+  end
 end

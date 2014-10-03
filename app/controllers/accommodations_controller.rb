@@ -24,11 +24,14 @@ class AccommodationsController < ApplicationController
   # POST /accommodations
   # POST /accommodations.json
   def create
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
     @accommodation = Accommodation.new(accommodation_params)
-
+    @accommodation.travel_leg = @travel_leg
+    @accommodation.booked = false
     respond_to do |format|
       if @accommodation.save
-        format.html { redirect_to @accommodation, notice: 'Accommodation was successfully created.' }
+        format.html { redirect_to travel_request_travel_leg_path(@travel_request, @travel_leg), notice: 'Accommodation was successfully created.' }
         format.json { render action: 'show', status: :created, location: @accommodation }
       else
         format.html { render action: 'new' }

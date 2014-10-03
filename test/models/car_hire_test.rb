@@ -12,6 +12,8 @@
 #  comment          :string(255)
 #  created_at       :datetime
 #  updated_at       :datetime
+#  booked           :boolean
+#  booking_comment  :string(255)
 #
 
 require 'test_helper'
