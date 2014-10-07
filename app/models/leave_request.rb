@@ -72,7 +72,7 @@ class LeaveRequest < ActiveRecord::Base
 					# then the leave request covers the whole report period
 					true
 				# and if the end date of the leave request is after the start date of the report
-				elsif self.end_date >= Date.strptime("{ #{{date_start}} }", "{ %m/%d/%Y }")
+				elsif self.end_date >= Date.strptime("{ #{date_start} }", "{ %m/%d/%Y }")
 					# then the leave request finishes inside the leave period report
 					true
 				else
