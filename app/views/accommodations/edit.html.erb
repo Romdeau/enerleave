@@ -1,6 +1,8 @@
-<h1>Editing accommodation</h1>
+<div class="page-header">
+  <h1>Editing accommodation</h1>
+</div>
+<div class="content">
+  <%= render 'edit' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @accommodation %> |
-<%= link_to 'Back', accommodations_path %>
+  <%= link_to 'Back', travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:travel_leg_id], @accommodation), class: "btn btn-sm btn-primary" %>
+</div>

@@ -34,12 +34,12 @@
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>
-            <%= f.text_field :flight_date, class: "form-control" %>
+            <%= f.text_field :flight_date, class: "form-control", value: @formatted_flight_date %>
           </div>
         </div>
       </div>
       <div class="field form-group">
-        <%= f.label :preffered_time, class: "col-sm-4 control-label" %>
+        <%= f.label :return, "Return Flight?", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
           <%= f.check_box :return%>
         </div>
@@ -51,7 +51,7 @@
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
-            <%= f.text_field :return_date, class: "form-control" %>
+            <%= f.text_field :return_date, class: "form-control", value: @formatted_return_date %>
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
       <div class="field form-group">
         <%= f.label :landing_location, class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.text_field :landing_location, class: "form-control" %>
+          <%= f.text_field :landing_location, class: "form-control", value: @travel_leg.destination_city %>
         </div>
       </div>
       <div class="actions col-sm-offset-4 col-sm-8">

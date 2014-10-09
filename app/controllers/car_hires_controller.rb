@@ -15,10 +15,16 @@ class CarHiresController < ApplicationController
   # GET /car_hires/new
   def new
     @car_hire = CarHire.new
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @formatted_hire_date = @travel_leg.date_start.strftime('%d/%m/%Y')
+    @formatted_return_date = @travel_leg.date_end.strftime('%d/%m/%Y')
   end
 
   # GET /car_hires/1/edit
   def edit
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @formatted_hire_date = @travel_leg.date_start.strftime('%d/%m/%Y')
+    @formatted_return_date = @travel_leg.date_end.strftime('%d/%m/%Y')
   end
 
   # POST /car_hires
@@ -31,7 +37,7 @@ class CarHiresController < ApplicationController
     @car_hire.booked = false
     respond_to do |format|
       if @car_hire.save
-        format.html { redirect_to @car_hire, notice: 'Car hire was successfully created.' }
+        format.html { redirect_to travel_request_travel_leg_path(@travel_request, @travel_leg), notice: 'Car hire was successfully created.' }
         format.json { render action: 'show', status: :created, location: @car_hire }
       else
         format.html { render action: 'new' }
@@ -43,9 +49,11 @@ class CarHiresController < ApplicationController
   # PATCH/PUT /car_hires/1
   # PATCH/PUT /car_hires/1.json
   def update
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
     respond_to do |format|
       if @car_hire.update(car_hire_params)
-        format.html { redirect_to @car_hire, notice: 'Car hire was successfully updated.' }
+        format.html { redirect_to travel_request_travel_leg_car_hire_path(@travel_request, @travel_leg, @car_hire), notice: 'Car hire was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

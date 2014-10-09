@@ -15,10 +15,18 @@ class AccommodationsController < ApplicationController
   # GET /accommodations/new
   def new
     @accommodation = Accommodation.new
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @travel_request = @travel_leg.travel_request
+    @formatted_checkin_date = @travel_leg.date_start.strftime('%d/%m/%Y')
+    @formatted_checkout_date = @travel_leg.date_end.strftime('%d/%m/%Y')
   end
 
   # GET /accommodations/1/edit
   def edit
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @travel_request = @travel_leg.travel_request
+    @formatted_checkin_date = @travel_leg.date_start.strftime('%d/%m/%Y')
+    @formatted_checkout_date = @travel_leg.date_end.strftime('%d/%m/%Y')
   end
 
   # POST /accommodations
@@ -43,9 +51,11 @@ class AccommodationsController < ApplicationController
   # PATCH/PUT /accommodations/1
   # PATCH/PUT /accommodations/1.json
   def update
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
     respond_to do |format|
       if @accommodation.update(accommodation_params)
-        format.html { redirect_to @accommodation, notice: 'Accommodation was successfully updated.' }
+        format.html { redirect_to travel_request_travel_leg_accommodation_path(@travel_request, @travel_leg, @accommodation), notice: 'Accommodation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

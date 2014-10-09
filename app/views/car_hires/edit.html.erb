@@ -1,6 +1,8 @@
-<h1>Editing car_hire</h1>
+<div class="page-header">
+  <h1>Editing car_hire</h1>
+</div>
+<div class="content">
+  <%= render 'edit' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @car_hire %> |
-<%= link_to 'Back', car_hires_path %>
+  <%= link_to 'Back', travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:travel_leg_id], @car_hire), class: "btn btn-sm btn-primary" %>
+</div>

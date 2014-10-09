@@ -1,11 +1,13 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th class="ener-header">Destination</th>
       <th class="ener-header">Date start</th>
       <th class="ener-header">Date end</th>
-      <th class="ener-header">Flight</th>
-      <th class="ener-header">Car</th>
-      <th class="ener-header">Accommodation</th>
+      <th class="ener-header">Fully Booked?</th>
+      <th class="ener-header"><span class="glyphicon glyphicon-plane"></span></th>
+      <th class="ener-header"><span class="glyphicon glyphicon-road"></span></th>
+      <th class="ener-header"><span class="glyphicon glyphicon-home"></span></th>
       <th></th>
     </tr>
   </thead>
@@ -13,16 +15,24 @@
   <tbody class="searchable">
     <% @travel_legs.each do |travel_leg| %>
       <tr>
+        <td><%= travel_leg.destination_city%></td>
         <td><%= travel_leg.date_start.strftime("%A %B %d %Y") %></td>
         <td><%= travel_leg.date_end.strftime("%A %B %d %Y") %></td>
         <td>
-          flight
+          <% if travel_leg.leg_booked? %>
+            <span class="glyphicon glyphicon-ok"></span>
+          <% else %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
         </td>
         <td>
-          car
+          <%= travel_leg.flight.count %>
         </td>
         <td>
-          accom
+          <%= travel_leg.car_hire.count %>
+        </td>
+        <td>
+          <%= travel_leg.accommodation.count %>
         </td>
         <td>
           <%= link_to 'Show', travel_request_travel_leg_path(@travel_request, travel_leg.id), class: "btn btn-xs btn-primary" %>

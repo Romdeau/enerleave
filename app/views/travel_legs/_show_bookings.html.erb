@@ -31,7 +31,7 @@
     <% end %>
     <% @accommodation.each do |accommodation| %>
       <tr>
-        <td><span class="glyphicon glyphicon-home"></span> <%= accommodation.preffered_location %> check in on <%= accommodation.check_in.strftime("%A") %> the <%= accommodation.check_in.strftime("%d/%m/%y") %> to <%= accommodation.check_out.strftime("%d/%m/%y")  %>  </td>
+        <td><span class="glyphicon glyphicon-home"></span> <%= accommodation.preffered_location %> for <%= accommodation.check_in.strftime("%A") %> the <%= accommodation.check_in.strftime("%d/%m/%y") %> to <%= accommodation.check_out.strftime("%d/%m/%y")  %>  </td>
         <td>
           <% if accommodation.booked == true %>
             <span class="glyphicon glyphicon-ok"></span>
@@ -39,12 +39,17 @@
             <span class="glyphicon glyphicon-remove"></span>
           <% end %>
         </td>
-        <td><%= link_to "Show", travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id], accommodation.id), class: "btn btn-xs btn-primary" %></td>
+        <td>
+          <div class="btn-group">
+            <%= link_to "Show", travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id], accommodation.id), class: "btn btn-xs btn-primary" %>
+            <%= link_to "Destroy", travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id], accommodation.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+          </div>
+        </td>
       </tr>
     <% end%>
     <% @car_hire.each do |car_hire| %>
       <tr>
-        <td><span class="glyphicon glyphicon-road"> <%= %></td>
+        <td><span class="glyphicon glyphicon-road"></span> <%= car_hire.driver %> to pickup on <%= car_hire.pickup_date.strftime("%A") %> the <%= car_hire.pickup_date.strftime("%d/%m/%y") %></td>
         <td>
           <% if car_hire.booked == true %>
             <span class="glyphicon glyphicon-ok"></span>
@@ -52,7 +57,12 @@
             <span class="glyphicon glyphicon-remove"></span>
           <% end %>
         </td>
-        <td><%= link_to "Show", travel_request_travel_car_hire_path(params[:travel_request_id], params[:id], car_hire.id), class: "btn btn-xs btn-primary" %></td>
+        <td>
+          <div class="btn-group">
+            <%= link_to "Show", travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id], car_hire.id), class: "btn btn-xs btn-primary" %>
+            <%= link_to "Destroy", travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id], car_hire.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+          </div>
+        </td>
       </tr>
     <% end%>
   </tbody>

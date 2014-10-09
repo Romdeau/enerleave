@@ -15,6 +15,9 @@ class FlightsController < ApplicationController
   # GET /flights/new
   def new
     @flight = Flight.new
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @formatted_flight_date = @travel_leg.date_start.strftime('%d/%m/%Y')
+    @formatted_return_date = @travel_leg.date_end.strftime('%d/%m/%Y')
   end
 
   # GET /flights/1/edit
@@ -49,7 +52,7 @@ class FlightsController < ApplicationController
     @travel_leg = TravelLeg.find(params[:travel_leg_id])
     respond_to do |format|
       if @flight.update(flight_params)
-        format.html { redirect_to travel_request_travel_leg_path(@travel_request, @travel_leg), notice: 'Flight was successfully updated.' }
+        format.html { redirect_to travel_request_travel_leg_flight_path(@travel_request, @travel_leg, @flight), notice: 'Flight was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

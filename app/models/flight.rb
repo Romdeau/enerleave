@@ -15,6 +15,7 @@
 #  booked           :boolean
 #  booking_comment  :string(255)
 #  return           :boolean
+#  return_date      :datetime
 #
 
 class Flight < ActiveRecord::Base

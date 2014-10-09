@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h4>Viewing Leg for Travel Request</h4>
+  <h1>Viewing Leg for Travel Request for <%= @travel_request.user.email %></h1>
 </div>
 <div class="content">
   <div class="row">
@@ -7,12 +7,21 @@
       <h4>Leg Detail</h4>
       <p>
         <strong>Date start:</strong>
-        <%= @travel_leg.date_start %>
+        <%= @travel_leg.date_start.strftime("%A") %>, <%= @travel_leg.date_start.strftime("%d/%m/%y") %>
       </p>
 
       <p>
         <strong>Date end:</strong>
-        <%= @travel_leg.date_end %>
+        <%= @travel_leg.date_end.strftime("%A") %>, <%= @travel_leg.date_end.strftime("%d/%m/%y") %>
+      </p>
+
+      <p>
+        <strong>Destination:</strong><br>
+        <%= @travel_leg.destination_address %><br>
+        <% if @travel_leg.destination_suburb != "" %>
+          <%= @travel_leg.destination_suburb %><br>
+        <% end %>
+        <%= @travel_leg.destination_city %> <%= @travel_leg.destination_state %> <%= @travel_leg.destination_postcode %>
       </p>
 
       <p>
@@ -27,12 +36,12 @@
   <div class="row">
     <div class="col-lg-4 btn-group">
       <%= link_to 'Edit', edit_travel_request_travel_leg_path(params[:travel_request_id], @travel_leg.id), class: "btn btn-sm btn-primary" %>
-      <%= link_to 'Back', travel_request_path(params[:travel_request_id]), class: "btn btn-sm btn-primary" %>
+      <%= link_to 'Back', travel_request_path(params[:travel_request_id]), class: "btn btn-sm btn-info" %>
     </div>
     <div class="col-lg-8 btn-group">
       <%= link_to 'Add Flight', new_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
-      <%= link_to 'Add Accommodation', new_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
       <%= link_to 'Add Car Hire', new_travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
+      <%= link_to 'Add Accommodation', new_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
     </div>
   </div>
 </div>

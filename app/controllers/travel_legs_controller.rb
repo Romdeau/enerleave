@@ -10,6 +10,7 @@ class TravelLegsController < ApplicationController
   # GET /travel_legs/1
   # GET /travel_legs/1.json
   def show
+    @travel_request = TravelRequest.find(params[:travel_request_id])
     @flights = @travel_leg.flight
     @accommodation = @travel_leg.accommodation
     @car_hire = @travel_leg.car_hire
@@ -18,6 +19,9 @@ class TravelLegsController < ApplicationController
   # GET /travel_legs/new
   def new
     @travel_leg = TravelLeg.new
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @formatted_start_date = @travel_request.start_date.strftime('%d/%m/%Y')
+    @formatted_end_date = @travel_request.end_date.strftime('%d/%m/%Y')
   end
 
   # GET /travel_legs/1/edit
@@ -46,9 +50,10 @@ class TravelLegsController < ApplicationController
   # PATCH/PUT /travel_legs/1
   # PATCH/PUT /travel_legs/1.json
   def update
+    @travel_request = @travel_leg.travel_request
     respond_to do |format|
       if @travel_leg.update(travel_leg_params)
-        format.html { redirect_to @travel_leg, notice: 'Travel leg was successfully updated.' }
+        format.html { redirect_to travel_request_travel_leg_path(@travel_request, @travel_leg), notice: 'Travel leg was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -75,6 +80,6 @@ class TravelLegsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def travel_leg_params
-      params.require(:travel_leg).permit(:date_start, :date_end, :flight, :flight_comment, :car, :car_comment, :accommodation, :accommodation)
+      params.require(:travel_leg).permit(:date_start, :date_end, :destination_address, :destination_suburb, :destination_city, :destination_state, :destination_postcode)
     end
 end

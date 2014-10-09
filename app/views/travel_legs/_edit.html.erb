@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-9">
-    <%= form_for [@travel_request, @travel_leg], :url => {:action => 'create'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
+    <%= form_for [@travel_request, @travel_leg], :url => {:action => 'update'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
       <% if @travel_leg.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@travel_leg.errors.count, "error") %> prohibited this travel_leg from being saved:</h2>

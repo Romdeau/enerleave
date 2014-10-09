@@ -15,6 +15,7 @@
 #  booked           :boolean
 #  booking_comment  :string(255)
 #  return           :boolean
+#  return_date      :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
