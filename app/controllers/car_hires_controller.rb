@@ -1,5 +1,5 @@
 class CarHiresController < ApplicationController
-  before_action :set_car_hire, only: [:show, :edit, :update, :destroy]
+  before_action :set_car_hire, only: [:show, :edit, :update, :destroy, :approve, :approval]
 
   # GET /car_hires
   # GET /car_hires.json
@@ -22,9 +22,8 @@ class CarHiresController < ApplicationController
 
   # GET /car_hires/1/edit
   def edit
-    @travel_leg = TravelLeg.find(params[:travel_leg_id])
-    @formatted_hire_date = @travel_leg.date_start.strftime('%d/%m/%Y')
-    @formatted_return_date = @travel_leg.date_end.strftime('%d/%m/%Y')
+    @formatted_hire_date = @car_hire.pickup_date.strftime('%d/%m/%Y')
+    @formatted_return_date = @car_hire.dropoff_date.strftime('%d/%m/%Y')
   end
 
   # POST /car_hires
@@ -72,6 +71,27 @@ class CarHiresController < ApplicationController
     end
   end
 
+  def approve
+    @formatted_hire_date = @car_hire.pickup_date.strftime('%d/%m/%Y')
+    @formatted_return_date = @car_hire.dropoff_date.strftime('%d/%m/%Y')
+  end
+
+  def approval
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @car_hire.booked = true
+    @car_hire.booking_comment = car_hire_params[:booking_comment]
+    respond_to do |format|
+      if @car_hire.save
+        format.html { redirect_to travel_request_travel_leg_car_hire_path(@travel_request, @travel_leg, @car_hire), notice: 'Car hire was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @car_hire.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_car_hire
@@ -80,6 +100,6 @@ class CarHiresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def car_hire_params
-      params.require(:car_hire).permit(:driver, :pickup_location, :pickup_date, :dropoff_date, :dropoff_location, :comment)
+      params.require(:car_hire).permit(:driver, :pickup_location, :pickup_date, :dropoff_date, :dropoff_location, :comment, :booked, :booking_comment)
     end
 end

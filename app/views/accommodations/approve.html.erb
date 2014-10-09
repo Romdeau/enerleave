@@ -1,0 +1,62 @@
+<div class="page-header">
+  <h1>Approve Accommodation</h1>
+</div>
+
+<div class="content">
+  <div class="row">
+    <div class="col-lg-6">
+      <h4>Please Double Check Booking Details</h4>
+      <p>
+        <strong>Preffered location:</strong>
+        <%= @accommodation.preffered_location %>
+      </p>
+
+      <p>
+        <strong>Check in:</strong>
+        <%= @accommodation.check_in %>
+      </p>
+
+      <p>
+        <strong>Check out:</strong>
+        <%= @accommodation.check_out %>
+      </p>
+
+      <p>
+        <strong>Comment:</strong>
+        <%= @accommodation.comment %>
+      </p>
+    </div>
+    <div class="col-lg-6">
+      <div class="row">
+        <div class="col-lg-offset-1 col-lg-11">
+          <h4>Booking Approval</h4>
+        </div>
+      </div>
+      <%= form_for [@travel_request, @travel_leg, @accommodation], :url => {:action => 'approval'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
+        <% if @accommodation.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@accommodation.errors.count, "error") %> prohibited this accommodation from being saved:</h2>
+
+            <ul>
+            <% @accommodation.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field form-group">
+          <%= f.label :booking_comment, class: "col-sm-4 control-label" %>
+          <div class="col-sm-8">
+            <%= f.text_field :booking_comment, class: "form-control" %>
+            <p class="help-block">Airline/Booking References go here.</p>
+          </div>
+        </div>
+
+        <div class="actions col-sm-offset-4 col-sm-8">
+          <%= f.submit class: "btn btn-sm btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

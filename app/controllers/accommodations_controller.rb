@@ -1,5 +1,5 @@
 class AccommodationsController < ApplicationController
-  before_action :set_accommodation, only: [:show, :edit, :update, :destroy]
+  before_action :set_accommodation, only: [:show, :edit, :update, :destroy, :approve, :approval]
 
   # GET /accommodations
   # GET /accommodations.json
@@ -23,10 +23,8 @@ class AccommodationsController < ApplicationController
 
   # GET /accommodations/1/edit
   def edit
-    @travel_leg = TravelLeg.find(params[:travel_leg_id])
-    @travel_request = @travel_leg.travel_request
-    @formatted_checkin_date = @travel_leg.date_start.strftime('%d/%m/%Y')
-    @formatted_checkout_date = @travel_leg.date_end.strftime('%d/%m/%Y')
+    @formatted_checkin_date = @accommodation.check_in.strftime('%d/%m/%Y')
+    @formatted_checkout_date = @accommodation.check_out.strftime('%d/%m/%Y')
   end
 
   # POST /accommodations
@@ -74,6 +72,27 @@ class AccommodationsController < ApplicationController
     end
   end
 
+  def approve
+    @formatted_checkin_date = @accommodation.check_in.strftime('%d/%m/%Y')
+    @formatted_checkout_date = @accommodation.check_out.strftime('%d/%m/%Y')
+  end
+
+  def approval
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @accommodation.booked = true
+    @accommodation.booking_comment = accommodation_params[:booking_comment]
+    respond_to do |format|
+      if @accommodation.save
+        format.html { redirect_to travel_request_travel_leg_accommodation_path(@travel_request, @travel_leg, @accommodation), notice: 'Accommodation was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @accommodation.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_accommodation
@@ -82,6 +101,6 @@ class AccommodationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def accommodation_params
-      params.require(:accommodation).permit(:preffered_location, :check_in, :check_out, :comment)
+      params.require(:accommodation).permit(:preffered_location, :check_in, :check_out, :comment, :booked, :booking_comment)
     end
 end

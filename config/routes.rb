@@ -14,6 +14,14 @@ Enerleave::Application.routes.draw do
   resources :users do
 
   end
+
+  get '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/flights/:id/approve' => 'flights#approve', as: :approve_flight
+  patch '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/flights/:id/approve' => 'flights#approval', as: :flight_approval
+  get '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/accommodations/:id/approve' => 'accommodations#approve', as: :approve_accommodation
+  patch '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/accommodations/:id/approve' => 'accommodations#approval', as: :accommodation_approval
+  get '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/car_hires/:id/approve' => 'car_hires#approve', as: :approve_car_hire
+  patch '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/car_hires/:id/approve' => 'car_hires#approval', as: :car_hire_approval
+
   resources :user_sessions
   resources :password_resets
   resources :user_audits

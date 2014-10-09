@@ -1,5 +1,5 @@
 class FlightsController < ApplicationController
-  before_action :set_flight, only: [:show, :edit, :update, :destroy]
+  before_action :set_flight, only: [:show, :edit, :update, :destroy, :approve, :approvals]
 
   # GET /flights
   # GET /flights.json
@@ -73,6 +73,27 @@ class FlightsController < ApplicationController
     end
   end
 
+  def approve
+    @formatted_flight_date = @flight.flight_date.strftime('%d/%m/%Y')
+    @formatted_return_date = @flight.return_date.strftime('%d/%m/%Y')
+  end
+
+  def approval
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @flight.booked = true
+    @flight.booking_comment = flight_params[:booking_comment]
+    respond_to do |format|
+      if @flight.save
+        format.html { redirect_to travel_request_travel_leg_flight_path(@travel_request, @travel_leg, @flight), notice: 'Flight was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @flight.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_flight
@@ -81,6 +102,6 @@ class FlightsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def flight_params
-      params.require(:flight).permit(:preffered_flight, :preffered_time, :takeoff_location, :landing_location, :flight_date, :return, :return_date)
+      params.require(:flight).permit(:preffered_flight, :preffered_time, :takeoff_location, :landing_location, :flight_date, :return, :return_date, :booked, :booking_comment)
     end
 end
