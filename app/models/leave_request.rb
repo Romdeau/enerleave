@@ -56,20 +56,20 @@ class LeaveRequest < ActiveRecord::Base
 
 	def leave_between?(date_start, date_end)
 		if self.approved == 'true'
+			#if the start date of the leave request is after the start date of the report
 			if self.start_date >= Date.strptime("{ #{date_start} }", "{ %m/%d/%Y }")
+				# and if the start date of the leave request is before the end date of the report
 				if self.start_date <= Date.strptime("{ #{date_end} }", "{ %m/%d/%Y }")
+					#then the leave starts between the leave period report dates or starts between and ends outside the leave period report dates
 					true
 				else
 					false
 				end
+			#if the start date of the leave request is before the start date of the report
 			elsif self.start_date <= Date.strptime("{ #{date_start} }", "{ %m/%d/%Y }")
-				if self.end_date >= Date.strptime("{ #{date_end} }", "{ %m/%d/%Y }")
-					true
-				else
-					false
-				end
-			elsif self.end_date >= Date.strptime("{ #{date_start} }", "{ %m/%d/%Y }")
-				if self.end_date <= Date.strptime("{ #{date_end} }", "{ %m/%d/%Y }")
+				# and if the end date of the leave request is after the start date of the report
+				if self.end_date >= Date.strptime("{ #{date_start} }", "{ %m/%d/%Y }")
+					# then the leave request finishes inside the leave period report or finishes after the leave period report
 					true
 				else
 					false
