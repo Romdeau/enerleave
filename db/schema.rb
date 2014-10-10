@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003051644) do
+ActiveRecord::Schema.define(version: 20141010040121) do
 
   create_table "accommodations", force: true do |t|
     t.integer  "travel_leg_id"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20141003051644) do
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "lodged"
   end
 
   create_table "user_audits", force: true do |t|

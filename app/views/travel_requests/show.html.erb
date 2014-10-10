@@ -25,7 +25,10 @@
       <%= render 'travel_leg' %>
     </div>
   </div>
-  <%= link_to 'Add Leg', new_travel_request_travel_leg_path(@travel_request), class: "btn btn-sm btn-success" %>
+  <% if @travel_request.lodged != true %>
+    <%= link_to 'Lodge Request', travel_request_path(@travel_request), method: :lodge, class: "btn btn-sm btn-success" %>
+    <%= link_to 'Add Leg', new_travel_request_travel_leg_path(@travel_request), class: "btn btn-sm btn-success" %>
+  <% end %>
   <div class="btn-group">
     <%= link_to 'Edit', edit_travel_request_path(@travel_request), class: "btn btn-sm btn-primary" %>
     <%= link_to 'Back', travel_requests_path, class: "btn btn-sm btn-primary" %>

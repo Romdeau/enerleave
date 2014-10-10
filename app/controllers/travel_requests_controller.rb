@@ -1,5 +1,5 @@
 class TravelRequestsController < ApplicationController
-  before_action :set_travel_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_travel_request, only: [:show, :edit, :update, :destroy, :approve]
   before_filter :require_login, except: [:index, :show]
 
   # GET /travel_requests
@@ -62,6 +62,17 @@ class TravelRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to travel_requests_url }
       format.json { head :no_content }
+    end
+  end
+
+  def lodge
+    @travel_request = TravelRequest.find(params[:id])
+    UserMailer.lodge_travel_request(current_user, @travel_request).deliver
+    @travel_request.lodged = true
+    if @travel_request.save
+      redirect_to @travel_request, notice: 'Travel request was successfully updated.'
+    else
+      redirect_to @travel_request, notice: 'Hrm, something went wrong.'
     end
   end
 
