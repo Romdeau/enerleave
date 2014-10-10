@@ -1,5 +1,5 @@
 class FlightsController < ApplicationController
-  before_action :set_flight, only: [:show, :edit, :update, :destroy, :approve, :approvals]
+  before_action :set_flight, only: [:show, :edit, :update, :destroy, :approve, :approval]
 
   # GET /flights
   # GET /flights.json
@@ -74,8 +74,6 @@ class FlightsController < ApplicationController
   end
 
   def approve
-    @formatted_flight_date = @flight.flight_date.strftime('%d/%m/%Y')
-    @formatted_return_date = @flight.return_date.strftime('%d/%m/%Y')
   end
 
   def approval

@@ -75,4 +75,10 @@ class UserMailer < ActionMailer::Base
     @comment = comment
     mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@toil_spend.leave_date}; has been rejected")
   end
+
+  def lodge_travel_request(user, travel_request)
+    @user = user
+    @travel_request = travel_request
+    @url = "http://enerleave.eneraque.com/travel_requests/#{@travel_request.id}"
+    mail(to: "travel@eneraque.com", subject: "#{@user.email} has lodged a new travel request")
 end

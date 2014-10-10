@@ -1,29 +1,56 @@
 <div class="page-header">
   <h1>Accommodation Details</h1>
+  <h4>This Accommodation request is <% if @accommodation.booked == true %><span class="ener-header">Booked</span><% else %><span style="color:#ff0000;">Not Booked</span><% end %></h4>
+  <% if @accommodation.booked == true %>
+    <h4>Booking Comment: <%= @accommodation.booking_comment %></h4>
+  <% end %>
 </div>
 
 <div class="content">
-  <p>
-    <strong>Preffered location:</strong>
-    <%= @accommodation.preffered_location %>
-  </p>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Preffered location:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @accommodation.preffered_location %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Check in:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @accommodation.check_in.strftime("%A") %>, <%= @accommodation.check_in.strftime("%d/%m/%y") %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Check in:</strong>
-    <%= @accommodation.check_in %>
-  </p>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Check out:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @accommodation.check_out.strftime("%A") %>, <%= @accommodation.check_out.strftime("%d/%m/%y") %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Check out:</strong>
-    <%= @accommodation.check_out %>
-  </p>
-
-  <p>
-    <strong>Comment:</strong>
-    <%= @accommodation.comment %>
-  </p>
-  <div class="btn-group">
-  <%= link_to 'Edit', edit_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:travel_leg_id], @accommodation), class: "btn btn-sm btn-primary" %>
-  <%= link_to 'Back', travel_request_travel_leg_path(params[:travel_request_id], params[:travel_leg_id]), class: "btn btn-sm btn-info" %>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Comment:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @accommodation.comment %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-6">
+      <% if @accommodation.booked == false %>
+        <%= link_to "Approve", approve_accommodation_path(params[:travel_request_id], params[:travel_leg_id], @accommodation), class: "btn btn-sm btn-success" %>
+      <% end %>
+      <div class="btn-group">
+        <%= link_to 'Edit', edit_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:travel_leg_id], @accommodation), class: "btn btn-sm btn-primary" %>
+        <%= link_to 'Back', travel_request_travel_leg_path(params[:travel_request_id], params[:travel_leg_id]), class: "btn btn-sm btn-info" %>
+      </div>
+    </div>
   </div>
 </div>

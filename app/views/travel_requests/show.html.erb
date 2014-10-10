@@ -5,6 +5,7 @@
 <div class="content">
   <div class="row">
     <div class="col-lg-4">
+      <h4>This Travel Request <% if @travel_request.request_booked? %> is fully booked.<% else %> has <%= @travel_request.unbooked_legs %> leg(s) to book.<% end %></h4>
       <p>
         <strong>Start date:</strong>
         <%= @travel_request.start_date.strftime("%A %B %d %Y") %>

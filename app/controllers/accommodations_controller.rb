@@ -73,8 +73,6 @@ class AccommodationsController < ApplicationController
   end
 
   def approve
-    @formatted_checkin_date = @accommodation.check_in.strftime('%d/%m/%Y')
-    @formatted_checkout_date = @accommodation.check_out.strftime('%d/%m/%Y')
   end
 
   def approval

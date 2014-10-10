@@ -2,27 +2,66 @@
   <h1>Flight Details</h1>
 </div>
 <div class="content">
-  <p>
-    <strong>Preffered flight:</strong>
-    <%= @flight.preffered_flight %>
-  </p>
-
-  <p>
-    <strong>Preffered time:</strong>
-    <%= @flight.preffered_time %>
-  </p>
-
-  <p>
-    <strong>Takeoff location:</strong>
-    <%= @flight.takeoff_location %>
-  </p>
-
-  <p>
-    <strong>Landing location:</strong>
-    <%= @flight.landing_location %>
-  </p>
-  <div class="btn-group">
-    <%= link_to 'Edit', edit_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:travel_leg_id], @flight), class: "btn btn-sm btn-primary" %>
-    <%= link_to 'Back', travel_request_travel_leg_path(params[:travel_request_id], params[:travel_leg_id]), class: "btn btn-sm btn-info" %>
+  <h4>This is a <% if @flight.return == true %>return<% else %>one-way<% end %> flight.</h4>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Preffered flight:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @flight.preffered_flight %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Preffered time:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @flight.preffered_time %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Flight Date:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @flight.flight_date.strftime("%A") %>, <%= @flight.flight_date.strftime("%d/%m/%y") %>
+    </div>
+  </div>
+  <% if @flight.return == true %>
+    <div class="row">
+      <div class="col-sm-2 ener-header">
+        <strong>Return Date:</strong>
+      </div>
+      <div class="col-sm-4">
+        <%= @flight.return_date.strftime("%A") %>, <%= @flight.return_date.strftime("%d/%m/%y") %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Takeoff location:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @flight.takeoff_location %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Landing location:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @flight.landing_location %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <% if @flight.booked == false %>
+        <%= link_to "Approve", approve_flight_path(params[:travel_request_id], params[:travel_leg_id], @flight), class: "btn btn-sm btn-success" %>
+      <% end %>
+      <div class="btn-group">
+        <%= link_to 'Edit', edit_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:travel_leg_id], @flight), class: "btn btn-sm btn-primary" %>
+        <%= link_to 'Back', travel_request_travel_leg_path(params[:travel_request_id], params[:travel_leg_id]), class: "btn btn-sm btn-info" %>
+      </div>
+    </div>
   </div>
 </div>

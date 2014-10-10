@@ -72,8 +72,6 @@ class CarHiresController < ApplicationController
   end
 
   def approve
-    @formatted_hire_date = @car_hire.pickup_date.strftime('%d/%m/%Y')
-    @formatted_return_date = @car_hire.dropoff_date.strftime('%d/%m/%Y')
   end
 
   def approval
