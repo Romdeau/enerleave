@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h1>Choose User to Add</h1>
+</div>
+<div class="content">
+  <input id="filter" type="text" class="form-control" placeholder="Search For...">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="ener-header"><h4>Employee</h6></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="searchable">
+      <% @users.each do |this_user| %>
+        <% if @travel_leg.user.exists?(this_user) == false %>
+          <tr>
+            <td><%= format_name(this_user.email) %></td>
+            <td>
+              <div class="btn-group">
+                <%= link_to "Add User", add_user_path(params[:travel_request_id], @travel_leg, this_user), method: :approve_user, class: 'btn btn-xs btn-success' %>
+              </div>
+            </td>
+          <tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "back", travel_request_travel_leg_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-info" %>
+</div>

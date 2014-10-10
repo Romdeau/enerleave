@@ -1,5 +1,5 @@
 class TravelLegsController < ApplicationController
-  before_action :set_travel_leg, only: [:show, :edit, :update, :destroy]
+  before_action :set_travel_leg, only: [:show, :edit, :update, :destroy, :add_user, :approve_user, :remove_user, :destroy_user]
 
   # GET /travel_legs
   # GET /travel_legs.json
@@ -36,6 +36,7 @@ class TravelLegsController < ApplicationController
     @travel_request = TravelRequest.find(params[:travel_request_id])
     @travel_leg = TravelLeg.new(travel_leg_params)
     @travel_leg.travel_request = @travel_request
+    @travel_leg.user << current_user
     respond_to do |format|
       if @travel_leg.save
         format.html { redirect_to @travel_request, notice: 'Travel leg was successfully created.' }
@@ -69,6 +70,34 @@ class TravelLegsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to travel_legs_url }
       format.json { head :no_content }
+    end
+  end
+
+  def add_user
+    @users = User.all
+  end
+
+  def approve_user
+    @user = User.find(params[:user_id])
+    if @travel_leg.user.exists?(@user) == false
+      @travel_leg.user << @user
+    end
+    if @travel_leg.save
+      redirect_to travel_request_travel_leg_path(params[:travel_request_id], @travel_leg), notice: 'User was successfully added to travel leg.'
+    end
+  end
+
+  def remove_user
+    @users = @travel_leg.user
+  end
+
+  def destroy_user
+    @user = User.find(params[:user_id])
+    if @travel_leg.user.exists?(@user)
+      @travel_leg.user.delete(@user)
+    end
+    if @travel_leg.save
+      redirect_to travel_request_travel_leg_path(params[:travel_request_id], @travel_leg), notice: 'User was successfully removed from the travel leg.'
     end
   end
 

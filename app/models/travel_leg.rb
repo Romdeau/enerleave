@@ -14,6 +14,7 @@
 #  comment              :string(255)
 #  created_at           :datetime
 #  updated_at           :datetime
+#  user                 :belongs_to
 #
 
 class TravelLeg < ActiveRecord::Base
@@ -21,6 +22,7 @@ class TravelLeg < ActiveRecord::Base
   has_many :flight
   has_many :car_hire
   has_many :accommodation
+  has_and_belongs_to_many :user
 
   def flights_to_book
     @flights = self.flight

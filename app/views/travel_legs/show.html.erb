@@ -1,47 +1,82 @@
 <div class="page-header">
   <h1>Viewing Leg for Travel Request for <%= @travel_request.user.email %></h1>
+  <h4><%= @travel_leg.user.count %> Travelers in this leg.</h4>
 </div>
 <div class="content">
   <div class="row">
     <div class="col-lg-4">
       <h4>Leg Detail</h4>
-      <p>
-        <strong>Date start:</strong>
-        <%= @travel_leg.date_start.strftime("%A") %>, <%= @travel_leg.date_start.strftime("%d/%m/%y") %>
-      </p>
+      <div class="row">
+        <div class="col-sm-4 ener-header">
+          <strong>Date start:</strong>
+        </div>
+        <div class="col-sm-8">
+          <%= @travel_leg.date_start.strftime("%A") %>, <%= @travel_leg.date_start.strftime("%d/%m/%y") %>
+        </div>
+      </div>
 
-      <p>
-        <strong>Date end:</strong>
-        <%= @travel_leg.date_end.strftime("%A") %>, <%= @travel_leg.date_end.strftime("%d/%m/%y") %>
-      </p>
+      <div class="row">
+        <div class="col-sm-4 ener-header">
+          <strong>Date end:</strong>
+        </div>
+        <div class="col-sm-8">
+          <%= @travel_leg.date_end.strftime("%A") %>, <%= @travel_leg.date_end.strftime("%d/%m/%y") %>
+        </div>
+      </div>
 
-      <p>
-        <strong>Destination:</strong><br>
-        <%= @travel_leg.destination_address %><br>
-        <% if @travel_leg.destination_suburb != "" %>
-          <%= @travel_leg.destination_suburb %><br>
-        <% end %>
-        <%= @travel_leg.destination_city %> <%= @travel_leg.destination_state %> <%= @travel_leg.destination_postcode %>
-      </p>
+      <div class="row">
+        <div class="col-sm-4 ener-header">
+          <strong>Destination:</strong><br>
+        </div>
+        <div class="col-sm-8">
+          <%= @travel_leg.destination_address %><br>
+          <% if @travel_leg.destination_suburb != "" %>
+            <%= @travel_leg.destination_suburb %><br>
+          <% end %>
+          <%= @travel_leg.destination_city %> <%= @travel_leg.destination_state %> <%= @travel_leg.destination_postcode %>
+        </div>
+      </div>
 
-      <p>
+      <div class="row">
+        <div class="col-sm-4 ener-header">
         <strong>Comment:</strong>
-        <%= @travel_leg.comment %>
-      </p>
+      </div>
+        <div class="col-sm-8">
+          <%= @travel_leg.comment %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 ener-header">
+        <strong>Travelers:</strong>
+      </div>
+        <div class="col-sm-8">
+          <% @travel_leg.user.each do |user| %>
+            <%= user.email %> <br>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="col-lg-8">
       <%= render 'show_bookings' %>
     </div>
   </div>
+  <br>
   <div class="row">
     <div class="col-lg-4 btn-group">
-      <%= link_to 'Edit', edit_travel_request_travel_leg_path(params[:travel_request_id], @travel_leg.id), class: "btn btn-sm btn-primary" %>
-      <%= link_to 'Back', travel_request_path(params[:travel_request_id]), class: "btn btn-sm btn-info" %>
+      <%= link_to "Add Traveler", add_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-success" %>
+      <%= link_to "Remove Traveler", remove_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-danger" %>
     </div>
     <div class="col-lg-8 btn-group">
       <%= link_to 'Add Flight', new_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
       <%= link_to 'Add Car Hire', new_travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
       <%= link_to 'Add Accommodation', new_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-4 btn-group">
+      <%= link_to 'Edit', edit_travel_request_travel_leg_path(params[:travel_request_id], @travel_leg.id), class: "btn btn-sm btn-primary" %>
+      <%= link_to 'Back', travel_request_path(params[:travel_request_id]), class: "btn btn-sm btn-info" %>
     </div>
   </div>
 </div>

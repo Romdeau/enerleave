@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   has_many :leave_request, dependent: :destroy
   has_many :travel_request
 
+  has_and_belongs_to_many :travel_leg
+
   validate :eneraque_email?
   validate :user_email?
 
