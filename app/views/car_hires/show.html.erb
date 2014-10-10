@@ -8,13 +8,22 @@
 <div class="content">
   <div class="row">
     <div class="col-sm-2 ener-header">
+      <strong>Accommodation For:</strong>
+    </div>
+    <div class="col-sm-4">
+      <strong><% @travel_leg.user.each do |user| %>
+        <%= user.email %><br>
+      <% end %></strong>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
       <strong>Driver:</strong>
     </div>
     <div class="col-sm-4">
       <%= @car_hire.driver %>
     </div>
   </div>
-
   <div class="row">
     <div class="col-sm-2 ener-header">
       <strong>Pickup location:</strong>

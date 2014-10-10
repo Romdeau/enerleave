@@ -10,6 +10,7 @@ class FlightsController < ApplicationController
   # GET /flights/1
   # GET /flights/1.json
   def show
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
   end
 
   # GET /flights/new
@@ -74,6 +75,7 @@ class FlightsController < ApplicationController
   end
 
   def approve
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
   end
 
   def approval

@@ -7,6 +7,16 @@
     <div class="col-lg-5">
       <h4>Please Double Check Booking Details</h4>
       <div class="row">
+        <div class="col-sm-2 ener-header">
+          <strong>Accommodation For:</strong>
+        </div>
+        <div class="col-sm-4">
+          <strong><% @travel_leg.user.each do |user| %>
+            <%= user.email %><br>
+          <% end %></strong>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-sm-4 ener-header">
           <strong>Driver:</strong>
         </div>

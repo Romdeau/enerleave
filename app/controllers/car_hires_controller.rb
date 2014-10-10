@@ -10,6 +10,7 @@ class CarHiresController < ApplicationController
   # GET /car_hires/1
   # GET /car_hires/1.json
   def show
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
   end
 
   # GET /car_hires/new
@@ -72,6 +73,7 @@ class CarHiresController < ApplicationController
   end
 
   def approve
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
   end
 
   def approval
