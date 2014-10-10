@@ -14,7 +14,7 @@
 #  comment              :string(255)
 #  created_at           :datetime
 #  updated_at           :datetime
-#  user                 :belongs_to
+#  fully_booked         :boolean
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

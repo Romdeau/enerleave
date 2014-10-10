@@ -22,7 +22,9 @@ Enerleave::Application.routes.draw do
   get '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/car_hires/:id/approve' => 'car_hires#approve', as: :approve_car_hire
   patch '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/car_hires/:id/approve' => 'car_hires#approval', as: :car_hire_approval
 
-  post '/travel_requests/:id/' => 'travel_requests#lodge', as: :lodge_travel_request
+  post '/travel_requests/:id/lodge' => 'travel_requests#lodge', as: :lodge_travel_request
+  post '/travel_requests/:id/' => 'travel_requests#complete_booking', as: :complete_travel_request
+  post '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id' => 'travel_legs#complete_booking', as: :complete_travel_leg
 
   get '/travel_requests/:travel_request_id/travel_legs/:id/add_user' => 'travel_legs#add_user', as: :add_user
   post '/travel_requests/:travel_request_id/travel_legs/:id/add_user.:user_id' => 'travel_legs#approve_user', as: :approve_user

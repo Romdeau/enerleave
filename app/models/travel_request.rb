@@ -2,14 +2,15 @@
 #
 # Table name: travel_requests
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  start_date :datetime
-#  end_date   :datetime
-#  comment    :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  lodged     :boolean
+#  id           :integer          not null, primary key
+#  user_id      :integer
+#  start_date   :datetime
+#  end_date     :datetime
+#  comment      :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  lodged       :boolean
+#  fully_booked :boolean
 #
 
 class TravelRequest < ActiveRecord::Base
@@ -43,5 +44,20 @@ class TravelRequest < ActiveRecord::Base
       end
     end
     @unbooked_legs
+  end
+
+  def legs_booked?
+    @travel_legs = self.travel_leg
+    @unbooked_legs = 0
+    @travel_legs.each do |travel_leg|
+      if travel_leg.fully_booked != true
+        @unbooked_legs = @unbooked_legs + 1
+      end
+    end
+    if @unbooked_legs > 0
+      false
+    else
+      true
+    end
   end
 end

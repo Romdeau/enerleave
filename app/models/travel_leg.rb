@@ -14,7 +14,7 @@
 #  comment              :string(255)
 #  created_at           :datetime
 #  updated_at           :datetime
-#  user                 :belongs_to
+#  fully_booked         :boolean
 #
 
 class TravelLeg < ActiveRecord::Base
@@ -55,6 +55,10 @@ class TravelLeg < ActiveRecord::Base
       end
     end
     @accommodations_to_book
+  end
+
+  def bookings_remaining
+    self.flights_to_book + self.cars_to_book + self.accommodation_to_book
   end
 
   def leg_booked?

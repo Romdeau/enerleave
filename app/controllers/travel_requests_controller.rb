@@ -76,6 +76,16 @@ class TravelRequestsController < ApplicationController
     end
   end
 
+  def complete_booking
+    @travel_request = TravelRequest.find(params[:id])
+    @travel_request.fully_booked = true
+    if @travel_request.save
+      redirect_to @travel_request, notice: 'Travel request was successfully updated.'
+    else
+      redirect_to @travel_request, notice: 'Hrm, something went wrong.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_travel_request

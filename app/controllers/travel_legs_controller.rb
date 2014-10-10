@@ -101,6 +101,16 @@ class TravelLegsController < ApplicationController
     end
   end
 
+  def complete_booking
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @travel_leg.fully_booked = true
+    if @travel_leg.save
+      redirect_to travel_request_travel_leg_path(params[:travel_request_id], @travel_leg), notice: 'Travel Leg was successfully updated.'
+    else
+      redirect_to travel_request_travel_leg_path(params[:travel_request_id], @travel_leg), notice: 'Hrm, something went wrong.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_travel_leg

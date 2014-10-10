@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   validate :eneraque_email?
   validate :user_email?
 
-  ROLES = %w[user manager admin]
+  ROLES = %w[user manager admin travel]
 
   def count_toil
   	self.toil_request.count

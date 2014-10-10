@@ -14,7 +14,7 @@
 #  comment              :string(255)
 #  created_at           :datetime
 #  updated_at           :datetime
-#  user                 :belongs_to
+#  fully_booked         :boolean
 #
 
 require 'test_helper'
