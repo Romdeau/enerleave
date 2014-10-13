@@ -24,7 +24,9 @@
         <td>
           <div class="btn-group">
             <%= link_to "Show", travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id], flight.id), class: "btn btn-xs btn-primary" %>
-            <%= link_to "Destroy", travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id], flight.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+            <% if @travel_leg.fully_booked != true and @travel_leg.travel_request.lodged != true %>
+              <%= link_to "Destroy", travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id], flight.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+            <% end %>
           </div>
         </td>
       </tr>
@@ -42,7 +44,9 @@
         <td>
           <div class="btn-group">
             <%= link_to "Show", travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id], accommodation.id), class: "btn btn-xs btn-primary" %>
-            <%= link_to "Destroy", travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id], accommodation.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+            <% if @travel_leg.fully_booked != true and @travel_leg.travel_request.lodged != true %>
+              <%= link_to "Destroy", travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id], accommodation.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+            <% end %>
           </div>
         </td>
       </tr>
@@ -60,7 +64,9 @@
         <td>
           <div class="btn-group">
             <%= link_to "Show", travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id], car_hire.id), class: "btn btn-xs btn-primary" %>
-            <%= link_to "Destroy", travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id], car_hire.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+            <% if @travel_leg.fully_booked != true and @travel_leg.travel_request.lodged != true %>
+              <%= link_to "Destroy", travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id], car_hire.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+            <% end %>
           </div>
         </td>
       </tr>

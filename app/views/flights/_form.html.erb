@@ -41,7 +41,7 @@
       <div class="field form-group">
         <%= f.label :return, "Return Flight?", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.check_box :return%>
+          <%= f.check_box :return, checked: true%>
         </div>
       </div>
       <div class="field form-group">
@@ -58,7 +58,7 @@
       <div class="field form-group">
         <%= f.label :takeoff_location, class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.text_field :takeoff_location, class: "form-control" %>
+          <%= f.text_field :takeoff_location, class: "form-control", value: "<Enter Office Here>" %>
         </div>
       </div>
       <div class="field form-group">

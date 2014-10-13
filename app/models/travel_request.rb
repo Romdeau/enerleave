@@ -22,16 +22,20 @@ class TravelRequest < ActiveRecord::Base
 
   def request_booked?
     @travel_legs = self.travel_leg
-    @unbooked_legs = 0
-    @travel_legs.each do |travel_leg|
-      if travel_leg.leg_booked? == false
-        @unbooked_legs = @unbooked_legs + 1
+    if @travel_legs.size > 0
+      @unbooked_legs = 0
+      @travel_legs.each do |travel_leg|
+        if travel_leg.leg_booked? == false
+          @unbooked_legs = @unbooked_legs + 1
+        end
       end
-    end
-    if @unbooked_legs > 0
-      false
+      if @unbooked_legs > 0
+        false
+      else
+        true
+      end
     else
-      true
+      false
     end
   end
 
@@ -48,16 +52,20 @@ class TravelRequest < ActiveRecord::Base
 
   def legs_booked?
     @travel_legs = self.travel_leg
-    @unbooked_legs = 0
-    @travel_legs.each do |travel_leg|
-      if travel_leg.fully_booked != true
-        @unbooked_legs = @unbooked_legs + 1
+    if @travel_legs.size > 0
+      @unbooked_legs = 0
+      @travel_legs.each do |travel_leg|
+        if travel_leg.fully_booked != true
+          @unbooked_legs = @unbooked_legs + 1
+        end
       end
-    end
-    if @unbooked_legs > 0
-      false
+      if @unbooked_legs > 0
+        false
+      else
+        true
+      end
     else
-      true
+      false
     end
   end
 end

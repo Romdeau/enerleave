@@ -68,19 +68,19 @@
     </div>
   </div>
   <br>
-  <div class="row">
-    <div class="col-lg-4 btn-group">
-      <%= link_to "Add Traveler", add_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-success" %>
-      <%= link_to "Remove Traveler", remove_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-danger" %>
-    </div>
-    <% if @travel_leg.fully_booked != true %>
+  <% if @travel_leg.fully_booked != true and @travel_leg.travel_request.lodged != true %>
+    <div class="row">
+      <div class="col-lg-4 btn-group">
+        <%= link_to "Add Traveler", add_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-success" %>
+        <%= link_to "Remove Traveler", remove_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-danger" %>
+      </div>
       <div class="col-lg-8 btn-group">
         <%= link_to 'Add Flight', new_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
         <%= link_to 'Add Car Hire', new_travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
         <%= link_to 'Add Accommodation', new_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
   <br>
   <div class="row">
     <div class="col-lg-4 btn-group">
