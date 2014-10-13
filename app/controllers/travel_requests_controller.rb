@@ -1,5 +1,5 @@
 class TravelRequestsController < ApplicationController
-  before_action :set_travel_request, only: [:show, :edit, :update, :destroy, :approve]
+  before_action :set_travel_request, only: [:show, :edit, :update, :destroy, :approve, :itinerary]
   before_filter :require_login, except: [:index, :show]
 
   # GET /travel_requests
@@ -84,6 +84,11 @@ class TravelRequestsController < ApplicationController
     else
       redirect_to @travel_request, notice: 'Hrm, something went wrong.'
     end
+  end
+
+  def itinerary
+    render "travel_requests/itinerary", :layout => false
+    @travel_legs = @travel_request.travel_leg
   end
 
   private

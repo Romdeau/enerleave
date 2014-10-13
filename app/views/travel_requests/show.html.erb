@@ -35,6 +35,8 @@
   <% if @travel_request.lodged != true and @travel_request.fully_booked != true  %>
     <%= link_to 'Lodge Request', lodge_travel_request_path(@travel_request), method: :lodge, class: "btn btn-sm btn-success" %>
     <%= link_to 'Add Leg', new_travel_request_travel_leg_path(@travel_request), class: "btn btn-sm btn-success" %>
+  <% elsif @travel_request.fully_booked %>
+    <%= link_to 'Show Itinerary', itinerary_travel_request_path(@travel_request), class: "btn btn-sm btn-info" %>
   <% end %>
   <div class="btn-group">
     <%= link_to 'Edit', edit_travel_request_path(@travel_request), class: "btn btn-sm btn-primary" %>

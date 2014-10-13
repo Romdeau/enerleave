@@ -15,6 +15,8 @@ Enerleave::Application.routes.draw do
 
   end
 
+  get '/travel_requests/:id/itinerary' => 'travel_requests#itinerary', as: :itinerary_travel_request
+
   get '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/flights/:id/approve' => 'flights#approve', as: :approve_flight
   patch '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/flights/:id/approve' => 'flights#approval', as: :flight_approval
   get '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/accommodations/:id/approve' => 'accommodations#approve', as: :approve_accommodation

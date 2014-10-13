@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Enerleave</title>
+    <link href='http://fonts.googleapis.com/css?family=Istok+Web' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="container main-body">
+      <div class="page-header">
+        <h1>Eneraque Travel Itinerary</h1>
+      </div>
+      <div class="content">
+        <% @travel_request.travel_leg.each do |travel_leg| %>
+          <h2 class="ener-header">Travel Leg <%= travel_leg.comment %></h4>
+          <p>
+            Travel between <%= travel_leg.date_start.strftime("%d/%m/%y") %> and <%= travel_leg.date_end.strftime("%d/%m/%y") %><br>
+            <%= travel_leg.destination_address %><br>
+            <%= travel_leg.destination_suburb %> <%= travel_leg.destination_city %> <%= travel_leg.destination_state %> <%= travel_leg.destination_postcode %><br>
+            <br><strong>Travelers:</strong><br>
+            <% travel_leg.user.each do |traveler| %>
+              <%= traveler.email %>
+            <% end %>
+          </p>
+          <p>
+            <% if travel_leg.flight.size > 0 %>
+              <strong>Flights</strong><br>
+              <% travel_leg.flight.each do |flight| %>
+                Travel From <%= flight.takeoff_location %> to <%= flight.landing_location %> on <%= flight.flight_date.strftime("%A") %>, <%= flight.flight_date.strftime("%d/%m/%y") %><br>
+                <% if flight.return %>
+                  Returning to <%= flight.takeoff_location %> on <%= flight.return_date.strftime("%A") %>, <%= flight.return_date.strftime("%d/%m/%y") %><br>
+                <% end %>
+                Booking Reference: <%= flight.booking_comment %><br>
+              <% end %><br>
+            <% end %>
+            <% if travel_leg.accommodation.size > 0 %>
+              <strong>Accommodation</strong><br>
+              <% travel_leg.accommodation.each do |accommodation| %>
+                Check in on <%= accommodation.check_in.strftime("%A") %>, <%= accommodation.check_in.strftime("%d/%m/%y") %><br>
+                Check out on <%= accommodation.check_in.strftime("%A") %>, <%= accommodation.check_in.strftime("%d/%m/%y") %><br>
+                Booking Reference: <% accommodation.booking_comment %><br>
+              <% end %><br>
+            <% end %>
+            <% if travel_leg.car_hire.size > 0 %>
+            <strong>Car Hire</strong><br>
+              <% travel_leg.car_hire.each do |car_hire| %>
+                Nominated Driver: <%= car_hire.driver %>
+                Pickup at <%= car_hire.pickup_location %> on <%= car_hire.pickup_date.strftime("%A") %>, <%= car_hire.pickup_date.strftime("%d/%m/%y") %><br>
+                Dropoff at <%= car_hire.dropoff_location %> on <%= car_hire.dropoff_date.strftime("%A") %>, <%= car_hire.dropoff_date.strftime("%d/%m/%y") %><br>
+                Booking Reference: <%= car_hire.booking_comment %><br>
+              <% end %><br>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>
