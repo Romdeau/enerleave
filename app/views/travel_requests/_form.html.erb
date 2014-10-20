@@ -46,9 +46,10 @@
       </div>
 
       <div class="field form-group">
-        <%= f.label :comment, class: "col-sm-3 control-label" %>
+        <%= f.label :comment, "Job Number & Cost Code", class: "col-sm-3 control-label" %>
         <div class="col-sm-9">
           <%= f.text_field :comment, class: "form-control" %>
+          <p class="help-block">You can enter multiple Job numbers and cost codes here. 255 character maximum.</p>
         </div>
       </div>
 

@@ -19,6 +19,7 @@ class TravelRequest < ActiveRecord::Base
 
   validates :start_date, presence: true
   validates :end_date, presence: true
+  validates :comment, presence: true
 
   def request_booked?
     @travel_legs = self.travel_leg
