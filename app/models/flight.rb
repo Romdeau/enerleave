@@ -27,8 +27,6 @@ class Flight < ActiveRecord::Base
   def valid_return
     if self.return == true and self.return_date == nil
       errors.add(:return_date, "A return flight must have a date")
-    elsif self.return == false and self.return_date != nil
-      errors.add(:return, "A one way flight cannot have a return date")
     end
   end
 end

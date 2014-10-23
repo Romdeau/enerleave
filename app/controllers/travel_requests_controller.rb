@@ -67,10 +67,21 @@ class TravelRequestsController < ApplicationController
 
   def lodge
     @travel_request = TravelRequest.find(params[:id])
-    UserMailer.lodge_travel_request(current_user, @travel_request).deliver
+    UserMailer.lodge_travel_request(@travel_request.user, @travel_request).deliver
     @travel_request.lodged = true
     if @travel_request.save
-      redirect_to @travel_request, notice: 'Travel request was successfully updated.'
+      redirect_to @travel_request, notice: 'Travel request was successfully lodged.'
+    else
+      redirect_to @travel_request, notice: 'Hrm, something went wrong.'
+    end
+  end
+
+  def manager_approve
+    @travel_request = TravelRequest.find(params[:id])
+    UserMailer.approve_travel_request(current_user, @travel_request).deliver
+    @travel_request.manager_approved = true
+    if @travel_request.save
+      redirect_to @travel_request, notice: 'Travel request has been approved by a manager.'
     else
       redirect_to @travel_request, notice: 'Hrm, something went wrong.'
     end
@@ -78,9 +89,10 @@ class TravelRequestsController < ApplicationController
 
   def complete_booking
     @travel_request = TravelRequest.find(params[:id])
+    UserMailer.booked_travel_request(@travel_request.user, @travel_request).deliver
     @travel_request.fully_booked = true
     if @travel_request.save
-      redirect_to @travel_request, notice: 'Travel request was successfully updated.'
+      redirect_to @travel_request, notice: 'Travel request has been booked.'
     else
       redirect_to @travel_request, notice: 'Hrm, something went wrong.'
     end

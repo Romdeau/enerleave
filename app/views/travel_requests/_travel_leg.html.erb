@@ -19,7 +19,7 @@
         <td><%= travel_leg.date_start.strftime("%A %B %d %Y") %></td>
         <td><%= travel_leg.date_end.strftime("%A %B %d %Y") %></td>
         <td>
-          <% if travel_leg.leg_booked? %>
+          <% if travel_leg.fully_booked == true %>
             <span class="glyphicon glyphicon-ok"></span>
           <% else %>
             <span class="glyphicon glyphicon-remove"></span>

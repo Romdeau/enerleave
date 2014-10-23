@@ -18,4 +18,6 @@
 
 class CarHire < ActiveRecord::Base
   belongs_to :travel_leg
+
+  validates :driver, :pickup_location, :dropoff_location, presence: true
 end

@@ -2,15 +2,16 @@
 #
 # Table name: travel_requests
 #
-#  id           :integer          not null, primary key
-#  user_id      :integer
-#  start_date   :datetime
-#  end_date     :datetime
-#  comment      :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  lodged       :boolean
-#  fully_booked :boolean
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  start_date       :datetime
+#  end_date         :datetime
+#  comment          :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  lodged           :boolean
+#  fully_booked     :boolean
+#  manager_approved :boolean
 #
 
 class TravelRequest < ActiveRecord::Base

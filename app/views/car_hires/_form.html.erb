@@ -16,13 +16,7 @@
       <div class="field form-group">
         <%= f.label :driver, class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.text_field :driver, class: "form-control" %>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :pickup_location, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :pickup_location, class: "form-control" %>
+          <%= f.text_field :driver, class: "form-control", value: @travel_leg.travel_request.user.email %>
         </div>
       </div>
       <div class="field form-group">
@@ -34,6 +28,12 @@
             </span>
             <%= f.text_field :pickup_date, class: "form-control", value: @formatted_hire_date %>
           </div>
+        </div>
+      </div>
+      <div class="field form-group">
+        <%= f.label :pickup_location, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :pickup_location, class: "form-control", value: @travel_leg.destination_city %>
         </div>
       </div>
       <div class="field form-group">
@@ -50,8 +50,7 @@
       <div class="field form-group">
         <%= f.label :dropoff_location, class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.text_field :dropoff_location, class: "form-control" %>
-          <p class="help-block">Leave blank if returning to pickup location.</p>
+          <%= f.text_field :dropoff_location, class: "form-control", value: @travel_leg.destination_city %>
         </div>
       </div>
       <div class="field form-group">

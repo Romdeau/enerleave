@@ -24,6 +24,11 @@ class TravelLeg < ActiveRecord::Base
   has_many :accommodation
   has_and_belongs_to_many :user
 
+  validates :date_start, presence: true
+  validates :date_end, presence: true
+  validates :destination_city, presence: true
+  validates :destination_state, presence: true
+
   def flights_to_book
     @flights = self.flight
     @flights_to_book = 0

@@ -38,9 +38,24 @@
       </div>
 
       <div class="field form-group">
+        <%= f.label :destination_city, "City/Town", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :destination_city, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :destination_state, "State", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :destination_state, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="field form-group">
         <%= f.label :destination_address, "Address", class: "col-sm-3 control-label" %>
         <div class="col-sm-9">
           <%= f.text_field :destination_address, class: "form-control" %>
+          <p class="help-block">This field is not required</p>
         </div>
       </div>
 
@@ -48,27 +63,18 @@
         <%= f.label :destination_suburb, "Suburb", class: "col-sm-3 control-label" %>
         <div class="col-sm-9">
           <%= f.text_field :destination_suburb, class: "form-control" %>
+          <p class="help-block">This field is not required</p>
         </div>
       </div>
-      <div class="field form-group">
-        <%= f.label :destination_city, "City/Town", class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <%= f.text_field :destination_city, class: "form-control" %>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :destination_state, "State", class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <%= f.text_field :destination_state, class: "form-control" %>
-        </div>
-      </div>
+
       <div class="field form-group">
         <%= f.label :destination_postcode, "Postcode", class: "col-sm-3 control-label" %>
         <div class="col-sm-9">
           <%= f.text_field :destination_postcode, class: "form-control" %>
+          <p class="help-block">This field is not required</p>
         </div>
       </div>
-
+      
       <div class="field form-group">
         <%= f.label :comment, class: "col-sm-3 control-label" %>
         <div class="col-sm-9">

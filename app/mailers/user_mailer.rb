@@ -84,15 +84,17 @@ class UserMailer < ActionMailer::Base
   end
 
   def approve_travel_request(user, travel_request)
-    @user = user
+    @user = travel_request.user
     @travel_request = travel_request
+    @approver_email = user.email
     @url = "http://enerleave.eneraque.com/travel_requests/#{travel_request.id}"
     mail(to: "#{@user.email}, travel@eneraque.com", cc: "#{@user.manager_email}", subject: "Travel Request from #{@user.email} has been approved")
   end
 
   def booked_travel_request(user, travel_request)
-    @user = user
+    @user = travel_request.user
     @travel_request = travel_request
+    @approver_email = user.email
     @url = "http://enerleave.eneraque.com/travel_requests/#{travel_request.id}"
     mail(to: "#{@user.email}", cc: "travel@eneraque.com", subject: "Travel Request from #{@user.email} has been completely booked")
   end

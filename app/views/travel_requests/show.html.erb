@@ -5,14 +5,19 @@
 <div class="content">
   <div class="row">
     <div class="col-sm-9">
-      <% if @travel_request.legs_booked? and (current_user.role == "travel" or current_user.role == "admin") and @travel_request.fully_booked != true %>
-        All bookings complete. <%= link_to "Finalise Bookings", travel_request_path(@travel_request), method: :complete_booking , class: "btn btn-sm btn-success"%>
-      <% end %>
+      <h4>
+        This Travel Request <% if @travel_request.fully_booked? %> is marked as complete.<% elsif @travel_request.request_booked? %> is pending travel signoff.<% else %> has <%= @travel_request.unbooked_legs %> leg(s) to book.<% end %>
+        <% if @travel_request.legs_booked? and (current_user.role == "travel" or current_user.role == "admin") and @travel_request.fully_booked != true %>
+          All bookings complete. <%= link_to "Finalise Bookings", travel_request_path(@travel_request), method: :complete_booking , class: "btn btn-sm btn-success"%>
+        <% end %>
+        <% if @travel_request.user.manager_email == current_user.email && @travel_request.manager_approved != true %>
+          This request is pending manager approval: <%= link_to "Approve Request", manager_approve_travel_request_path(@travel_request), method: :manager_approve, class: "btn btn-sm btn-success"%>
+        <% end %>
+      </h4>
     </div>
   </div>
   <div class="row">
     <div class="col-lg-4">
-      <h4>This Travel Request <% if @travel_request.fully_booked? %> is marked as complete.<% elsif @travel_request.request_booked? %> is pending travel signoff.<% else %> has <%= @travel_request.unbooked_legs %> leg(s) to book.<% end %></h4>
       <p>
         <strong>Start date:</strong>
         <%= @travel_request.start_date.strftime("%A %B %d %Y") %>
@@ -33,7 +38,9 @@
     </div>
   </div>
   <% if @travel_request.lodged != true and @travel_request.fully_booked != true  %>
-    <%= link_to 'Lodge Request', lodge_travel_request_path(@travel_request), method: :lodge, class: "btn btn-sm btn-success" %>
+    <% if @travel_request.travel_leg.count > 0 %>
+      <%= link_to 'Lodge Request', lodge_travel_request_path(@travel_request), method: :lodge, class: "btn btn-sm btn-success" %>
+    <% end %>
     <%= link_to 'Add Leg', new_travel_request_travel_leg_path(@travel_request), class: "btn btn-sm btn-success" %>
   <% elsif @travel_request.fully_booked %>
     <%= link_to 'Show Itinerary', itinerary_travel_request_path(@travel_request), class: "btn btn-sm btn-info" %>

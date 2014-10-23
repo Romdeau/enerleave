@@ -67,6 +67,12 @@
           <%= f.text_field :landing_location, class: "form-control", value: @travel_leg.destination_city %>
         </div>
       </div>
+      <div class="field form-group">
+        <%= f.label :comment, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :comment, class: "form-control" %>
+        </div>
+      </div>
       <div class="actions col-sm-offset-4 col-sm-8">
         <%= f.submit class: "btn btn-sm btn-success" %>
       </div>
