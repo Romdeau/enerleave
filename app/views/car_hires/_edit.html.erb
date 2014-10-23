@@ -20,12 +20,6 @@
         </div>
       </div>
       <div class="field form-group">
-        <%= f.label :pickup_location, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :pickup_location, class: "form-control" %>
-        </div>
-      </div>
-      <div class="field form-group">
         <%= f.label :pickup_date, class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
           <div class="input-group" id="StartDateTimePicker">
@@ -36,6 +30,13 @@
           </div>
         </div>
       </div>
+      <div class="field form-group">
+        <%= f.label :pickup_location, class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :pickup_location, class: "form-control" %>
+        </div>
+      </div>
+
       <div class="field form-group">
         <%= f.label :dropoff_date, class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
@@ -51,7 +52,6 @@
         <%= f.label :dropoff_location, class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
           <%= f.text_field :dropoff_location, class: "form-control" %>
-          <p class="help-block">Leave blank if returning to pickup location.</p>
         </div>
       </div>
       <div class="field form-group">
