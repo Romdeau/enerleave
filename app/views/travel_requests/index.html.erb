@@ -1,5 +1,5 @@
 <div class="page-header">
- <h1>Listing travel_requests</h1>
+ <h1>Listing Travel Requests</h1>
 </div>
 <div class="content">
   <input id="filter" type="text" class="form-control" placeholder="Search For...">
@@ -7,8 +7,6 @@
     <thead>
       <tr>
         <th class="ener-header">Requester</th>
-        <th class="ener-header">Start date</th>
-        <th class="ener-header">End date</th>
         <th class="ener-header">Comment</th>
         <th></th>
       </tr>
@@ -18,8 +16,6 @@
       <% @travel_requests.each do |travel_request| %>
         <tr>
           <td><%= format_name(travel_request.user.email) %></td>
-          <td><%= travel_request.start_date.strftime("%B %d %Y") %></td>
-          <td><%= travel_request.end_date.strftime("%B %d %Y") %></td>
           <td><%= travel_request.comment %></td>
           <td>
             <div class="btn-group">

@@ -18,7 +18,6 @@ class CarHiresController < ApplicationController
     @car_hire = CarHire.new
     @travel_leg = TravelLeg.find(params[:travel_leg_id])
     @formatted_hire_date = @travel_leg.date_start.strftime('%d/%m/%Y')
-    @formatted_return_date = @travel_leg.date_end.strftime('%d/%m/%Y')
   end
 
   # GET /car_hires/1/edit

@@ -14,34 +14,29 @@
       <% end %>
 
       <div class="field form-group">
-        <%= f.label :start_date, class: "col-sm-3 control-label" %>
+        <%= f.label :destination, "Destination", class: "col-sm-3 control-label" %>
         <div class="col-sm-9">
-          <div class="input-group" id="StartDateTimePicker">
+          <%= f.text_field :destination, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :flight_date, 'Travel Date', class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <div class="input-group" id="FlightDateTimePicker">
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>
-            <% if @travel_request.start_date != nil %>
-              <%= f.text_field :start_date, class: "form-control", value: @formatted_start_date %>
-            <% else %>
-              <%= f.text_field :start_date, class: "form-control" %>
-            <% end %>
+            <%= f.text_field :flight_date, class: "form-control" %>
           </div>
         </div>
       </div>
 
       <div class="field form-group">
-        <%= f.label :end_date, class: "col-sm-3 control-label" %>
+        <%= f.label :flight_comment, "Notes and Comments", class: "col-sm-3 control-label" %>
         <div class="col-sm-9">
-          <div class="input-group" id="EndDateTimePicker">
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-            <% if @travel_request.end_date != nil %>
-              <%= f.text_field :end_date, class: "form-control", value: @formatted_end_date %>
-            <% else %>
-              <%= f.text_field :end_date, class: "form-control" %>
-            <% end %>
-          </div>
+          <%= f.text_field :comment, class: "form-control" %>
+          <p class="help-block">Note here any requirements for flight booking.</p>
         </div>
       </div>
 
@@ -62,12 +57,7 @@
 
 <script type="text/javascript">
   $(function () {
-    $('#StartDateTimePicker').datetimepicker({
-      pickTime: false
-    });
-  });
-  $(function () {
-    $('#EndDateTimePicker').datetimepicker({
+    $('#FlightDateTimePicker').datetimepicker({
       pickTime: false
     });
   });

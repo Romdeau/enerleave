@@ -11,7 +11,7 @@ class TravelRequestsController < ApplicationController
   # GET /travel_requests/1
   # GET /travel_requests/1.json
   def show
-    @travel_legs = @travel_request.travel_leg
+    @travel_legs = @travel_request.travel_leg.reorder("date_start ASC")
   end
 
   # GET /travel_requests/new
@@ -21,17 +21,22 @@ class TravelRequestsController < ApplicationController
 
   # GET /travel_requests/1/edit
   def edit
-    @formatted_start_date = @travel_request.start_date.strftime('%d/%m/%Y')
-    @formatted_end_date = @travel_request.end_date.strftime('%d/%m/%Y')
+
   end
 
   # POST /travel_requests
   # POST /travel_requests.json
   def create
-    @travel_request = TravelRequest.new(travel_request_params)
+    @travel_request = TravelRequest.new
+    @travel_request.comment = travel_request_params[:comment]
+    @flight = TravelLeg.new
+    @flight.travel_request = @travel_request
+    @flight.date_start = travel_request_params[:flight_date]
+    @flight.destination_city = travel_request_params[:destination]
+    @flight.comment = travel_request_params[:flight_comment]
     @travel_request.user = current_user
     respond_to do |format|
-      if @travel_request.save
+      if @travel_request.save && @flight.save
         format.html { redirect_to @travel_request, notice: 'Travel request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @travel_request }
       else
@@ -111,6 +116,6 @@ class TravelRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def travel_request_params
-      params.require(:travel_request).permit(:start_date, :end_date, :comment)
+      params.require(:travel_request).permit(:destination, :flight_date, :flight_comment, :comment)
     end
 end

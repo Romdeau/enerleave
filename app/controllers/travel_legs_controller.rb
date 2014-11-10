@@ -11,7 +11,6 @@ class TravelLegsController < ApplicationController
   # GET /travel_legs/1.json
   def show
     @travel_request = TravelRequest.find(params[:travel_request_id])
-    @flights = @travel_leg.flight
     @accommodation = @travel_leg.accommodation
     @car_hire = @travel_leg.car_hire
   end
@@ -20,8 +19,6 @@ class TravelLegsController < ApplicationController
   def new
     @travel_leg = TravelLeg.new
     @travel_request = TravelRequest.find(params[:travel_request_id])
-    @formatted_start_date = @travel_request.start_date.strftime('%d/%m/%Y')
-    @formatted_end_date = @travel_request.end_date.strftime('%d/%m/%Y')
   end
 
   # GET /travel_legs/1/edit
@@ -36,7 +33,6 @@ class TravelLegsController < ApplicationController
     @travel_request = TravelRequest.find(params[:travel_request_id])
     @travel_leg = TravelLeg.new(travel_leg_params)
     @travel_leg.travel_request = @travel_request
-    @travel_leg.user << current_user
     respond_to do |format|
       if @travel_leg.save
         format.html { redirect_to @travel_request, notice: 'Travel leg was successfully created.' }
@@ -66,9 +62,10 @@ class TravelLegsController < ApplicationController
   # DELETE /travel_legs/1
   # DELETE /travel_legs/1.json
   def destroy
+    @travel_request = @travel_leg.travel_request
     @travel_leg.destroy
     respond_to do |format|
-      format.html { redirect_to travel_legs_url }
+      format.html { redirect_to travel_request_path(@travel_request) }
       format.json { head :no_content }
     end
   end

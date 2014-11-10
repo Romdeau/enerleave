@@ -1,21 +1,29 @@
 <div class="page-header">
-  <h1>Viewing Leg for Travel Request for <%= @travel_request.user.email %></h1>
+  <h1>Viewing Flight Booking</h1>
   <h4><%= @travel_leg.user.count %> Travelers in this leg.</h4>
 </div>
 <div class="content">
   <div class="row">
-    <div class="col-sm-8">
-      <% if @travel_leg.leg_booked? and (current_user.role == "travel" or current_user.role == "admin") and @travel_leg.fully_booked != true %>
-        All bookings complete. <%= link_to "Finalise Bookings", travel_request_travel_leg_path(@travel_request, @travel_leg), method: :complete_booking , class: "btn btn-sm btn-success"%>
-      <% end %>
-    </div>
+    <% if @travel_leg.user.count < 1 %>
+      <div class="col-sm-8 bg-danger">
+        There doesnt appear to be anyone on this flight?
+      </div>
+    <% else %>
+      <div class="col-sm-8">
+        <% if @travel_leg.bookings_remaining < 1 and (current_user.role == "travel" or current_user.role == "admin") and @travel_leg.fully_booked != true %>
+          All accommodation and Car Hire Booked. <%= link_to "Finalise Flight", travel_request_travel_leg_path(@travel_request, @travel_leg), method: :complete_booking , class: "btn btn-sm btn-success"%>
+        <% elsif current_user.role == "travel" or current_user.role == "admin" %>
+          <%= @travel_leg.bookings_remaining %> items remain to be booked.
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="row">
     <div class="col-lg-4">
       <h4>Leg Detail</h4>
       <div class="row">
         <div class="col-sm-4 ener-header">
-          <strong>Date start:</strong>
+          <strong>Flight Date:</strong>
         </div>
         <div class="col-sm-8">
           <%= @travel_leg.date_start.strftime("%A") %>, <%= @travel_leg.date_start.strftime("%d/%m/%y") %>
@@ -24,23 +32,10 @@
 
       <div class="row">
         <div class="col-sm-4 ener-header">
-          <strong>Date end:</strong>
-        </div>
-        <div class="col-sm-8">
-          <%= @travel_leg.date_end.strftime("%A") %>, <%= @travel_leg.date_end.strftime("%d/%m/%y") %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-4 ener-header">
           <strong>Destination:</strong><br>
         </div>
         <div class="col-sm-8">
-          <%= @travel_leg.destination_address %><br>
-          <% if @travel_leg.destination_suburb != "" %>
-            <%= @travel_leg.destination_suburb %><br>
-          <% end %>
-          <%= @travel_leg.destination_city %> <%= @travel_leg.destination_state %> <%= @travel_leg.destination_postcode %>
+          <%= @travel_leg.destination_city %>
         </div>
       </div>
 
@@ -58,7 +53,7 @@
       </div>
         <div class="col-sm-8">
           <% @travel_leg.user.each do |user| %>
-            <%= user.email %> <br>
+            <%= format_name(user.email) %><br>
           <% end %>
         </div>
       </div>
@@ -75,7 +70,6 @@
         <%= link_to "Remove Traveler", remove_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-danger" %>
       </div>
       <div class="col-lg-8 btn-group">
-        <%= link_to 'Add Flight', new_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
         <%= link_to 'Add Car Hire', new_travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
         <%= link_to 'Add Accommodation', new_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
       </div>

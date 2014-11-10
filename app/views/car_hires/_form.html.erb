@@ -16,7 +16,7 @@
       <div class="field form-group">
         <%= f.label :driver, class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.text_field :driver, class: "form-control", value: @travel_leg.travel_request.user.email %>
+          <%= f.text_field :driver, class: "form-control", value: format_name(@travel_leg.travel_request.user.email) %>
         </div>
       </div>
       <div class="field form-group">

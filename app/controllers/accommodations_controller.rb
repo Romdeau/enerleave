@@ -19,7 +19,6 @@ class AccommodationsController < ApplicationController
     @travel_leg = TravelLeg.find(params[:travel_leg_id])
     @travel_request = @travel_leg.travel_request
     @formatted_checkin_date = @travel_leg.date_start.strftime('%d/%m/%Y')
-    @formatted_checkout_date = @travel_leg.date_end.strftime('%d/%m/%Y')
   end
 
   # GET /accommodations/1/edit

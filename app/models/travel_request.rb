@@ -18,8 +18,8 @@ class TravelRequest < ActiveRecord::Base
   has_many :travel_leg
   belongs_to :user
 
-  validates :start_date, presence: true
-  validates :end_date, presence: true
+  attr_accessor :destination, :flight_date, :flight_comment
+
   validates :comment, presence: true
 
   def request_booked?
@@ -45,7 +45,7 @@ class TravelRequest < ActiveRecord::Base
     @travel_legs = self.travel_leg
     @unbooked_legs = 0
     @travel_legs.each do |travel_leg|
-      if travel_leg.leg_booked? == false
+      if travel_leg.leg_booked? != true
         @unbooked_legs = @unbooked_legs + 1
       end
     end

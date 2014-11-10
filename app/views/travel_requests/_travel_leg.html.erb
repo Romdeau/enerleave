@@ -1,43 +1,43 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th class="ener-header">Destination</th>
-      <th class="ener-header">Date start</th>
-      <th class="ener-header">Date end</th>
-      <th class="ener-header">Fully Booked?</th>
-      <th class="ener-header"><span class="glyphicon glyphicon-plane"></span></th>
-      <th class="ener-header"><span class="glyphicon glyphicon-road"></span></th>
-      <th class="ener-header"><span class="glyphicon glyphicon-home"></span></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody class="searchable">
-    <% @travel_legs.each do |travel_leg| %>
-      <tr>
-        <td><%= travel_leg.destination_city%></td>
-        <td><%= travel_leg.date_start.strftime("%A %B %d %Y") %></td>
-        <td><%= travel_leg.date_end.strftime("%A %B %d %Y") %></td>
-        <td>
-          <% if travel_leg.fully_booked == true %>
-            <span class="glyphicon glyphicon-ok"></span>
-          <% else %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
-        </td>
-        <td>
-          <%= travel_leg.flight.count %>
-        </td>
-        <td>
-          <%= travel_leg.car_hire.count %>
-        </td>
-        <td>
-          <%= travel_leg.accommodation.count %>
-        </td>
-        <td>
-          <%= link_to 'Show', travel_request_travel_leg_path(@travel_request, travel_leg.id), class: "btn btn-xs btn-primary" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @travel_legs.each do |travel_leg| %>
+  <div class="row eneraque-box <% if travel_leg.fully_booked == true %>bg-success<%else%>bg-warning<%end%>">
+    <div class="col-sm-4">
+      <strong>Flight Details</strong>
+    </div>
+    <div class="col-sm-8">
+      <% if travel_leg.fully_booked == true %>
+        <strong>Booked?</strong> <span class="glyphicon glyphicon-ok"></span>
+      <% else %>
+        <strong>Booked?</strong> <span class="glyphicon glyphicon-remove"></span>
+      <% end %>
+    </div>
+    <div class="col-sm-12">
+      <strong>Travelers:</strong>
+      <% travel_leg.user.each do |user| %>
+        <%= format_name(user.email) %>,
+      <% end %>
+    </div>
+    <div class="col-sm-4"><strong>Destination:</strong><%= travel_leg.destination_city%></div>
+    <div class="col-sm-8"><strong>Travel Date:</strong><%= travel_leg.date_start.strftime("%A %B %d %Y") %></div>
+    <div class="col-sm-4">
+      <strong>Car Hire:</strong><%= travel_leg.car_hire.count %>
+    </div>
+    <div class="col-sm-8" style="padding:0px 0px 5px 0px;">
+      <strong>Accommodation: </strong><%= travel_leg.accommodation.count %>
+    </div>
+    <div class="col-sm-12">
+      <%= link_to 'Show', travel_request_travel_leg_path(@travel_request, travel_leg.id), class: "btn btn-xs btn-primary" %>
+      <div class="btn-group">
+        <%= link_to 'Add Car Hire', new_travel_request_travel_leg_car_hire_path(@travel_request, travel_leg), class: "btn btn-xs btn-success" %>
+        <%= link_to 'Add Accommodation', new_travel_request_travel_leg_accommodation_path(@travel_request, travel_leg), class: "btn btn-xs btn-success" %>
+      </div>
+      <% if @travel_request.user == current_user or current_user.role == 'travel' or current_user.role == 'admin' %>
+        <%= link_to 'Destroy', travel_request_travel_leg_path(@travel_request, travel_leg), method: :delete, class: "btn btn-xs btn-danger" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-sm-12 btn-group">
+    <%= link_to 'Add a Flight', new_travel_request_travel_leg_path(@travel_request), class: "btn btn-sm btn-success" %>
+  </div>
+</div>

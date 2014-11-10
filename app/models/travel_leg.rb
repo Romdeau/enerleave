@@ -19,26 +19,12 @@
 
 class TravelLeg < ActiveRecord::Base
   belongs_to :travel_request
-  has_many :flight
   has_many :car_hire
   has_many :accommodation
   has_and_belongs_to_many :user
 
   validates :date_start, presence: true
-  validates :date_end, presence: true
   validates :destination_city, presence: true
-  validates :destination_state, presence: true
-
-  def flights_to_book
-    @flights = self.flight
-    @flights_to_book = 0
-    @flights.each do |flight|
-      if flight.booked == false
-        @flights_to_book = @flights_to_book + 1
-      end
-    end
-    @flights_to_book
-  end
 
   def cars_to_book
     @cars = self.car_hire
@@ -63,11 +49,11 @@ class TravelLeg < ActiveRecord::Base
   end
 
   def bookings_remaining
-    self.flights_to_book + self.cars_to_book + self.accommodation_to_book
+    self.cars_to_book + self.accommodation_to_book
   end
 
   def leg_booked?
-    if (self.flights_to_book + self.cars_to_book + self.accommodation_to_book) == 0
+    if self.fully_booked == true
       true
     else
       false

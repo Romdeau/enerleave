@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-6">
+    <%= form_for (@travel_request), :html => {class: "form-horizontal edit-stock"} do |f| %>
+      <% if @travel_request.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@travel_request.errors.count, "error") %> prohibited this travel_request from being saved:</h2>
+          <ul>
+            <% @travel_request.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field form-group">
+        <%= f.label :comment, "Job Number & Cost Code", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :comment, class: "form-control" %>
+          <p class="help-block">You can enter multiple Job numbers and cost codes here. 255 character maximum.</p>
+        </div>
+      </div>
+
+      <div class="actions btn-group">
+        <%= f.submit class: "btn btn-sm btn-success" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $('#FlightDateTimePicker').datetimepicker({
+      pickTime: false
+    });
+  });
+</script>

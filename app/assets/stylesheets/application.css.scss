@@ -25,6 +25,20 @@ $brand-danger:#263746;
 *  @import "bootstrap/theme";
 */
 
+.eneraque-box {
+  margin-right: 0;
+  margin-left: 0;
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: none;
+  position: relative;
+  padding: 10px 5px 5px;
+  margin: 0px 0px 15px 0px;
+  border-style: solid;
+  box-sizing: border-box;
+}
+
 .brand {
   position: relative;
   top: 5px;
