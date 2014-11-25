@@ -21,6 +21,11 @@ class TravelLegsController < ApplicationController
     @travel_request = TravelRequest.find(params[:travel_request_id])
   end
 
+  def new_destination
+    @travel_leg = TravelLeg.new
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+  end
+
   # GET /travel_legs/1/edit
   def edit
     @formatted_start_date = @travel_leg.date_start.strftime('%d/%m/%Y')
@@ -30,6 +35,21 @@ class TravelLegsController < ApplicationController
   # POST /travel_legs
   # POST /travel_legs.json
   def create
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @travel_leg = TravelLeg.new(travel_leg_params)
+    @travel_leg.travel_request = @travel_request
+    respond_to do |format|
+      if @travel_leg.save
+        format.html { redirect_to @travel_request, notice: 'Travel leg was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @travel_leg }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @travel_leg.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def create_destination
     @travel_request = TravelRequest.find(params[:travel_request_id])
     @travel_leg = TravelLeg.new(travel_leg_params)
     @travel_leg.travel_request = @travel_request

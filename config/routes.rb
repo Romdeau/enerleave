@@ -31,6 +31,8 @@ Enerleave::Application.routes.draw do
 
   get '/travel_requests/:travel_request_id/travel_legs/:id/add_user' => 'travel_legs#add_user', as: :add_user
   post '/travel_requests/:travel_request_id/travel_legs/:id/add_user.:user_id' => 'travel_legs#approve_user', as: :approve_user
+  get '/travel_requests/:travel_request_id/travel_legs/:id/new_destination' => 'travel_legs#new_destination', as: :new_destination
+  post '/travel_requests/:travel_request_id/travel_legs/:id/new_destination' => 'travel_legs#create_destination', as: :create_destination
 
   get '/travel_requests/:travel_request_id/travel_legs/:id/remove_user' => 'travel_legs#remove_user', as: :remove_user
   post '/travel_requests/:travel_request_id/travel_legs/:id/remove_user.:user_id' => 'travel_legs#destroy_user', as: :destroy_user
