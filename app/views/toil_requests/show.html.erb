@@ -35,5 +35,8 @@
     	<%= link_to "Approve", approve_toil_request_path(@toil_request), class: 'btn btn-sm btn-warning'%>
       <%= link_to "Reject", delete_toil_path(@toil_request), class: 'btn btn-sm btn-danger' %>
     <% end %>
+    <% if @toil_request.approved == 'true' and current_user.role == 'admin' %>
+      <%= link_to "Admin Destroy", delete_toil_path(@toil_request), class: 'btn btn-sm btn-danger' %>
+    <% end %>
   </div>
 </div>

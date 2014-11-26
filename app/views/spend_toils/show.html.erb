@@ -33,5 +33,8 @@
       <%= link_to "Approve", approve_toil_path(@spend_toil), class: 'btn btn-sm btn-warning'%>
       <%= link_to "Reject", delete_toil_spend_path(@spend_toil), class: 'btn btn-sm btn-danger'%>
     <% end %>
+    <% if @spend_toil.approved == 'true' and current_user.role == 'admin' %>
+    <%= link_to "Admin Destroy", delete_toil_spend_path(@spend_toil), class: 'btn btn-sm btn-danger' %>
+    <% end %>
   </div>
 </div>

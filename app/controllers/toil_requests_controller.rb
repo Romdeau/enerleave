@@ -84,7 +84,7 @@ class ToilRequestsController < ApplicationController
   def destroy
     UserAudit.create({:user => current_user, :action => "destroyed toil request", :end_user => @toil_request.user.email})
     @comment = toil_request_params[:comment]
-    UserMailer.reject_toil(@toil_request.user, @toil_request, @comment).deliver
+    UserMailer.reject_toil(@toil_request.user, @toil_request, @comment, current_user.email).deliver
     @toil_request.destroy
     respond_to do |format|
       format.html { redirect_to toil_requests_url }

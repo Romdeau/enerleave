@@ -75,17 +75,16 @@ background-color: #f6f6f6;
               <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
                 <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
                   <td class="content-block" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                    Your Leave Request has been approved by <%= @approving_user.email %>
+                    Your Toil Request has been approved by <%= @approving_user.email %>
                   </td>
                 </tr>
                 <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
                   <td class="content-block" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                    This leave request was created at <%= @leave.created_at %>.<br>
-                    Start Date: <%= @leave.start_date %><br>
-                    End Date: <%= @leave.end_date %><br>
-                    Leave Type: <%= @leave.leave_type %><br>
-                    Comment: <%= @leave.comment %><br><br>
-                    To view approved leave requests please visit the homepage for Enerleave or click the button below.
+                    This leave request was created at <%= @toil.created_at %>.<br>
+                    Start Date: <%= @toil.date_accrued %><br>
+                    End Date: <%= @toil.date_accrued_end %><br>
+                    Toil Amount: <%= @toil.amount %> minutes<br><br>
+                    To view approved toil requests please visit the homepage for Enerleave or click the button below.
                   </td>
                 </tr>
                 <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
