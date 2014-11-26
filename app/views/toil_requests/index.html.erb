@@ -12,8 +12,8 @@
 	</div>
 </div>
 <div class="btn-group" style="margin-top:20px;">
-	<% if current_user.can_toil or current_user.role == 'admin'
+	<% if current_user.can_toil or current_user.role == 'admin' %>
 		<%= link_to "New Toil Request", new_toil_request_path, class: 'btn btn-sm btn-success' %>
 		<%= link_to "Spend Toil", new_spend_toil_path, class: 'btn btn-sm btn-success' %>
-	<% admin %>
+	<% end %>
 </div>
