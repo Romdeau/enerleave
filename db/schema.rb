@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023042150) do
+ActiveRecord::Schema.define(version: 20141126024659) do
 
   create_table "accommodations", force: true do |t|
     t.integer  "travel_leg_id"
@@ -144,9 +144,9 @@ ActiveRecord::Schema.define(version: 20141023042150) do
   add_index "user_audits", ["user_id"], name: "index_user_audits_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "email",                           null: false
-    t.string   "crypted_password",                null: false
-    t.string   "salt",                            null: false
+    t.string   "email",                                           null: false
+    t.string   "crypted_password",                                null: false
+    t.string   "salt",                                            null: false
     t.string   "approved"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20141023042150) do
     t.string   "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
+    t.boolean  "can_toil",                        default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

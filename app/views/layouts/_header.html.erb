@@ -17,7 +17,9 @@
             <li><%= link_to "Travel Requests", travel_requests_path %></li>
           <% end %>
           <% if logged_in? %>
-            <li><%= link_to "Toil Requests", toil_requests_path %></li>
+            <% if current_user.can_toil or current_user.role == 'admin' %>
+              <li><%= link_to "Toil Requests", toil_requests_path %></li>
+            <% end %>
             <li><%= link_to "Users", users_path %></li>
           <% end %>
           <% if logged_in? and can? :manage, :all %>
