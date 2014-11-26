@@ -49,6 +49,7 @@ class SpendToilsController < ApplicationController
   # PATCH/PUT /spend_toils/1
   # PATCH/PUT /spend_toils/1.json
   def update
+    @spend_toil.amount = spend_toil_params[:amount]
     @spend_toil.initial_amount = @spend_toil.amount
     respond_to do |format|
       if @spend_toil.update(spend_toil_params)

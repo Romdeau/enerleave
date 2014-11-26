@@ -142,8 +142,7 @@ class UsersController < ApplicationController
     @toil_request.user = @user
     @toil_request.initial_amount = 1
     @toil_request.amount = 1
-    @toil_request.date_accrued = Time.now
-    @toil_request.date_accrued_end = Time.now
+    @toil_request.leave_date = Time.now
     @toil_request.approved = 'false'
     if @toil_request.save
       UserAudit.create({:user => current_user, :action => "created toil request while impersonating user", :end_user => @user.email})
