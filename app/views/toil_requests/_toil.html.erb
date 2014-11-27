@@ -11,7 +11,7 @@
       </div> <hr style="margin-top:5px;margin-bottom:5px;">
       <% @toil_requests.each do |toil_request| %>
         <div class="row">
-          <div class="col-sm-3"><%= format_name(toil_request.user.email) %></div>
+          <div class="col-sm-3"><%= link_to format_name(toil_request.user.email), user_toil_path(toil_request.user) %></div>
           <div class="col-sm-2"><%= toil_request.initial_amount %>(<%= toil_request.amount %>)</div>
           <div class="col-sm-3"><td><%= toil_request.date_accrued_end %></div>
           <div class="col-sm-1"><td><%= toil_request.approved %></div>
@@ -37,7 +37,7 @@
       </div> <hr style="margin-top:5px;margin-bottom:5px;">
       <% @spend_toils.each do |spend_toil| %>
         <div class="row">
-          <div class="col-sm-3"><%= format_name(spend_toil.user.email) %></div>
+          <div class="col-sm-3"><%= link_to format_name(spend_toil.user.email), user_toil_path(spend_toil.user) %></div>
           <div class="col-sm-2"><%= spend_toil.initial_amount%> <% if can? :manage, :all %>(<%= spend_toil.amount %>)<% end %></div>
           <div class="col-sm-3"><td><%= spend_toil.leave_date %></div>
           <div class="col-sm-1"><td><%= spend_toil.approved %></div>

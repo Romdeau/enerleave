@@ -17,7 +17,7 @@ class UserMailer < ActionMailer::Base
   def toil_request(user)
     @user = user
     @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
-    mail(to: @user.email, cc: "laura.pringle@eneraque.com", subject: 'New EnerLeave Toil Request')
+    mail(to: @user.email, cc: "#{@user.manager_email}, laura.pringle@eneraque.com", subject: 'New EnerLeave Toil Request')
   end
 
   def assign_manager(user)
@@ -42,12 +42,28 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, cc: "laura.pringle@eneraque.com", subject: 'Your Toil Request was approved')
   end
 
+  def manager_toil_approved(user, approving_user, request)
+    @user = user
+    @approving_user = approving_user
+    @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
+    @toil = request
+    mail(to: @user.email, cc: "#{@user.manager_email}, laura.pringle@eneraque.com", subject: 'Your Toil Request was approved by a Manager')
+  end
+
   def spend_toil_approved(user, approving_user, request)
     @user = user
     @approving_user = approving_user
     @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
     @toil = request
     mail(to: @user.email, cc: "laura.pringle@eneraque.com", subject: 'Your Toil Request was approved')
+  end
+
+  def manager_spend_toil_approved(user, approving_user, request)
+    @user = user
+    @approving_user = approving_user
+    @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
+    @toil = request
+    mail(to: @user.email, cc: "#{@user.manager_email}, laura.pringle@eneraque.com", subject: 'Your Toil Request was approved by a Manager')
   end
 
   def reset_password_email(user)

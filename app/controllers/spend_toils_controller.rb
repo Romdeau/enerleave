@@ -102,6 +102,18 @@ class SpendToilsController < ApplicationController
     end
   end
 
+  def manager_approve
+    @to_approve = SpendToil.find(params[:id])
+    @to_approve.manager_approved = true
+      if @to_approve.save
+        UserAudit.create({:user => current_user, :action => "approved toil spend request", :description => "#{@to_approve.id} ending #{@to_approve.leave_date} for #{@to_approve.amount} minutes", :end_user => @to_approve.user.email})
+        UserMailer.manager_spend_toil_approved(@to_approve.user, current_user, @to_approve).deliver
+        redirect_to toil_requests_path, notice: "Leave successfully processed"
+      else
+        redirect_to toil_requests_path, alert: 'Failed to approve'
+      end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_spend_toil

@@ -88,13 +88,13 @@ Enerleave::Application.routes.draw do
 
   #spend toil routes
   get '/spend_toils/:id/approve_toil' => 'spend_toils#approve_toil', :as => :approve_toil
+  get '/spend_toils/:id/manager_approve' => 'spend_toils#manager_approve', :as => :manager_approve_toil_spend
   get '/spend_toils/:id/delete' => 'spend_toils#delete', :as => :delete_toil_spend
   post '/spend_toils/:id/delete' => 'spend_toils#destroy'
 
   #toil routes
   get '/toil_requests/:id/approve_toil' => 'toil_requests#approve_toil', :as => :approve_toil_request
   get '/toil_requests/:id/manager_approve' => 'toil_requests#manager_approve', :as => :manager_approve_toil_request
-  post '/toil_requests/:id/manager_approve' => 'toil_requests#manager_approval'
   get '/toil_requests/:id/delete' => 'toil_requests#delete', :as => :delete_toil
   post '/toil_requests/:id/delete' => 'toil_requests#destroy'
 

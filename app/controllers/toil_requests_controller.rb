@@ -104,6 +104,18 @@ class ToilRequestsController < ApplicationController
     end
   end
 
+  def manager_approve
+    @to_approve = ToilRequest.find(params[:id])
+    @to_approve.manager_approved = 'true'
+    if @to_approve.save
+      UserAudit.create({:user => current_user, :action => "manager approved toil request", :description => "#{@to_approve.id} ending #{@to_approve.date_accrued_end} for #{@to_approve.amount} minutes", :end_user => @to_approve.user.email})
+      UserMailer.manager_toil_approved(@to_approve.user, current_user, @to_approve).deliver
+      redirect_to toil_requests_path, notice: 'Toil Request Approved'
+    else
+      redirect_to toil_requests_path, alert: 'Something Went Wrong'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_toil_request
