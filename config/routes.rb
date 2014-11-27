@@ -93,6 +93,8 @@ Enerleave::Application.routes.draw do
 
   #toil routes
   get '/toil_requests/:id/approve_toil' => 'toil_requests#approve_toil', :as => :approve_toil_request
+  get '/toil_requests/:id/manager_approve' => 'toil_requests#manager_approve', :as => :manager_approve_toil_request
+  post '/toil_requests/:id/manager_approve' => 'toil_requests#manager_approval'
   get '/toil_requests/:id/delete' => 'toil_requests#delete', :as => :delete_toil
   post '/toil_requests/:id/delete' => 'toil_requests#destroy'
 
