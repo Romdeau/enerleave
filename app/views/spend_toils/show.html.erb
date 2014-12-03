@@ -19,7 +19,11 @@
     <div class="col-sm-2"><%= @spend_toil.leave_date %></div>
   </p>
   <p class="row">
-    <div class="col-sm-3"><strong>Approved:</strong></div>
+    <div class="col-sm-3"><strong>Manager Approved:</strong></div>
+    <div class="col-sm-2"><%= @spend_toil.manager_approved %></div>
+  </p>
+  <p class="row">
+    <div class="col-sm-3"><strong>Admin Approved:</strong></div>
     <div class="col-sm-2"><%= @spend_toil.approved %></div>
   </p>
   <div class="row" style="margin-bottom:20px;"></div>
@@ -29,9 +33,18 @@
       <%= link_to 'Edit', edit_spend_toil_path(@spend_toil), class: "btn btn-sm btn-primary" %>
     <% end %>
     <%= link_to 'Back', toil_requests_path, class: "btn btn-sm btn-primary" %>
-    <% if @spend_toil.approved == 'false' and can? :manage, :all %>
-      <%= link_to "Approve", approve_toil_path(@spend_toil), class: 'btn btn-sm btn-warning'%>
+  </div>
+  <div class="btn-group">
+    <% if @spend_toil.manager_approved == false and can? :approve, :all %>
+      <%= link_to "Manager Approve", manager_approve_toil_spend_path(@spend_toil), class: 'btn btn-sm btn-success'%>
       <%= link_to "Reject", delete_toil_spend_path(@spend_toil), class: 'btn btn-sm btn-danger'%>
+    <% else %>
+      <% if @spend_toil.approved == 'false' and can? :manage, :all %>
+        <%= link_to "Approve", approve_toil_path(@spend_toil), class: 'btn btn-sm btn-warning'%>
+        <%= link_to "Reject", delete_toil_spend_path(@spend_toil), class: 'btn btn-sm btn-danger'%>
+      <% elsif @spend_toil.approved == 'true' and current_user.role == 'admin' %>
+        <%= link_to "Admin Destroy", delete_toil_spend_path(@spend_toil), class: 'btn btn-sm btn-danger' %>
+      <% end %>
     <% end %>
   </div>
 </div>

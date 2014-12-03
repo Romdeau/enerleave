@@ -84,8 +84,8 @@ class ToilRequestsController < ApplicationController
   def destroy
     UserAudit.create({:user => current_user, :action => "destroyed toil request", :end_user => @toil_request.user.email})
     @comment = toil_request_params[:comment]
+    UserMailer.reject_toil(@toil_request.user, @toil_request, @comment, current_user.email).deliver
     @toil_request.destroy
-    UserMailer.reject_toil(@toil_request.user, @toil_request, @comment).deliver
     respond_to do |format|
       format.html { redirect_to toil_requests_url }
       format.json { head :no_content }
@@ -98,6 +98,18 @@ class ToilRequestsController < ApplicationController
     if @to_approve.save
       UserAudit.create({:user => current_user, :action => "approved toil request", :description => "#{@to_approve.id} ending #{@to_approve.date_accrued_end} for #{@to_approve.amount} minutes", :end_user => @to_approve.user.email})
       UserMailer.toil_approved(@to_approve.user, current_user, @to_approve).deliver
+      redirect_to toil_requests_path, notice: 'Toil Request Approved'
+    else
+      redirect_to toil_requests_path, alert: 'Something Went Wrong'
+    end
+  end
+
+  def manager_approve
+    @to_approve = ToilRequest.find(params[:id])
+    @to_approve.manager_approved = 'true'
+    if @to_approve.save
+      UserAudit.create({:user => current_user, :action => "manager approved toil request", :description => "#{@to_approve.id} ending #{@to_approve.date_accrued_end} for #{@to_approve.amount} minutes", :end_user => @to_approve.user.email})
+      UserMailer.manager_toil_approved(@to_approve.user, current_user, @to_approve).deliver
       redirect_to toil_requests_path, notice: 'Toil Request Approved'
     else
       redirect_to toil_requests_path, alert: 'Something Went Wrong'

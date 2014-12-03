@@ -81,12 +81,10 @@ background-color: #f6f6f6;
                 <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
                   <td class="content-block" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                     The reason supplied for this was: <%= @comment %><br><br>
-                    This leave request was created at <%= @leave.created_at %>.<br>
-                    Start Date: <%= @leave.start_date %><br>
-                    End Date: <%= @leave.end_date %><br>
-                    Leave Type: <%= @leave.leave_type %><br>
-                    Comment: <%= @leave.comment %><br><br>
-                    This Leave Request will need to be relodged.
+                    This leave request was created at <%= @toil.created_at %>.<br>
+                    Leave Date: <%= @toil.leave_date %><br>
+                    Toil Amount: <%= @toil.amount %> minutes<br><br>
+                    This Toil Request will need to be relodged.
                   </td>
                 </tr>
                 <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">

@@ -142,8 +142,7 @@ class UsersController < ApplicationController
     @toil_request.user = @user
     @toil_request.initial_amount = 1
     @toil_request.amount = 1
-    @toil_request.date_accrued = Time.now
-    @toil_request.date_accrued_end = Time.now
+    @toil_request.leave_date = Time.now
     @toil_request.approved = 'false'
     if @toil_request.save
       UserAudit.create({:user => current_user, :action => "created toil request while impersonating user", :end_user => @user.email})
@@ -192,7 +191,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :role, :manager_email)
+      params.require(:user).permit(:email, :password, :password_confirmation, :role, :manager_email, :can_toil)
     end
 
     def leave_request_params

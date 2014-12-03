@@ -21,7 +21,12 @@
   </p>
 
   <p class="row">
-    <div class="col-xs-3"><strong>Approved:</strong></div>
+    <div class="col-xs-3"><strong>Manager Approval:</strong></div>
+    <div class="col-xs-2"><%= @toil_request.manager_approved %></div>
+  </p>
+
+  <p class="row">
+    <div class="col-xs-3"><strong>Admin Approval:</strong></div>
     <div class="col-xs-2"><%= @toil_request.approved %></div>
   </p>
   <div class="row" style="margin-bottom:20px;"></div>
@@ -31,9 +36,18 @@
     	<%= link_to 'Edit', edit_toil_request_path(@toil_request), class: 'btn btn-sm btn-primary' %>
     <% end %>
     <%= link_to 'Back', toil_requests_path, class: 'btn btn-sm btn-primary' %>
-    <% if can? :manage, :all and @toil_request.approved == 'false' %>
-    	<%= link_to "Approve", approve_toil_request_path(@toil_request), class: 'btn btn-sm btn-warning'%>
+  </div>
+  <div class="btn-group">
+    <% if @toil_request.manager_approved == false and can? :approve, :all %>
+      <%= link_to "Manager Approve", manager_approve_toil_request_path(@toil_request), class: 'btn btn-sm btn-success'%>
       <%= link_to "Reject", delete_toil_path(@toil_request), class: 'btn btn-sm btn-danger' %>
+    <% else %>
+      <% if can? :manage, :all and @toil_request.approved == 'false' %>
+      	<%= link_to "Approve", approve_toil_request_path(@toil_request), class: 'btn btn-sm btn-warning'%>
+        <%= link_to "Reject", delete_toil_path(@toil_request), class: 'btn btn-sm btn-danger' %>
+      <% elsif @toil_request.approved == 'true' and current_user.role == 'admin' %>
+        <%= link_to "Admin Destroy", delete_toil_path(@toil_request), class: 'btn btn-sm btn-danger' %>
+      <% end %>
     <% end %>
   </div>
 </div>

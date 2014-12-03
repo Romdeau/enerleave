@@ -67,7 +67,7 @@ background-color: #f6f6f6;
         <table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background: #fff; margin: 0; padding: 0; border: 1px solid #e9e9e9;">
           <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
             <td class="alert alert-warning" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background: #ff9f00; margin: 0; padding: 20px;" align="center" valign="top">
-              Your Leave Request has been rejected
+              Your Toil Request has been rejected
             </td>
           </tr>
           <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
@@ -75,18 +75,17 @@ background-color: #f6f6f6;
               <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
                 <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
                   <td class="content-block" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                    <%= @rejecting_user.email %> has rejected your leave request.
+                    <%= @rejecting_user %> has rejected your toil request.
                   </td>
                 </tr>
                 <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
                   <td class="content-block" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                     The reason supplied for this was: <%= @comment %><br><br>
-                    This leave request was created at <%= @leave.created_at %>.<br>
-                    Start Date: <%= @leave.start_date %><br>
-                    End Date: <%= @leave.end_date %><br>
-                    Leave Type: <%= @leave.leave_type %><br>
-                    Comment: <%= @leave.comment %><br><br>
-                    This Leave Request will need to be relodged.
+                    This leave request was created at <%= @toil.created_at %>.<br>
+                    Start Date: <%= @toil.date_accrued %><br>
+                    End Date: <%= @toil.date_accrued_end %><br>
+                    Toil Amount: <%= @toil.amount %> minutes<br><br>
+                    This Toil Request will need to be relodged.
                   </td>
                 </tr>
                 <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">

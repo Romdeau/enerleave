@@ -17,7 +17,7 @@ class UserMailer < ActionMailer::Base
   def toil_request(user)
     @user = user
     @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
-    mail(to: 'enerleaveadmins@eneraque.com', subject: 'New EnerLeave Toil Request')
+    mail(to: @user.email, cc: "#{@user.manager_email}, laura.pringle@eneraque.com", subject: 'New EnerLeave Toil Request')
   end
 
   def assign_manager(user)
@@ -38,8 +38,32 @@ class UserMailer < ActionMailer::Base
     @user = user
     @approving_user = approving_user
     @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
-    @leave = request
+    @toil = request
     mail(to: @user.email, cc: "laura.pringle@eneraque.com", subject: 'Your Toil Request was approved')
+  end
+
+  def manager_toil_approved(user, approving_user, request)
+    @user = user
+    @approving_user = approving_user
+    @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
+    @toil = request
+    mail(to: @user.email, cc: "#{@user.manager_email}, laura.pringle@eneraque.com", subject: 'Your Toil Request was approved by a Manager')
+  end
+
+  def spend_toil_approved(user, approving_user, request)
+    @user = user
+    @approving_user = approving_user
+    @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
+    @toil = request
+    mail(to: @user.email, cc: "laura.pringle@eneraque.com", subject: 'Your Toil Request was approved')
+  end
+
+  def manager_spend_toil_approved(user, approving_user, request)
+    @user = user
+    @approving_user = approving_user
+    @url = "http://enerleave.eneraque.com/users/#{@user.id}/toil"
+    @toil = request
+    mail(to: @user.email, cc: "#{@user.manager_email}, laura.pringle@eneraque.com", subject: 'Your Toil Request was approved by a Manager')
   end
 
   def reset_password_email(user)
@@ -59,21 +83,23 @@ class UserMailer < ActionMailer::Base
     @user = @leave.user
     @rejecting_user = rejecting_user
     @comment = comment
-    mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@leave.start_date}; #{@leave.comment} has been rejected")
+    mail(to: @user.email, cc: "#{@user.manager_email}, laura.pringle@eneraque.com", subject: "Your leave request: #{@leave.start_date}; #{@leave.comment} has been rejected")
   end
 
-  def reject_toil(user, toil, comment)
+  def reject_toil(user, toil, comment, rejecting_user)
     @user = user
     @toil = toil
     @comment = comment
-    mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@toil.date_accrued}; has been rejected")
+    @rejecting_user = rejecting_user
+    mail(to: @user.email, cc: "#{@user.manager_email}, laura.pringle@eneraque.com", subject: "Your leave request: #{@toil.date_accrued}; has been rejected")
   end
 
-  def reject_toil_spend(user, toil_spend, comment)
+  def reject_toil_spend(user, toil_spend, comment, rejecting_user)
     @user = user
-    @toil_spend = toil_spend
+    @toil = toil_spend
     @comment = comment
-    mail(to: @user.email, cc: @user.manager_email, subject: "Your leave request: #{@toil_spend.leave_date}; has been rejected")
+    @rejecting_user = rejecting_user
+    mail(to: @user.email, cc: "#{@user.manager_email}, laura.pringle@eneraque.com", subject: "Your leave request: #{@toil.leave_date}; has been rejected")
   end
 
   def lodge_travel_request(user, travel_request)
