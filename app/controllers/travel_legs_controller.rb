@@ -45,7 +45,7 @@ class TravelLegsController < ApplicationController
     @flight.flight_date = travel_leg_params[:date_start]
     @flight.booked = false
     respond_to do |format|
-      if @travel_leg.save && flight.save
+      if @travel_leg.save && @flight.save
         format.html { redirect_to @travel_request, notice: 'Travel leg was successfully created.' }
         format.json { render action: 'show', status: :created, location: @travel_leg }
       else
