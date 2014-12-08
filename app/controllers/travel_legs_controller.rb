@@ -13,6 +13,7 @@ class TravelLegsController < ApplicationController
     @travel_request = TravelRequest.find(params[:travel_request_id])
     @accommodation = @travel_leg.accommodation
     @car_hire = @travel_leg.car_hire
+    @flights =  @travel_leg.flight
   end
 
   # GET /travel_legs/new
@@ -38,8 +39,13 @@ class TravelLegsController < ApplicationController
     @travel_request = TravelRequest.find(params[:travel_request_id])
     @travel_leg = TravelLeg.new(travel_leg_params)
     @travel_leg.travel_request = @travel_request
+    @flight = Flight.new
+    @flight.travel_leg = @travel_leg
+    @flight.landing_location = travel_leg_params[:destination_city]
+    @flight.flight_date = travel_leg_params[:date_start]
+    @flight.booked = false
     respond_to do |format|
-      if @travel_leg.save
+      if @travel_leg.save && flight.save
         format.html { redirect_to @travel_request, notice: 'Travel leg was successfully created.' }
         format.json { render action: 'show', status: :created, location: @travel_leg }
       else

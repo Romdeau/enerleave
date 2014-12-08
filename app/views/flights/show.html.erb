@@ -2,31 +2,14 @@
   <h1>Flight Details</h1>
 </div>
 <div class="content">
-  <h4>This is a <% if @flight.return == true %>return<% else %>one-way<% end %> flight.</h4>
   <div class="row">
     <div class="col-sm-2 ener-header">
-      <strong>Accommodation For:</strong>
+      <strong>Flight For:</strong>
     </div>
     <div class="col-sm-4">
       <strong><% @travel_leg.user.each do |user| %>
         <%= user.email %><br>
       <% end %></strong>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-2 ener-header">
-      <strong>Preffered flight:</strong>
-    </div>
-    <div class="col-sm-4">
-      <%= @flight.preffered_flight %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-2 ener-header">
-      <strong>Preffered time:</strong>
-    </div>
-    <div class="col-sm-4">
-      <%= @flight.preffered_time %>
     </div>
   </div>
   <div class="row">
@@ -37,36 +20,31 @@
       <%= @flight.flight_date.strftime("%A") %>, <%= @flight.flight_date.strftime("%d/%m/%y") %>
     </div>
   </div>
-  <% if @flight.return == true %>
-    <div class="row">
-      <div class="col-sm-2 ener-header">
-        <strong>Return Date:</strong>
-      </div>
-      <div class="col-sm-4">
-        <%= @flight.return_date.strftime("%A") %>, <%= @flight.return_date.strftime("%d/%m/%y") %>
-      </div>
-    </div>
-  <% end %>
   <div class="row">
     <div class="col-sm-2 ener-header">
-      <strong>Takeoff location:</strong>
-    </div>
-    <div class="col-sm-4">
-      <%= @flight.takeoff_location %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-2 ener-header">
-      <strong>Landing location:</strong>
+      <strong>Flight Destination:</strong>
     </div>
     <div class="col-sm-4">
       <%= @flight.landing_location %>
     </div>
   </div>
+  <br>
+  <% if @flight.booked == true %>
+    <div class="row">
+      <div class="col-sm-2 ener-header">
+        <strong>Booking Comment:</strong>
+      </div>
+      <div class="col-sm-4">
+        <%= @flight.booking_comment %>
+      </div>
+    </div>
+  <% end %>
   <div class="row">
     <div class="col-lg-6">
-      <% if @flight.booked == false and (current_user.role == "admin" or current_user.role == "travel") %>
+      <% if @flight.booked == false and (current_user.role == "admin" or current_user.role == "travel") and @flight.travel_leg.travel_request.lodged == true %>
         <%= link_to "Approve", approve_flight_path(params[:travel_request_id], params[:travel_leg_id], @flight), class: "btn btn-sm btn-success" %>
+      <% elsif @flight.booked == false and (current_user.role == "admin" or current_user.role == "travel") and @flight.travel_leg.travel_request.lodged != true %>
+        This flight cannot be booked until its request has been lodged.<br>
       <% end %>
       <div class="btn-group">
         <% if @flight.booked == false or (current_user.role == "admin" or current_user.role == "travel") %>

@@ -1,12 +1,12 @@
 <div class="page-header">
-  <h1>Viewing Flight Booking</h1>
+  <h1>Viewing <% if @travel_leg.destination_type == "flight" %>Flight Booking<%else%>Destination<%end%></h1>
   <h4><%= @travel_leg.user.count %> Travelers in this leg.</h4>
 </div>
 <div class="content">
   <div class="row">
     <% if @travel_leg.user.count < 1 %>
       <div class="col-sm-8 bg-danger">
-        There doesnt appear to be anyone on this flight?
+        There doesnt appear to be anyone <% if @travel_leg.destination_type == "flight" %>on this flight?<% else %>traveling to this destination?<%end%>
       </div>
     <% else %>
       <div class="col-sm-8">

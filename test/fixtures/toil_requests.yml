@@ -11,6 +11,7 @@
 #  created_at       :datetime
 #  updated_at       :datetime
 #  date_accrued_end :date
+#  manager_approved :boolean          default(FALSE)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

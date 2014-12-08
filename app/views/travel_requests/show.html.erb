@@ -19,8 +19,10 @@
           <% end %>
         <% end %>
       <% else %>
-        <% if current_user.email == @travel_request.user.manager_email or current_user.role == 'admin' %>
+        <% if ( current_user.email == @travel_request.user.manager_email or current_user.role == 'admin' ) and @travel_request.lodged == true %>
           You are the manager for this booking. <%= link_to "Approve Request", manager_approve_travel_request_path(@travel_request), method: :manager_approve, class: "btn btn-sm btn-success"%>
+        <% elsif ( current_user.email == @travel_request.user.manager_email or current_user.role == 'admin' ) and @travel_request.lodged != true %>
+          You are the manager for this booking, however the user has not lodged the request.
         <% else %>
           This booking is pending manager approval. The manager responsible for approval is <%= format_name(@travel_request.user.manager_email) %>
         <% end %>
@@ -47,7 +49,6 @@
           <% if @travel_request.travel_leg.count > 0 %>
             <%= link_to 'Lodge Request', lodge_travel_request_path(@travel_request), method: :lodge, class: "btn btn-sm btn-success" %>
           <% end %>
-          <%= link_to 'Add Leg', new_travel_request_travel_leg_path(@travel_request), class: "btn btn-sm btn-success" %>
         <% elsif @travel_request.fully_booked %>
           <%= link_to 'Show Itinerary', itinerary_travel_request_path(@travel_request), class: "btn btn-sm btn-info" %>
         <% end %>

@@ -15,7 +15,7 @@
 #
 
 class TravelRequest < ActiveRecord::Base
-  has_many :travel_leg
+  has_many :travel_leg, dependent: :destroy
   belongs_to :user
 
   attr_accessor :destination, :flight_date, :flight_comment

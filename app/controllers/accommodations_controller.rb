@@ -35,6 +35,9 @@ class AccommodationsController < ApplicationController
     @accommodation = Accommodation.new(accommodation_params)
     @accommodation.travel_leg = @travel_leg
     @accommodation.booked = false
+    if @accommodation.check_out == nil
+      @accommodation.check_out = @accommodation.check_in.tomorrow
+    end
     respond_to do |format|
       if @accommodation.save
         format.html { redirect_to travel_request_travel_leg_path(@travel_request, @travel_leg), notice: 'Accommodation was successfully created.' }

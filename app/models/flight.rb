@@ -21,12 +21,5 @@
 class Flight < ActiveRecord::Base
   belongs_to :travel_leg
 
-  validates :takeoff_location, :landing_location, presence: true
-  validate :valid_return
-
-  def valid_return
-    if self.return == true and self.return_date == nil
-      errors.add(:return_date, "A return flight must have a date")
-    end
-  end
+  validates :landing_location, :flight_date, presence: true
 end

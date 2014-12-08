@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127004142) do
+ActiveRecord::Schema.define(version: 20141203023443) do
 
   create_table "accommodations", force: true do |t|
     t.integer  "travel_leg_id"
@@ -106,15 +106,13 @@ ActiveRecord::Schema.define(version: 20141127004142) do
     t.integer  "travel_request_id"
     t.datetime "date_start"
     t.datetime "date_end"
-    t.string   "destination_address"
-    t.string   "destination_suburb"
     t.string   "destination_city"
-    t.string   "destination_state"
-    t.string   "destination_postcode"
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "fully_booked"
+    t.string   "destination_type"
+    t.string   "booking_status"
   end
 
   create_table "travel_legs_users", id: false, force: true do |t|

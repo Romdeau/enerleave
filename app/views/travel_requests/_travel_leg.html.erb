@@ -1,7 +1,7 @@
 <% @travel_legs.each do |travel_leg| %>
   <div class="row eneraque-box <% if travel_leg.fully_booked == true %>bg-success<%else%>bg-warning<%end%>">
     <div class="col-sm-4">
-      <strong>Flight Details</strong>
+      <strong><% if travel_leg.destination_type == "flight" %>Flight Details<% else %>Destination Details<% end %></strong>
     </div>
     <div class="col-sm-8">
       <% if travel_leg.fully_booked == true %>
@@ -39,6 +39,10 @@
 <div class="row">
   <div class="col-sm-12 btn-group">
     <%= link_to 'Add a Flight', new_travel_request_travel_leg_path(@travel_request), class: "btn btn-sm btn-success" %>
-    <%= link_to 'Add a Destination', new_travel_request_travel_leg_path(@travel_request), class: "btn btn-sm btn-success" %>
+    <%= link_to 'Add a Destination', new_destination_path(@travel_request), class: "btn btn-sm btn-success" %>
   </div>
+  <p>
+    A Flight needs a flight booked for the destination<br>
+    A Destination either does not require flights or the flights have been organised by a third party
+  </p>
 </div>

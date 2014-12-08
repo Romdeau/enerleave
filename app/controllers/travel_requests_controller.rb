@@ -19,6 +19,10 @@ class TravelRequestsController < ApplicationController
     @travel_request = TravelRequest.new
   end
 
+  def new_destination
+    @travel_request = TravelRequest.new
+  end
+
   # GET /travel_requests/1/edit
   def edit
 
@@ -29,14 +33,43 @@ class TravelRequestsController < ApplicationController
   def create
     @travel_request = TravelRequest.new
     @travel_request.comment = travel_request_params[:comment]
-    @flight = TravelLeg.new
-    @flight.travel_request = @travel_request
-    @flight.date_start = travel_request_params[:flight_date]
-    @flight.destination_city = travel_request_params[:destination]
-    @flight.comment = travel_request_params[:flight_comment]
+    @travel_leg = TravelLeg.new
+    @travel_leg.travel_request = @travel_request
+    @travel_leg.date_start = travel_request_params[:flight_date]
+    @travel_leg.destination_city = travel_request_params[:destination]
+    @travel_leg.comment = travel_request_params[:flight_comment]
+    @travel_leg.destination_type = "flight"
+    @travel_leg.booking_status = "unbooked"
+    @flight = Flight.new
+    @flight.travel_leg = @travel_leg
+    @flight.landing_location = travel_request_params[:destination]
+    @flight.flight_date = travel_request_params[:flight_date]
+    @flight.booked = false
     @travel_request.user = current_user
     respond_to do |format|
-      if @travel_request.save && @flight.save
+      if @travel_request.save && @travel_leg.save && @flight.save
+        format.html { redirect_to @travel_request, notice: 'Travel request was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @travel_request }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @travel_request.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def create_destination
+    @travel_request = TravelRequest.new
+    @travel_request.comment = travel_request_params[:comment]
+    @travel_leg = TravelLeg.new
+    @travel_leg.travel_request = @travel_request
+    @travel_leg.date_start = travel_request_params[:flight_date]
+    @travel_leg.destination_city = travel_request_params[:destination]
+    @travel_leg.comment = travel_request_params[:flight_comment]
+    @travel_leg.destination_type = "destination"
+    @travel_leg.booking_status = "unbooked"
+    @travel_request.user = current_user
+    respond_to do |format|
+      if @travel_request.save && @travel_leg.save
         format.html { redirect_to @travel_request, notice: 'Travel request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @travel_request }
       else
