@@ -1,80 +1,48 @@
 <div class="row">
-  <div class="col-lg-6">
-    <%= form_for [@travel_request, @travel_leg, @flight], :url => {:action => 'create'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
+  <div class="col-lg-12">
+    <%= form_for [@travel_request, @travel_leg, @flight], :url => {:action => 'create'} do |f| %>
       <% if @flight.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@flight.errors.count, "error") %> prohibited this flight from being saved:</h2>
-
           <ul>
-          <% @flight.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
+            <% @flight.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
           </ul>
         </div>
       <% end %>
-
-      <div class="field form-group">
-        <%= f.label :preffered_flight, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :preffered_flight, class: "form-control" %>
-          <p class="help-block">Leave blank if you do not have a preference.</p>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :preffered_time, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :preffered_time, class: "form-control" %>
-          <p class="help-block">Leave blank if you do not have a preference.</p>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :flight_date, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <div class="input-group" id="DateTimePicker">
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-            <%= f.text_field :flight_date, class: "form-control", value: @formatted_flight_date %>
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="field">
+            <%= f.label :takeoff_location, class: "" %>
+            <%= f.text_field :takeoff_location, class: "form-control", value: "Brisbane" %>
           </div>
         </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :return, "Return Flight?", class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.check_box :return, checked: true%>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :return, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <div class="input-group" id="ReturnDatePicker">
-            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-            <%= f.text_field :return_date, class: "form-control", value: @formatted_return_date %>
+        <div class="col-sm-2">
+          <div class="field">
+            <%= f.label :landing_location, class: "" %><br>
+            <%= f.text_field :landing_location, class: "form-control" %>
           </div>
         </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :takeoff_location, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :takeoff_location, class: "form-control", value: "Brisbane" %>
+        <div class="col-sm-3">
+          <div class="field">
+            <span class="glyphicon glyphicon-calendar"></span><%= f.label :flight_date, class: "control-label" %><br>
+            <div id="DateTimePicker">
+              <%= f.text_field :flight_date, class: "form-control" %>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :landing_location, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :landing_location, class: "form-control", value: @travel_leg.destination_city %>
+        <div class="col-sm-3">
+          <div class="field form-group">
+            <%= f.label :comment, class: "" %> Extra Baggae Etc.
+            <%= f.text_field :comment, class: "form-control" %>
+          </div>
         </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :comment, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :comment, class: "form-control" %>
+        <div class="col-sm-2">
+          <div class="actions">
+            <br><%= f.submit class: "btn btn-sm btn-success" %>
+          </div>
         </div>
-      </div>
-      <div class="actions col-sm-offset-4 col-sm-8">
-        <%= f.submit class: "btn btn-sm btn-success" %>
       </div>
     <% end %>
   </div>
@@ -83,12 +51,7 @@
 <script type="text/javascript">
   $(function () {
     $('#DateTimePicker').datetimepicker({
-      pickTime: false
-    });
-  });
-  $(function () {
-    $('#ReturnDatePicker').datetimepicker({
-      pickTime: false
+      pickTime: true
     });
   });
 </script>

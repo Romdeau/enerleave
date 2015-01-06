@@ -1,66 +1,50 @@
-<div class="row">
-  <div class="col-lg-8">
-    <%= form_for [@travel_request, @travel_leg, @car_hire], :url => {:action => 'create'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
-      <% if @car_hire.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@car_hire.errors.count, "error") %> prohibited this car_hire from being saved:</h2>
+<%= form_for [@travel_request, @travel_leg, @car_hire], :url => {:action => 'create'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
+  <% if @car_hire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car_hire.errors.count, "error") %> prohibited this car_hire from being saved:</h2>
 
-          <ul>
-          <% @car_hire.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-          </ul>
-        </div>
+      <ul>
+      <% @car_hire.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="row">
+      <div class="field col-lg-offset-1 col-lg-3">
+        <%= f.label :driver %><br>
+        <%= f.text_field :driver, class: "form-control", value: format_name(@travel_leg.travel_request.user.email) %>
+      </div>
 
-      <div class="field form-group">
-        <%= f.label :driver, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :driver, class: "form-control", value: format_name(@travel_leg.travel_request.user.email) %>
+      <div class="field col-lg-3">
+        <%= f.label :pickup_location %><br>
+        <%= f.text_field :pickup_location, class: "form-control", value: @travel_leg.destination_city %>
+      </div>
+
+      <div class="field col-lg-3">
+        <%= f.label :dropoff_location %>
+        <%= f.text_field :dropoff_location, class: "form-control", value: @travel_leg.destination_city %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field col-lg-offset-1 col-lg-3">
+        <%= f.label :comment, "Vehicle Type" %>
+        <%= f.text_field :comment, class: "form-control" %>
+      </div>
+      <div class="field col-lg-3">
+        <span class="glyphicon glyphicon-calendar"></span><%= f.label :pickup_date %><br>
+        <div id="StartDateTimePicker">
+          <%= f.text_field :pickup_date, class: "form-control"%>
         </div>
       </div>
-      <div class="field form-group">
-        <%= f.label :pickup_date, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <div class="input-group" id="StartDateTimePicker">
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-            <%= f.text_field :pickup_date, class: "form-control", value: @formatted_hire_date %>
-          </div>
+      <div class="field col-lg-3">
+        <span class="glyphicon glyphicon-calendar"></span><%= f.label :dropoff_date %>
+        <div id="EndDateTimePicker">
+          <%= f.text_field :dropoff_date, class: "form-control", value: @formatted_return_date %>
         </div>
       </div>
-      <div class="field form-group">
-        <%= f.label :pickup_location, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :pickup_location, class: "form-control", value: @travel_leg.destination_city %>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :dropoff_date, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <div class="input-group" id="EndDateTimePicker">
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-            <%= f.text_field :dropoff_date, class: "form-control", value: @formatted_return_date %>
-          </div>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :dropoff_location, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :dropoff_location, class: "form-control", value: @travel_leg.destination_city %>
-        </div>
-      </div>
-      <div class="field form-group">
-        <%= f.label :comment, class: "col-sm-4 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :comment, class: "form-control" %>
-        </div>
-      </div>
-      <div class="actions col-sm-offset-4 col-sm-8">
-        <%= f.submit class: "btn btn-sm btn-success" %>
+      <div class="actions col-lg-1">
+        <br><%= f.submit class: "btn btn-sm btn-success" %>
       </div>
     <% end %>
 

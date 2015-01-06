@@ -21,5 +21,5 @@
 class Flight < ActiveRecord::Base
   belongs_to :travel_leg
 
-  validates :landing_location, :flight_date, presence: true
+  validates :takeoff_location, :landing_location, :flight_date, presence: true
 end

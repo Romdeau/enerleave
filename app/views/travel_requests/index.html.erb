@@ -1,5 +1,6 @@
 <div class="page-header">
- <h1>Listing Travel Requests</h1>
+ <h1>Travel Requests</h1>
+ <%= link_to 'New Travel Request', new_request_destination_path, class: "btn btn-sm btn-success" %>
 </div>
 <div class="content">
   <input id="filter" type="text" class="form-control" placeholder="Search For...">
@@ -30,14 +31,4 @@
       <% end %>
     </tbody>
   </table>
-  <div>
-    <div class="btn-group">
-      <%= link_to 'New Travel request', new_travel_request_path, class: "btn btn-sm btn-success" %>
-      <%= link_to 'New Destination request', new_request_destination_path, class: "btn btn-sm btn-success" %>
-    </div>
-    <p>
-      A Travel Request includes flights to a destination<br>
-      A Destination Request either does not require flights or the flights have been organised by a third party
-    </p>
-  </div>
 </div>

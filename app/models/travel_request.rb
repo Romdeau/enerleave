@@ -20,7 +20,8 @@ class TravelRequest < ActiveRecord::Base
 
   attr_accessor :destination, :flight_date, :flight_comment
 
-  validates :comment, presence: true
+  validates :comment, :user_id, presence: true
+  validates_format_of :comment, with: /\A[0-9]{5}\s[0-9]{1,2}[a-z]{1}.{0,}*\z/i
 
   def request_booked?
     @travel_legs = self.travel_leg

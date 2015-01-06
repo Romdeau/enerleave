@@ -28,6 +28,14 @@
       <%= @flight.landing_location %>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-2 ener-header">
+      <strong>Comment:</strong>
+    </div>
+    <div class="col-sm-4">
+      <%= @flight.comment %>
+    </div>
+  </div>
   <br>
   <% if @flight.booked == true %>
     <div class="row">

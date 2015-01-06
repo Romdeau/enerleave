@@ -1,64 +1,51 @@
 <div class="row">
   <div class="col-lg-6">
-    <%= form_for (@travel_request), :html => {class: "form-horizontal edit-stock"} do |f| %>
-      <% if @travel_request.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@travel_request.errors.count, "error") %> prohibited this travel_request from being saved:</h2>
+    <%= form_for (@travel_request), :url => {:action => 'create_destination'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
+    <% if @travel_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@travel_request.errors.count, "error") %> prohibited this travel_request from being saved:</h2>
 
-          <ul>
-          <% @travel_request.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-          </ul>
-        </div>
+      <ul>
+        <% @travel_request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <div class="field form-group">
+      <%= f.label :comment, "Job Number & Cost Code", class: "col-sm-3 control-label" %>
+      <div class="col-sm-9">
+        <%= f.text_field :comment, class: "form-control" %>
+        <p class="help-block">jobs must be entered in the format </p>
+        <p class="help-block">You can enter multiple Job numbers and cost codes here. 255 character maximum.</p>
+      </div>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :user_id, "Person Traveling", class: "col-sm-3 control-label" %>
+      <div class="col-sm-9">
+        Search Box Goes Here
+      </div>
+      <% @users.each do |user| %>
+      <div class="col-sm-offset-3 col-sm-9">
+        <%= f.radio_button :user_id, user.id %>
+        <%= f.label :user_id, "#{user.email}", :value => user.id  %>
+      </div>
       <% end %>
+    </div>
 
-      <div class="field form-group">
-        <%= f.label :destination, "Destination", class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <%= f.text_field :destination, class: "form-control" %>
-        </div>
-      </div>
-
-      <div class="field form-group">
-        <%= f.label :flight_date, 'Travel Date', class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <div class="input-group" id="FlightDateTimePicker">
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-            <%= f.text_field :flight_date, class: "form-control" %>
-          </div>
-        </div>
-      </div>
-
-      <div class="field form-group">
-        <%= f.label :flight_comment, "Notes and Comments", class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <%= f.text_field :comment, class: "form-control" %>
-          <p class="help-block">Note here any requirements for flight booking.</p>
-        </div>
-      </div>
-
-      <div class="field form-group">
-        <%= f.label :comment, "Job Number & Cost Code", class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <%= f.text_field :comment, class: "form-control" %>
-          <p class="help-block">You can enter multiple Job numbers and cost codes here. 255 character maximum.</p>
-        </div>
-      </div>
-
-      <div class="actions btn-group">
-        <%= f.submit class: "btn btn-sm btn-success" %>
-      </div>
+    <div class="actions btn-group">
+      <%= f.submit  class: "btn btn-sm btn-success" %>
+    </div>
     <% end %>
   </div>
 </div>
 
 <script type="text/javascript">
-  $(function () {
-    $('#FlightDateTimePicker').datetimepicker({
-      pickTime: false
-    });
+$(function () {
+  $('#FlightDateTimePicker').datetimepicker({
+    pickTime: false
   });
+});
 </script>

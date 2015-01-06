@@ -1,64 +1,51 @@
 <div class="page-header">
-  <h1>Showing Travel Request for <%= @travel_request.user.email %></h1>
+  <h1>Travel Request for <%= @travel_request.user.email %></h1>
+  <h4><%= @travel_leg.user.count %> Travelers in this booking. Booked by <%= format_name(@travel_request.user.email) %></h4>
 </div>
-
 <div class="content">
   <div class="row">
-    <div class="col-sm-9">
-      <h4>
-        <% if @travel_request.fully_booked == true %>
-          This request is fully booked for its <%= @travel_request.travel_leg.count %> flights.
-        <% else %>
-          There are currently <%= @travel_request.travel_leg.count %> flights in this travel request, <%= @travel_request.unbooked_legs %> remain to be booked.
-        <% end %>
-      </h4>
-      <% if @travel_request.manager_approved ==  true %>
-        <% if current_user.role == 'travel' or current_user.role == 'admin' %>
-          <% if @travel_request.lodged == true and @travel_request.fully_booked != true %>
-            All bookings complete. <%= link_to "Finalise Bookings", travel_request_path(@travel_request), method: :complete_booking , class: "btn btn-sm btn-success"%>
-          <% end %>
-        <% end %>
-      <% else %>
-        <% if ( current_user.email == @travel_request.user.manager_email or current_user.role == 'admin' ) and @travel_request.lodged == true %>
-          You are the manager for this booking. <%= link_to "Approve Request", manager_approve_travel_request_path(@travel_request), method: :manager_approve, class: "btn btn-sm btn-success"%>
-        <% elsif ( current_user.email == @travel_request.user.manager_email or current_user.role == 'admin' ) and @travel_request.lodged != true %>
-          You are the manager for this booking, however the user has not lodged the request.
-        <% else %>
-          This booking is pending manager approval. The manager responsible for approval is <%= format_name(@travel_request.user.manager_email) %>
-        <% end %>
+    <div class="col-sm-4">
+      <h4>Travellers</h4>
+      <% @travel_leg.user.each do |user| %>
+      <%= user.email %><br>
+      <% end %><br>
+    </div>
+    <div class="col-sm-8">
+      This booking has been lodged.<br>
+      This booking has <% if @travel_request.manager_approved == true %> been approved by a manager <% else %> not been approved (responsible manager is <%= format_name(@travel_request.user.manager_email)%>) <% end %><br>
+      <% if @travel_leg.bookings_remaining < 1 and (current_user.role == "travel" or current_user.role == "admin") and @travel_leg.fully_booked != true %>
+      All accommodation and Car Hire Booked. <%= link_to "Finalise Flight", travel_request_travel_leg_path(@travel_request, @travel_leg), method: :complete_booking , class: "btn btn-sm btn-success"%>
+      <% elsif current_user.role == "travel" or current_user.role == "admin" %>
+      <%= @travel_leg.bookings_remaining %> items remain to be booked.
       <% end %>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-4">
-      <h4>Travel Request Details</h4>
-      <p>
-        <strong>Job Number & Cost Code:</strong>
-        <%= @travel_request.comment %> <%= link_to 'Edit', edit_travel_request_path(@travel_request), class: "btn btn-xs btn-primary" %>
-      </p>
-      <p>
-        <strong>Lodged On:</strong>
-        <%= @travel_request.created_at.strftime('%d/%m/%Y') %>
-      </p>
-      <p>
-        <strong>Requester:</strong>
-        <%= format_name(@travel_request.user.email) %>
-      </p>
-      <p>
-        <% if @travel_request.lodged != true and @travel_request.fully_booked != true  %>
-          <% if @travel_request.travel_leg.count > 0 %>
-            <%= link_to 'Lodge Request', lodge_travel_request_path(@travel_request), method: :lodge, class: "btn btn-sm btn-success" %>
-          <% end %>
-        <% elsif @travel_request.fully_booked %>
-          <%= link_to 'Show Itinerary', itinerary_travel_request_path(@travel_request), class: "btn btn-sm btn-info" %>
-        <% end %>
-      </p>
-    </div>
-    <div class="col-lg-8">
-      <%= render 'travel_leg' %>
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-sm-4">
+          <h4>Bookings for this Travel Request</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= render 'travel_legs/show_bookings' %>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="btn-group">
-    <%= link_to 'Back', travel_requests_path, class: "btn btn-sm btn-primary" %>
+  <br>
+  <% if @travel_leg.fully_booked != true and @travel_leg.travel_request.lodged != true %>
+  <div class="row">
+    <div class="col-lg-4 btn-group">
+      <%= link_to "Submit Request", lodge_travel_request_path(@travel_request), method: :lodge, class: "btn btn-sm btn-success" %>
+    </div>
+  </div>
+  <% end %>
+  <br>
+  <div class="row">
+    <div class="col-lg-4 btn-group">
+      <%= link_to 'Back', travel_requests_path, class: "btn btn-sm btn-info" %>
+    </div>
   </div>
 </div>

@@ -11,16 +11,26 @@ class TravelRequestsController < ApplicationController
   # GET /travel_requests/1
   # GET /travel_requests/1.json
   def show
-    @travel_legs = @travel_request.travel_leg.reorder("date_start ASC")
+    if @travel_request.lodged != true
+      @travel_leg = @travel_request.travel_leg[0]
+      redirect_to travel_request_travel_leg_path(@travel_request.id, @travel_leg.id)
+    else
+      @travel_leg = @travel_request.travel_leg[0]
+      @accommodations = @travel_leg.accommodation.reorder("check_in ASC")
+      @car_hires = @travel_leg.car_hire.reorder("pickup_date ASC")
+      @flights =  @travel_leg.flight.reorder("flight_date ASC")
+    end
   end
 
   # GET /travel_requests/new
   def new
     @travel_request = TravelRequest.new
+    @users = User.all
   end
 
   def new_destination
     @travel_request = TravelRequest.new
+    @users = User.all
   end
 
   # GET /travel_requests/1/edit
@@ -31,24 +41,18 @@ class TravelRequestsController < ApplicationController
   # POST /travel_requests
   # POST /travel_requests.json
   def create
+    @users = Users.all
+    @traveller = travel_request_params[:user_id]
     @travel_request = TravelRequest.new
     @travel_request.comment = travel_request_params[:comment]
+    @travel_request.user_id = current_user.id
+    @travel_request.lodged = false
     @travel_leg = TravelLeg.new
     @travel_leg.travel_request = @travel_request
-    @travel_leg.date_start = travel_request_params[:flight_date]
-    @travel_leg.destination_city = travel_request_params[:destination]
-    @travel_leg.comment = travel_request_params[:flight_comment]
-    @travel_leg.destination_type = "flight"
-    @travel_leg.booking_status = "unbooked"
-    @flight = Flight.new
-    @flight.travel_leg = @travel_leg
-    @flight.landing_location = travel_request_params[:destination]
-    @flight.flight_date = travel_request_params[:flight_date]
-    @flight.booked = false
-    @travel_request.user = current_user
+    @travel_leg.user << @travel_request.user
     respond_to do |format|
-      if @travel_request.save && @travel_leg.save && @flight.save
-        format.html { redirect_to @travel_request, notice: 'Travel request was successfully created.' }
+      if @travel_request.save
+        format.html { redirect_to travel_request_travel_leg_path(@travel_request, @travel_leg), notice: 'Travel request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @travel_request }
       else
         format.html { render action: 'new' }
@@ -58,22 +62,20 @@ class TravelRequestsController < ApplicationController
   end
 
   def create_destination
+    @users = User.all
     @travel_request = TravelRequest.new
     @travel_request.comment = travel_request_params[:comment]
+    @travel_request.user_id = travel_request_params[:user_id]
+    @travel_request.lodged = false
     @travel_leg = TravelLeg.new
     @travel_leg.travel_request = @travel_request
-    @travel_leg.date_start = travel_request_params[:flight_date]
-    @travel_leg.destination_city = travel_request_params[:destination]
-    @travel_leg.comment = travel_request_params[:flight_comment]
-    @travel_leg.destination_type = "destination"
-    @travel_leg.booking_status = "unbooked"
-    @travel_request.user = current_user
+    @travel_leg.user << @travel_request.user
     respond_to do |format|
       if @travel_request.save && @travel_leg.save
-        format.html { redirect_to @travel_request, notice: 'Travel request was successfully created.' }
+        format.html { redirect_to travel_request_travel_leg_path(@travel_request, @travel_leg), notice: 'Travel request was successfully created.' }
         format.json { render action: 'show', status: :created, location: @travel_request }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new_destination' }
         format.json { render json: @travel_request.errors, status: :unprocessable_entity }
       end
     end
@@ -149,6 +151,6 @@ class TravelRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def travel_request_params
-      params.require(:travel_request).permit(:destination, :flight_date, :flight_comment, :comment)
+      params.require(:travel_request).permit(:user_id, :destination, :flight_date, :flight_comment, :comment)
     end
 end

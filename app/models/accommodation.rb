@@ -16,5 +16,5 @@
 
 class Accommodation < ActiveRecord::Base
   belongs_to :travel_leg
-  validates :check_in, presence: true
+  validates :check_in, :check_out, presence: true
 end

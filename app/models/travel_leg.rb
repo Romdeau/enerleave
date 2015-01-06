@@ -22,9 +22,6 @@ class TravelLeg < ActiveRecord::Base
   has_many :flight, dependent: :destroy
   has_and_belongs_to_many :user
 
-  validates :date_start, presence: true
-  validates :destination_city, presence: true
-
   def cars_to_book
     @cars = self.car_hire
     @cars_to_book = 0

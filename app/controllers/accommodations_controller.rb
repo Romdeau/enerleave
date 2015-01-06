@@ -18,7 +18,9 @@ class AccommodationsController < ApplicationController
     @accommodation = Accommodation.new
     @travel_leg = TravelLeg.find(params[:travel_leg_id])
     @travel_request = @travel_leg.travel_request
-    @formatted_checkin_date = @travel_leg.date_start.strftime('%d/%m/%Y')
+    @accommodations = @travel_leg.accommodation.reorder("check_in ASC")
+    @car_hires = @travel_leg.car_hire.reorder("pickup_date ASC")
+    @flights =  @travel_leg.flight.reorder("flight_date ASC")
   end
 
   # GET /accommodations/1/edit
@@ -32,12 +34,12 @@ class AccommodationsController < ApplicationController
   def create
     @travel_request = TravelRequest.find(params[:travel_request_id])
     @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @accommodations = @travel_leg.accommodation
+    @car_hires = @travel_leg.car_hire
+    @flights =  @travel_leg.flight
     @accommodation = Accommodation.new(accommodation_params)
     @accommodation.travel_leg = @travel_leg
     @accommodation.booked = false
-    if @accommodation.check_out == nil
-      @accommodation.check_out = @accommodation.check_in.tomorrow
-    end
     respond_to do |format|
       if @accommodation.save
         format.html { redirect_to travel_request_travel_leg_path(@travel_request, @travel_leg), notice: 'Accommodation was successfully created.' }

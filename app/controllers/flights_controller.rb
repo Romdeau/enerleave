@@ -17,14 +17,15 @@ class FlightsController < ApplicationController
   def new
     @flight = Flight.new
     @travel_leg = TravelLeg.find(params[:travel_leg_id])
-    @formatted_flight_date = @travel_leg.date_start.strftime('%d/%m/%Y')
-    @formatted_return_date = @travel_leg.date_end.strftime('%d/%m/%Y')
+    @travel_request = TravelRequest.find(params[:travel_request_id])
+    @accommodations = @travel_leg.accommodation.reorder("check_in ASC")
+    @car_hires = @travel_leg.car_hire.reorder("pickup_date ASC")
+    @flights =  @travel_leg.flight.reorder("flight_date ASC")
   end
 
   # GET /flights/1/edit
   def edit
-    @formatted_flight_date = @flight.flight_date.strftime('%d/%m/%Y')
-    @formatted_return_date = @flight.return_date.strftime('%d/%m/%Y')
+
   end
 
   # POST /flights
@@ -32,6 +33,9 @@ class FlightsController < ApplicationController
   def create
     @travel_request = TravelRequest.find(params[:travel_request_id])
     @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @accommodations = @travel_leg.accommodation
+    @car_hires = @travel_leg.car_hire
+    @flights =  @travel_leg.flight
     @flight = Flight.new(flight_params)
     @flight.travel_leg = @travel_leg
     @flight.booked = false
@@ -102,6 +106,6 @@ class FlightsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def flight_params
-      params.require(:flight).permit(:preffered_flight, :preffered_time, :takeoff_location, :landing_location, :flight_date, :return, :return_date, :booked, :booking_comment)
+      params.require(:flight).permit(:takeoff_location, :landing_location, :flight_date, :comment, :booked, :booking_comment)
     end
 end

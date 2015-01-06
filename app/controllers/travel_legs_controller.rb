@@ -11,9 +11,9 @@ class TravelLegsController < ApplicationController
   # GET /travel_legs/1.json
   def show
     @travel_request = TravelRequest.find(params[:travel_request_id])
-    @accommodation = @travel_leg.accommodation
-    @car_hire = @travel_leg.car_hire
-    @flights =  @travel_leg.flight
+    @accommodations = @travel_leg.accommodation.reorder("check_in ASC")
+    @car_hires = @travel_leg.car_hire.reorder("pickup_date ASC")
+    @flights =  @travel_leg.flight.reorder("flight_date ASC")
   end
 
   # GET /travel_legs/new

@@ -1,10 +1,9 @@
-<h4>Bookings for this <% if @travel_leg.destination_type == "flight" %>Flight<%else%>Destination<%end%></h4>
-<%= @accommodation.count %> accommodations
-<%= @car_hire.count %> car hires
+<%= @accommodations.count %> accommodations <%= @car_hires.count %> car hires <%= @flights.count %> flights
 <table class="table table-striped table-sorter">
   <thead>
     <tr>
       <th>Summary</th>
+      <th>Comment</th>
       <th>Booked</th>
       <th>Show</th>
     </tr>
@@ -12,11 +11,16 @@
   <tbody class="searchable">
     <% @flights.each do |flight| %>
     <tr>
-      <% if flight.booked == true %>
-      <td><span class="glyphicon glyphicon-plane"></span> <%= flight.flight_date.strftime("%A") %> the <%= flight.flight_date.strftime("%d/%m/%y") %>, <%= flight.booking_comment %> </td>
-      <% else %>
-        <td><span class="glyphicon glyphicon-plane"></span> to <%= flight.landing_location %> on <%= flight.flight_date.strftime("%A") %> the <%= flight.flight_date.strftime("%d/%m/%y") %> </td>
-      <% end %>
+      <td>
+        <span class="glyphicon glyphicon-plane"></span> from <%= flight.takeoff_location %> to <%= flight.landing_location %> on <%= flight.flight_date.strftime("%A") %> the <%= flight.flight_date.strftime("%d/%m/%y") %> at <%= flight.flight_date.strftime("%l:%M %p") %>
+      </td>
+      <td>
+        <% if flight.comment != nil and flight.comment != "" %>
+        <span class="glyphicon glyphicon-asterisk" data-toggle="tooltip" data-placement="top" title="<%= flight.comment %>"></span>
+        <% else %>
+          <span class="glyphicon glyphicon-minus"></span>
+        <% end %>
+      </td>
       <td>
         <% if flight.booked == true %>
         <span class="glyphicon glyphicon-ok"></span>
@@ -26,17 +30,24 @@
       </td>
       <td>
         <div class="btn-group">
-          <%= link_to "Show", travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id], flight.id), class: "btn btn-xs btn-primary" %>
+          <%= link_to "Show", travel_request_travel_leg_flight_path(@travel_request, @travel_leg, flight.id), class: "btn btn-xs btn-primary" %>
           <% if @travel_leg.fully_booked != true and @travel_leg.travel_request.lodged != true %>
-          <%= link_to "Destroy", travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id], flight.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+          <%= link_to "Destroy", travel_request_travel_leg_flight_path(@travel_request, @travel_leg, flight.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
           <% end %>
         </div>
       </td>
     </tr>
     <% end %>
-    <% @accommodation.each do |accommodation| %>
+    <% @accommodations.each do |accommodation| %>
       <tr>
         <td><span class="glyphicon glyphicon-home"></span> <%= accommodation.preffered_location %> for <%= accommodation.check_in.strftime("%A") %> the <%= accommodation.check_in.strftime("%d/%m/%y") %> to <%= accommodation.check_out.strftime("%d/%m/%y")  %>  </td>
+        <td>
+          <% if accommodation.comment != nil and accommodation.comment != "" %>
+          <span class="glyphicon glyphicon-asterisk" data-toggle="tooltip" data-placement="top" title="<%= accommodation.comment %>"></span>
+          <% else %>
+          <span class="glyphicon glyphicon-minus"></span>
+          <% end %>
+        </td>
         <td>
           <% if accommodation.booked == true %>
             <span class="glyphicon glyphicon-ok"></span>
@@ -46,17 +57,24 @@
         </td>
         <td>
           <div class="btn-group">
-            <%= link_to "Show", travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id], accommodation.id), class: "btn btn-xs btn-primary" %>
+            <%= link_to "Show", travel_request_travel_leg_accommodation_path(@travel_request, @travel_leg, accommodation.id), class: "btn btn-xs btn-primary" %>
             <% if @travel_leg.fully_booked != true and @travel_leg.travel_request.lodged != true %>
-              <%= link_to "Destroy", travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id], accommodation.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+              <%= link_to "Destroy", travel_request_travel_leg_accommodation_path(@travel_request, @travel_leg, accommodation.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
             <% end %>
           </div>
         </td>
       </tr>
     <% end%>
-    <% @car_hire.each do |car_hire| %>
+    <% @car_hires.each do |car_hire| %>
       <tr>
-        <td><span class="glyphicon glyphicon-road"></span> <%= car_hire.driver %> to pickup on <%= car_hire.pickup_date.strftime("%A") %> the <%= car_hire.pickup_date.strftime("%d/%m/%y") %></td>
+        <td><div data-toggle="tooltip" data-placement="top" title="<%= "Return Vehicle to #{car_hire.dropoff_location} on #{car_hire.dropoff_date.strftime("%A")} the #{car_hire.dropoff_date.strftime("%d/%m/%y")} " %>"><span class="glyphicon glyphicon-road"></span> <%= car_hire.driver %> to pickup on <%= car_hire.pickup_date.strftime("%A") %> the <%= car_hire.pickup_date.strftime("%d/%m/%y") %> at <%= car_hire.pickup_location %></div></td>
+        <td>
+          <% if car_hire.comment != nil and car_hire.comment != "" %>
+          <span class="glyphicon glyphicon-asterisk" data-toggle="tooltip" data-placement="top" title="<%= car_hire.comment %>"></span>
+          <% else %>
+          <span class="glyphicon glyphicon-minus"></span>
+          <% end %>
+        </td>
         <td>
           <% if car_hire.booked == true %>
             <span class="glyphicon glyphicon-ok"></span>
@@ -66,9 +84,9 @@
         </td>
         <td>
           <div class="btn-group">
-            <%= link_to "Show", travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id], car_hire.id), class: "btn btn-xs btn-primary" %>
+            <%= link_to "Show", travel_request_travel_leg_car_hire_path(@travel_request, @travel_leg, car_hire.id), class: "btn btn-xs btn-primary" %>
             <% if @travel_leg.fully_booked != true and @travel_leg.travel_request.lodged != true %>
-              <%= link_to "Destroy", travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id], car_hire.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+              <%= link_to "Destroy", travel_request_travel_leg_car_hire_path(@travel_request, @travel_leg, car_hire.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
             <% end %>
           </div>
         </td>
@@ -76,3 +94,9 @@
     <% end%>
   </tbody>
 </table>
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>

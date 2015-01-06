@@ -20,9 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-  date:
-    order:
-      - :day
-      - :month
-      - :year
+  activerecord:
+    attributes:
+      travel_request:
+        comment: "Job Number & Cost Code"
+    errors:
+      models:
+        travel_request:
+          attributes:
+            comment:
+              invalid: "needs to be in the <job number> <job code> format, e.g. 12345 5a"

@@ -17,7 +17,10 @@ class CarHiresController < ApplicationController
   def new
     @car_hire = CarHire.new
     @travel_leg = TravelLeg.find(params[:travel_leg_id])
-    @formatted_hire_date = @travel_leg.date_start.strftime('%d/%m/%Y')
+    @travel_request = @travel_leg.travel_request
+    @accommodations = @travel_leg.accommodation.reorder("check_in ASC")
+    @car_hires = @travel_leg.car_hire.reorder("pickup_date ASC")
+    @flights =  @travel_leg.flight.reorder("flight_date ASC")
   end
 
   # GET /car_hires/1/edit
@@ -31,6 +34,9 @@ class CarHiresController < ApplicationController
   def create
     @travel_request = TravelRequest.find(params[:travel_request_id])
     @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @accommodations = @travel_leg.accommodation
+    @car_hires = @travel_leg.car_hire
+    @flights =  @travel_leg.flight
     @car_hire = CarHire.new(car_hire_params)
     @car_hire.travel_leg = @travel_leg
     @car_hire.booked = false
