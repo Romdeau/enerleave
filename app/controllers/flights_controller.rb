@@ -89,7 +89,7 @@ class FlightsController < ApplicationController
     @flight.booking_comment = flight_params[:booking_comment]
     respond_to do |format|
       if @flight.save
-        format.html { redirect_to travel_request_travel_leg_flight_path(@travel_request, @travel_leg, @flight), notice: 'Flight was successfully updated.' }
+        format.html { redirect_to travel_request_path(@travel_request), notice: 'Flight was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

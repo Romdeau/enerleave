@@ -134,6 +134,16 @@ class TravelLegsController < ApplicationController
     end
   end
 
+  def undo_booking
+    @travel_leg = TravelLeg.find(params[:travel_leg_id])
+    @travel_leg.fully_booked = false
+    if @travel_leg.save
+      redirect_to travel_request_travel_leg_path(params[:travel_request_id], @travel_leg), notice: 'Travel Leg was set back to unbooked.'
+    else
+      redirect_to travel_request_travel_leg_path(params[:travel_request_id], @travel_leg), notice: 'Hrm, something went wrong.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_travel_leg

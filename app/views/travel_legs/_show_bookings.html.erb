@@ -1,5 +1,5 @@
 <%= @accommodations.count %> accommodations <%= @car_hires.count %> car hires <%= @flights.count %> flights
-<table class="table table-striped table-sorter">
+<table class="table table-sorter">
   <thead>
     <tr>
       <th>Summary</th>
@@ -10,7 +10,7 @@
   </thead>
   <tbody class="searchable">
     <% @flights.each do |flight| %>
-    <tr>
+    <tr class=<% if flight.booked == true %>"success"<% else %>"warning"<% end %>>
       <td>
         <span class="glyphicon glyphicon-plane"></span> from <%= flight.takeoff_location %> to <%= flight.landing_location %> on <%= flight.flight_date.strftime("%A") %> the <%= flight.flight_date.strftime("%d/%m/%y") %> at <%= flight.flight_date.strftime("%l:%M %p") %>
       </td>
@@ -39,7 +39,7 @@
     </tr>
     <% end %>
     <% @accommodations.each do |accommodation| %>
-      <tr>
+      <tr class=<% if accommodation.booked == true %>"success"<% else %>"warning"<% end %>>
         <td><span class="glyphicon glyphicon-home"></span> <%= accommodation.preffered_location %> for <%= accommodation.check_in.strftime("%A") %> the <%= accommodation.check_in.strftime("%d/%m/%y") %> to <%= accommodation.check_out.strftime("%d/%m/%y")  %>  </td>
         <td>
           <% if accommodation.comment != nil and accommodation.comment != "" %>
@@ -64,9 +64,9 @@
           </div>
         </td>
       </tr>
-    <% end%>
+    <% end %>
     <% @car_hires.each do |car_hire| %>
-      <tr>
+      <tr class=<% if car_hire.booked == true %>"success"<% else %>"warning"<% end %>>
         <td><div data-toggle="tooltip" data-placement="top" title="<%= "Return Vehicle to #{car_hire.dropoff_location} on #{car_hire.dropoff_date.strftime("%A")} the #{car_hire.dropoff_date.strftime("%d/%m/%y")} " %>"><span class="glyphicon glyphicon-road"></span> <%= car_hire.driver %> to pickup on <%= car_hire.pickup_date.strftime("%A") %> the <%= car_hire.pickup_date.strftime("%d/%m/%y") %> at <%= car_hire.pickup_location %></div></td>
         <td>
           <% if car_hire.comment != nil and car_hire.comment != "" %>

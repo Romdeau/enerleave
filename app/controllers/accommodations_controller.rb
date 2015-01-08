@@ -88,7 +88,7 @@ class AccommodationsController < ApplicationController
     @accommodation.booking_comment = accommodation_params[:booking_comment]
     respond_to do |format|
       if @accommodation.save
-        format.html { redirect_to travel_request_travel_leg_accommodation_path(@travel_request, @travel_leg, @accommodation), notice: 'Accommodation was successfully updated.' }
+        format.html { redirect_to travel_request_path(@travel_request), notice: 'Accommodation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

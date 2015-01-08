@@ -15,7 +15,7 @@
 
     <tbody class="searchable">
       <% @travel_requests.each do |travel_request| %>
-        <tr>
+        <tr class=<% if travel_request.request_booked? %>"success"<% else %>"warning"<% end %>>
           <td><%= format_name(travel_request.user.email) %></td>
           <td><%= travel_request.comment %></td>
           <td>

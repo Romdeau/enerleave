@@ -102,4 +102,21 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def travel_admin?
+    if self.role == "admin" or self.role == "travel"
+      true
+    else
+      false
+    end
+  end
+
+  def manager?
+    if self.role == "admin" or self.role == "manager"
+      true
+    else
+      false
+    end
+  end
+
 end

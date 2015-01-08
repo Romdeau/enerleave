@@ -1,6 +1,9 @@
 <div class="page-header">
-  <h1>Travel Request for <%= @travel_request.user.email %></h1>
+  <% if @travel_leg.leg_booked? %>
+    <h1 style="color:green;">Travel Request is finalised, no changes can be made</h1>
+  <% end %>
   <h4><%= @travel_leg.user.count %> Travelers in this booking.</h4>
+  <h4>Booked by <%= format_name(@travel_request.user.email) %>.</h4>
 </div>
 <div class="content">
   <div class="row">
@@ -8,16 +11,26 @@
       <% @travel_leg.user.each do |user| %>
       <%= user.email %><br>
       <% end %><br>
-      <div class="btn-group">
-        <%= link_to "Add Traveler", add_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-success" %>
-        <%= link_to "Remove Traveler", remove_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-danger" %>
-      </div>
+      <% if @travel_leg.leg_booked? != true %>
+        <div class="btn-group">
+          <%= link_to "Add Traveler", add_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-success" %>
+          <%= link_to "Remove Traveler", remove_user_path(params[:travel_request_id], @travel_leg), class: "btn btn-sm btn-danger" %>
+        </div>
+      <% end %>
     </div>
     <div class="col-sm-8">
       <% if @travel_leg.bookings_remaining < 1 and (current_user.role == "travel" or current_user.role == "admin") and @travel_leg.fully_booked != true %>
-      All accommodation and Car Hire Booked. <%= link_to "Finalise Flight", travel_request_travel_leg_path(@travel_request, @travel_leg), method: :complete_booking , class: "btn btn-sm btn-success"%>
+        All accommodation and Car Hire Booked.<br>
+        <% if @travel_request.manager_approved == true %>
+          <%= link_to "Finalise Bookings", travel_request_travel_leg_path(@travel_request, @travel_leg), method: :complete_booking , class: "btn btn-sm btn-success"%>
+        <% else %>
+          <span style="color:red;">Manager Approval Outstanding (responsible manager is <%= format_name(@travel_request.user.manager_email)%>).</span>
+          <% if %>
+            <br> You are a manager for this request. <%= link_to "Approve", manager_approve_travel_request_path(@travel_request), method: :manager_approve, class: "btn btn-xs btn-success"%>
+          <% end %>
+        <% end %>
       <% elsif current_user.role == "travel" or current_user.role == "admin" %>
-      <%= @travel_leg.bookings_remaining %> items remain to be booked.
+        <%= @travel_leg.bookings_remaining %> items remain to be booked.
       <% end %>
     </div>
   </div>
@@ -33,15 +46,17 @@
           <%= render 'show_bookings' %>
         </div>
       </div>
-      <div class="row"
-        <div class="col-sm-8">
-          <div class="col-lg-8 btn-group">
-            <%= link_to 'Add Flight', new_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
-            <%= link_to 'Add Car Hire', new_travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
-            <%= link_to 'Add Accommodation', new_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
+      <% if @travel_leg.leg_booked? != true %>
+        <div class="row"
+          <div class="col-sm-8">
+            <div class="col-lg-8 btn-group">
+              <%= link_to 'Add Flight', new_travel_request_travel_leg_flight_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
+              <%= link_to 'Add Car Hire', new_travel_request_travel_leg_car_hire_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
+              <%= link_to 'Add Accommodation', new_travel_request_travel_leg_accommodation_path(params[:travel_request_id], params[:id]), class: "btn btn-sm btn-success" %>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
   <br>
@@ -59,4 +74,14 @@
       <%= link_to 'Back', travel_request_path(params[:travel_request_id]), class: "btn btn-sm btn-info" %>
     </div>
   </div>
+  <% if current_user.travel_admin? == true %>
+    <div class="row col-lg-4">
+      <h4>Admin Controlls</h4>
+      <div class="btn-group">
+        <% if @travel_leg.leg_booked? %>
+          <%= link_to "Undo Booking", undo_travel_leg_path(@travel_request, @travel_leg), method: :undo_booking , class: "btn btn-sm btn-success"%>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

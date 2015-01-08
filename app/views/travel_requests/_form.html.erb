@@ -24,15 +24,27 @@
 
     <div class="field form-group">
       <%= f.label :user_id, "Person Traveling", class: "col-sm-3 control-label" %>
-      <div class="col-sm-9">
-        Search Box Goes Here
-      </div>
-      <% @users.each do |user| %>
-      <div class="col-sm-offset-3 col-sm-9">
-        <%= f.radio_button :user_id, user.id %>
-        <%= f.label :user_id, "#{user.email}", :value => user.id  %>
-      </div>
-      <% end %>
+      <input id="filter" type="text" class="form-control" placeholder="Search For...">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="ener-header"><h4>Employee</h4></th>
+          </tr>
+        </thead>
+        <tbody class="searchable">
+          <% @users.each do |user| %>
+            <tr>
+              <td>
+                <%= f.radio_button :user_id, user.id %>
+              </td>
+              <td>
+                <%= f.label :user_id, "#{user.email}", :value => user.id  %>
+              </td>
+            <tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
 
     <div class="actions btn-group">

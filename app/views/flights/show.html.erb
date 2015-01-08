@@ -1,5 +1,9 @@
 <div class="page-header">
   <h1>Flight Details</h1>
+  <h4>This Flight request is <% if @flight.booked == true %><span class="ener-header">Booked</span><% else %><span style="color:#ff0000;">Not Booked</span><% end %></h4>
+  <% if @flight.booked == true %>
+  <h4>Booking Comment: <%= @flight.booking_comment %></h4>
+  <% end %>
 </div>
 <div class="content">
   <div class="row">

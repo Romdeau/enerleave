@@ -31,6 +31,7 @@ Enerleave::Application.routes.draw do
   post '/travel_requests/:id/manager_approve' => 'travel_requests#manager_approve', as: :manager_approve_travel_request
   post '/travel_requests/:id/' => 'travel_requests#complete_booking', as: :complete_travel_request
   post '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id' => 'travel_legs#complete_booking', as: :complete_travel_leg
+  post '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/undo' => 'travel_legs#undo_booking', as: :undo_travel_leg
 
   get '/travel_requests/:travel_request_id/travel_legs/:id/add_user' => 'travel_legs#add_user', as: :add_user
   post '/travel_requests/:travel_request_id/travel_legs/:id/add_user.:user_id' => 'travel_legs#approve_user', as: :approve_user

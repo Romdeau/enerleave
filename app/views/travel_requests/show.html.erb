@@ -1,6 +1,9 @@
 <div class="page-header">
-  <h1>Travel Request for <%= @travel_request.user.email %></h1>
-  <h4><%= @travel_leg.user.count %> Travelers in this booking. Booked by <%= format_name(@travel_request.user.email) %></h4>
+  <% if @travel_leg.leg_booked? %>
+    <h1 style="color:green;">Travel Request is finalised, no changes can be made</h1>
+  <% end %>
+  <h4><%= @travel_leg.user.count %> Travelers in this booking.</h4>
+  <h4>Booked by <%= format_name(@travel_request.user.email) %>.</h4>
 </div>
 <div class="content">
   <div class="row">
@@ -12,11 +15,20 @@
     </div>
     <div class="col-sm-8">
       This booking has been lodged.<br>
-      This booking has <% if @travel_request.manager_approved == true %> been approved by a manager <% else %> not been approved (responsible manager is <%= format_name(@travel_request.user.manager_email)%>) <% end %><br>
+      This booking has <% if @travel_request.manager_approved == true %> been approved by a manager <% else %> not been approved <span style="color:red;">(responsible manager is <%= format_name(@travel_request.user.manager_email)%>) <% end %></span><br>
+      <% if current_user.manager? and @travel_request.manager_approved != true %>
+        You can provide manager approval for this request. <%= link_to "Approve", manager_approve_travel_request_path(@travel_request), method: :manager_approve, class: "btn btn-xs btn-success"%><br>
+      <% end %>
       <% if @travel_leg.bookings_remaining < 1 and (current_user.role == "travel" or current_user.role == "admin") and @travel_leg.fully_booked != true %>
-      All accommodation and Car Hire Booked. <%= link_to "Finalise Flight", travel_request_travel_leg_path(@travel_request, @travel_leg), method: :complete_booking , class: "btn btn-sm btn-success"%>
+        <span style="color:green;">All accommodation and Car Hire Booked.<br>
+          <% if @travel_request.manager_approved == true %>
+            <%= link_to "Finalise Request", travel_request_travel_leg_path(@travel_request, @travel_leg), method: :complete_booking , class: "btn btn-sm btn-success"%>
+          <% else %>
+            <span style="color:red;">Cannot be finalised until manager approved.</span>
+          <% end %>
+        </span>
       <% elsif current_user.role == "travel" or current_user.role == "admin" %>
-      <%= @travel_leg.bookings_remaining %> items remain to be booked.
+        <span style="color:red;"><%= @travel_leg.bookings_remaining %> items remain to be booked.</span>
       <% end %>
     </div>
   </div>
@@ -48,4 +60,14 @@
       <%= link_to 'Back', travel_requests_path, class: "btn btn-sm btn-info" %>
     </div>
   </div>
+  <% if current_user.travel_admin? == true %>
+  <div class="row col-lg-4">
+    <h4>Admin Controlls</h4>
+    <div class="btn-group">
+      <% if @travel_leg.leg_booked? %>
+        <%= link_to "Undo Booking", undo_travel_leg_path(@travel_request, @travel_leg), method: :undo_booking , class: "btn btn-sm btn-success"%>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
 </div>

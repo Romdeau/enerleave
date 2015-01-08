@@ -88,7 +88,7 @@ class CarHiresController < ApplicationController
     @car_hire.booking_comment = car_hire_params[:booking_comment]
     respond_to do |format|
       if @car_hire.save
-        format.html { redirect_to travel_request_travel_leg_car_hire_path(@travel_request, @travel_leg, @car_hire), notice: 'Car hire was successfully updated.' }
+        format.html { redirect_to travel_request_path(@travel_request), notice: 'Car hire was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
