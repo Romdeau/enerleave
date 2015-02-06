@@ -124,4 +124,13 @@ class UserMailer < ActionMailer::Base
     @url = "http://enerleave.eneraque.com/travel_requests/#{travel_request.id}"
     mail(to: "#{@user.email}", cc: "travel@eneraque.com", subject: "Travel Request from #{@user.email} has been completely booked")
   end
+
+  def reject_travel_request(travel_request, manager, comment)
+    @user = travel_request.user
+    @manager = manager
+    @comment = comment
+    @url = "http://enerleave.eneraque.com/travel_requests/#{travel_request.id}"
+    mail(to: "#{@user.email}", cc: "travel@eneraque.com, #{manager.email}", subject: "Travel Request from #{@user.email} has been rejected by a manager.")
+  end
+
 end

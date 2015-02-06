@@ -17,7 +17,7 @@
       This booking has been lodged.<br>
       This booking has <% if @travel_request.manager_approved == true %> been approved by a manager <% else %> not been approved <span style="color:red;">(responsible manager is <%= format_name(@travel_request.user.manager_email)%>) <% end %></span><br>
       <% if current_user.manager? and @travel_request.manager_approved != true %>
-        You can provide manager approval for this request. <%= link_to "Approve", manager_approve_travel_request_path(@travel_request), method: :manager_approve, class: "btn btn-xs btn-success"%><br>
+        You can provide manager approval for this request. <%= link_to "Approve", manager_approve_travel_request_path(@travel_request), method: :manager_approve, class: "btn btn-xs btn-success"%><%= link_to "Reject", manager_reject_travel_request_path(@travel_request) , class: "btn btn-xs btn-danger"%><br>
       <% end %>
       <% if @travel_leg.bookings_remaining < 1 and (current_user.role == "travel" or current_user.role == "admin") and @travel_leg.fully_booked != true %>
         <span style="color:green;">All accommodation and Car Hire Booked.<br>

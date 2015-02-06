@@ -1,6 +1,6 @@
 class TravelLegsController < ApplicationController
   before_action :set_travel_leg, only: [:show, :edit, :update, :destroy, :add_user, :approve_user, :remove_user, :destroy_user]
-
+  before_filter :require_login
   # GET /travel_legs
   # GET /travel_legs.json
   def index
@@ -11,9 +11,13 @@ class TravelLegsController < ApplicationController
   # GET /travel_legs/1.json
   def show
     @travel_request = TravelRequest.find(params[:travel_request_id])
-    @accommodations = @travel_leg.accommodation.reorder("check_in ASC")
-    @car_hires = @travel_leg.car_hire.reorder("pickup_date ASC")
-    @flights =  @travel_leg.flight.reorder("flight_date ASC")
+    if @travel_request.lodged == true
+      redirect_to travel_request_path(@travel_request)
+    else
+      @accommodations = @travel_leg.accommodation.reorder("check_in ASC")
+      @car_hires = @travel_leg.car_hire.reorder("pickup_date ASC")
+      @flights =  @travel_leg.flight.reorder("flight_date ASC")
+    end
   end
 
   # GET /travel_legs/new

@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-lg-9">
+    <%= form_for [@travel_request, @travel_leg], :url => {:action => 'manager_process_reject'}, :html => {class: "form-horizontal edit-stock"} do |f| %>
+      <% if @travel_leg.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@travel_leg.errors.count, "error") %> prohibited this travel_leg from being saved:</h2>
+
+          <ul>
+          <% @travel_leg.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field form-group">
+        <%= f.label :comment, "Reason for Rejection", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :comment, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="actions col-sm-offset-3 col-sm-9">
+        <%= f.submit class: "btn btn-sm btn-danger" %>
+      </div>
+    <% end %>
+  </div>
+</div>

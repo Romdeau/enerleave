@@ -29,6 +29,8 @@ Enerleave::Application.routes.draw do
 
   post '/travel_requests/:id/lodge' => 'travel_requests#lodge', as: :lodge_travel_request
   post '/travel_requests/:id/manager_approve' => 'travel_requests#manager_approve', as: :manager_approve_travel_request
+  get '/travel_requests/:id/manager_reject' => 'travel_requests#manager_reject', as: :manager_reject_travel_request
+  patch '/travel_requests/:id/manager_reject' => 'travel_requests#manager_process_reject', as: :manager_process_reject_travel_request
   post '/travel_requests/:id/' => 'travel_requests#complete_booking', as: :complete_travel_request
   post '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id' => 'travel_legs#complete_booking', as: :complete_travel_leg
   post '/travel_requests/:travel_request_id/travel_legs/:travel_leg_id/undo' => 'travel_legs#undo_booking', as: :undo_travel_leg

@@ -1,6 +1,6 @@
 class TravelRequestsController < ApplicationController
   before_action :set_travel_request, only: [:show, :edit, :update, :destroy, :approve, :itinerary]
-  before_filter :require_login, except: [:index, :show]
+  before_filter :require_login
 
   # GET /travel_requests
   # GET /travel_requests.json
@@ -124,6 +124,25 @@ class TravelRequestsController < ApplicationController
       redirect_to @travel_request, notice: 'Travel request has been approved by a manager.'
     else
       redirect_to @travel_request, notice: 'Hrm, something went wrong.'
+    end
+  end
+
+  def manager_reject
+    @travel_request = TravelRequest.find(params[:id])
+    @travel_leg = @travel_request.travel_leg[0]
+    @accommodations = @travel_leg.accommodation.reorder("check_in ASC")
+    @car_hires = @travel_leg.car_hire.reorder("pickup_date ASC")
+    @flights =  @travel_leg.flight.reorder("flight_date ASC")
+  end
+
+  def manager_process_reject
+    @travel_request = TravelRequest.find(params[:id])
+    @travel_leg_params = params[:travel_leg]
+    @travel_request.lodged = false
+    @rejection_comment = @travel_leg_params[:comment]
+    UserMailer.reject_travel_request(@travel_request, current_user, @rejection_comment).deliver
+    if @travel_request.save
+      redirect_to @travel_request, notice: 'Travel request has been rejected.'
     end
   end
 
