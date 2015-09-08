@@ -75,7 +75,8 @@ class UsersController < ApplicationController
     @old_role = @user.role
     user_params.delete(:password)
     user_params.delete(:password_confirmation)
-    if @user.update_many_attributes(user_params)
+    @user.update_attributes(user_params)
+    if @user.save
       UserAudit.create({:user => current_user, :action => "changed user role", :description => "Role changed from #{@old_role} to #{@user.role}", :end_user => @user.email})
       redirect_to @user, notice: 'User Role successfully updated.'
     else
@@ -87,7 +88,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     user_params.delete(:password)
     user_params.delete(:password_confirmation)
-    if @user.update_many_attributes(user_params)
+    if @user.update_attributes(user_params)
       @user.check_manager
       UserAudit.create({:user => current_user, :action => "updatedted manager email", :end_user => @user.email})
       UserMailer.assign_manager(@user).deliver

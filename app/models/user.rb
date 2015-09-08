@@ -20,9 +20,9 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
-  validates :password, length: { minimum: 3 }
+  validates :password, length: { minimum: 3 }, if: :new_user?
   validates :password, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password_confirmation, presence: true, if: :new_user?
 
   validates :email, uniqueness: true
 
@@ -118,5 +118,10 @@ class User < ActiveRecord::Base
       false
     end
   end
+
+  private
+    def new_user?
+      new_record?
+    end
 
 end
